@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
+import java.util.*;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -20,6 +21,7 @@ public class Entity {
      * @param y
      */
     public Entity(int x, int y) {
+    	super();
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
     }
