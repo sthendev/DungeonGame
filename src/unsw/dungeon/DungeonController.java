@@ -65,6 +65,7 @@ public class DungeonController {
         default:
             break;
         }
+        dungeon.postMove();
     }
 
 }

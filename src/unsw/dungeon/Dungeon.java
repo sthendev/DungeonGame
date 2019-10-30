@@ -6,6 +6,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.awt.geom.Point2D;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -46,5 +48,18 @@ public class Dungeon {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+    
+    public void postMove() {
+    	for (Entity entity: entities) {
+    		if (entity instanceof Enemy) {
+    			Enemy enemy = (Enemy) entity;
+    			enemy.move();
+    		}
+    	}
+    }
+    
+    public double getDistToPlayer(Entity thing) {
+    	return Point2D.distance((double) thing.getX(), (double) thing.getY(), (double) player.getX(), (double) player.getY());
     }
 }
