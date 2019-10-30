@@ -64,7 +64,13 @@ public abstract class DungeonLoader {
         	Enemy enemy = new Enemy(dungeon, x, y);
         	onLoad(enemy);
         	entity = enemy;
-        // TODO Handle other possible entities
+        	break;
+        case "exit":
+        	Exit exit = new Exit(x, y);
+        	onLoad(exit);
+        	entity = exit;
+        	break;
+         // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
     }
@@ -74,6 +80,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Wall wall);
     
     public abstract void onLoad(Enemy enemy);
+    
+    public abstract void onLoad(Exit exit);
 
     // TODO Create additional abstract methods for the other entities
 

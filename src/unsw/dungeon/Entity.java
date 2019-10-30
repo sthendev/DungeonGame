@@ -39,4 +39,20 @@ public class Entity {
     public int getX() {
         return x().get();
     }
+    
+    public boolean overlap(Entity entity) {
+    	if (x().get() == entity.getX() && y().get() == entity.getY()) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean isBlocking(Entity entity) {
+    	return false;
+    }
+    
+    @Override
+    public String toString() {
+    	return "x: " + x.get() + ", y: " + y.get();
+    }
 }

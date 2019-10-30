@@ -39,31 +39,33 @@ public class Enemy extends Entity {
     
     public List<Entity> getValidDirections() {
     	 List<Entity> directions = new ArrayList<>();
-    	 if (getY() > 0) directions.add(new Entity(getX(), getY() - 1));
-    	 if (getY() < dungeon.getHeight() - 1) directions.add(new Entity(getX(), getY() + 1));
-    	 if (getX() > 0) directions.add(new Entity(getX() - 1, getY()));
-    	 if (getX() < dungeon.getWidth() - 1) directions.add(new Entity(getX() + 1, getY()));
+    	 
+    	 if (dungeon.canMove(this, up())) directions.add(up());
+    	 if (dungeon.canMove(this, down())) directions.add(down());
+    	 if (dungeon.canMove(this, left())) directions.add(left());
+    	 if (dungeon.canMove(this, right())) directions.add(right());
+    	 if (dungeon.canMove(this, stay())) directions.add(stay());
     	 
     	 return directions;
     }
 
-    public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
+    public Entity up() {
+        return new Entity(getX(), getY() - 1);
     }
 
-    public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
+    public Entity down() {
+    	return new Entity(getX(), getY() + 1);
     }
 
-    public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
+    public Entity left() {
+    	return new Entity(getX() - 1, getY());
     }
 
-    public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
+    public Entity right() {
+    	return new Entity(getX() + 1, getY());
+    }
+    
+    public Entity stay() {
+    	return new Entity(getX(), getY());
     }
 }

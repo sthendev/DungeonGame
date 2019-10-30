@@ -59,6 +59,19 @@ public class Dungeon {
     	}
     }
     
+    public boolean canMove(Entity entity, Entity target) {
+    	if (target.getX() < 0 || target.getY() < 0
+    		|| target.getX() >= width || target.getY() >= height) {
+    		return false;
+    	}
+    	for (Entity e: entities) {
+    		if (e.overlap(target) && e.isBlocking(entity)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
     public double getDistToPlayer(Entity thing) {
     	return Point2D.distance((double) thing.getX(), (double) thing.getY(), (double) player.getX(), (double) player.getY());
     }

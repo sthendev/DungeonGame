@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-public class Wall extends Entity {
-
-    public Wall(int x, int y) {
+public class Exit extends Entity {
+	public Exit(int x, int y) {
         super(x, y);
     }
     
@@ -13,7 +12,6 @@ public class Wall extends Entity {
     
     @Override
     public String toString() {
-    	return super.toString() + " wall";
+    	return super.toString() + " exit";
     }
-
 }
