@@ -6,14 +6,14 @@ public class Inventory {
 	private ArrayList<Treasure> treasure;
 	private Key key;
 	private Sword sword;
-	private int treasureCounter;
+	private int invincibleTime;
 
 	public Inventory() {
 		super();
 		this.treasure = new ArrayList<Treasure>();
 		this.key = null;
 		this.sword = null;
-		this.treasureCounter = 0;
+		this.invincibleTime = 0;
 	}
 
 	public ArrayList<Treasure> getTreasure() {
@@ -45,7 +45,22 @@ public class Inventory {
 		this.sword = sword;
 	}
 
+	public int SwordHit() {
+		return sword.getHits();
+	}
 	
+	public void useSword() {
+		sword.useHits();
+	}
 	
+	public int getInvincibleTime() {
+		return invincibleTime;
+	}
+
+	public void pickPotion(int invincibleTime) {
+		this.invincibleTime += invincibleTime;
+	}
+	
+	//To-do: count down of invincible time
 	
 }
