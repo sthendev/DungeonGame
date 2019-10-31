@@ -51,4 +51,31 @@ public class Tile {
 		return dungeon.getTile(x + 1, y);
 	}
 	
+	public List<Tile> getSurroundingTiles() {
+		List<Tile> tiles = new ArrayList<>();
+		
+		addIfNotNull(tiles, up());
+		addIfNotNull(tiles, down());
+		addIfNotNull(tiles, left());
+		addIfNotNull(tiles, right());
+		
+		return tiles;
+	}
+	
+	private void addIfNotNull(List<Tile> tiles, Tile tile) {
+		if (tile != null) tiles.add(tile); 
+	}
+	
+	public boolean canMove(Entity mover) {
+		for (Entity entity: entities) {
+			if (entity.isBlocking(mover)) return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Tile(" + getX() + ", " + getY() + ")";
+	}
+	
 }

@@ -57,4 +57,8 @@ public class Entity implements Subject {
     	this.position = tile;
     	notifyObservers();
     }
+    
+    public boolean isBlocking(Entity entity) {
+    	return false;
+    }
 }

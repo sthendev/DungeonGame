@@ -16,28 +16,25 @@ public class Player extends Movable {
     }
 
     public void moveUp() {
-    	Tile target = getPosition().up();
-        attemptMove(target);
+        attemptMove(getPosition().up());
     }
 
     public void moveDown() {
-        Tile target = getPosition().down();
-        attemptMove(target);
+        attemptMove(getPosition().down());
     }
 
     public void moveLeft() {
-        Tile target = getPosition().left();
-        attemptMove(target);
+        attemptMove(getPosition().left());
     }
 
     public void moveRight() {
-        Tile target = getPosition().right();
-        attemptMove(target);
+        attemptMove(getPosition().right());
     }
     
     public void attemptMove(Tile target) {
-    	if (target != null && dungeon.canMove(this, target)) {
-        	move(target);
+    	if (target != null && target.canMove(this)) {
+        	moveMe(target);
+        	dungeon.playTurn();
         }
     }
 }
