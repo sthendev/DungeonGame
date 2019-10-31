@@ -19,7 +19,7 @@ public class killEnemy implements Goal {
 	}
 	
 	public boolean accomplished() {
-		if (dungeon.getEnemyCount() == 0) {
+		if (dungeon.getEnemies().size() == 0) {
 			return true;
 		}
 		return false;

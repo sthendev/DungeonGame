@@ -19,7 +19,6 @@ public class Dungeon implements Observer {
 
     private int width, height;
     private ArrayList<ArrayList<ArrayList<Entity>>> entities;
-    private int enemyCount;
     private Player player;
     private Goal goal;
     private ArrayList<Enemy> enemies;
@@ -31,7 +30,6 @@ public class Dungeon implements Observer {
         this.enemies = new ArrayList<Enemy>();
         this.player = null;
         this.goal = goal;
-        this.enemyCount = 0;
     }
     
     public int getWidth() {
@@ -48,14 +46,6 @@ public class Dungeon implements Observer {
 
 	public void setEntities(ArrayList<ArrayList<ArrayList<Entity>>> entities) {
 		this.entities = entities;
-	}
-
-	public int getEnemyCount() {
-		return enemyCount;
-	}
-
-	public void setEnemyCount(int enemyCount) {
-		this.enemyCount = enemyCount;
 	}
 
 	public Goal getGoal() {
@@ -81,9 +71,21 @@ public class Dungeon implements Observer {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
+    
+    public int playerXPos() {
+    	return player.getX();
+    }
+    
+    public int playerYPos() {
+    	return player.getY();
+    }
+    
     public void addEntity(Entity entity, int x, int y) {
     	getEntities().get(x).get(y).add(entity);
+    }
+    
+    public ArrayList<Entity> getTile(int x, int y) {
+    	return getEntities().get(x).get(y);
     }
     
     public boolean canMove(Entity entity, int x, int y) {
@@ -128,7 +130,8 @@ public class Dungeon implements Observer {
     	} else if (e instanceof Enemy) {
     		Enemy en = (Enemy) e;
     		if (en.getState().equals("dead")) {
-    			enemyCount--;
+    			getEnemies().remove(en);
+    			getEntities().get(en.getX()).get(en.getY()).remove(en);
     		}
     	}
     }
