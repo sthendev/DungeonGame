@@ -42,9 +42,10 @@ public class DungeonController {
             }
         }
 
-        for (ImageView entity : initialEntities)
-            squares.getChildren().add(entity);
-
+        for (ImageView entity : initialEntities) {
+        	squares.getChildren().add(entity);
+        }
+        
     }
 
     @FXML
@@ -65,7 +66,6 @@ public class DungeonController {
         default:
             break;
         }
-        dungeon.postMove();
     }
 
 }

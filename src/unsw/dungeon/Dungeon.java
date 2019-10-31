@@ -20,22 +20,31 @@ import java.awt.geom.Point2D;
 public class Dungeon {
 
     private int width, height;
-    private List<Entity> entities;
+    private Tile[][] board;
     private Player player;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<>();
         this.player = null;
+        initializeBoard(width, height);
     }
-
+    
+    private void initializeBoard(int width, int height) {
+    	this.board = new Tile[height][width];
+    	for (int row = 0; row < height; row ++) {
+    		for (int col = 0; col < width; col++) {
+    			board[row][col] = new Tile(this, col, row);
+    		}
+    	}
+    }
+    
     public int getWidth() {
-        return width;
+    	return width;
     }
-
+    
     public int getHeight() {
-        return height;
+    	return height;
     }
 
     public Player getPlayer() {
@@ -47,32 +56,28 @@ public class Dungeon {
     }
 
     public void addEntity(Entity entity) {
-        entities.add(entity);
+    	linkEntityTile(entity, board[entity.getY()][entity.getX()]);
     }
     
-    public void postMove() {
-    	for (Entity entity: entities) {
-    		if (entity instanceof Enemy) {
-    			Enemy enemy = (Enemy) entity;
-    			enemy.move();
-    		}
-    	}
+    public void moveEntity(Entity entity, Tile tile) {
+    	entity.getPosition().removeEntity(entity);
+    	linkEntityTile(entity, tile);
     }
     
-    public boolean canMove(Entity entity, Entity target) {
-    	if (target.getX() < 0 || target.getY() < 0
-    		|| target.getX() >= width || target.getY() >= height) {
-    		return false;
-    	}
-    	for (Entity e: entities) {
-    		if (e.overlap(target) && e.isBlocking(entity)) {
-    			return false;
-    		}
-    	}
+    public boolean canMove(Entity entity, Tile tile) {
     	return true;
     }
     
-    public double getDistToPlayer(Entity thing) {
-    	return Point2D.distance((double) thing.getX(), (double) thing.getY(), (double) player.getX(), (double) player.getY());
+    private void linkEntityTile(Entity entity, Tile tile) {
+    	tile.placeEntity(entity);
+    	entity.setPosition(tile);
     }
+    
+    public Tile getTile(int x, int y) {
+    	if (x < 0 || x >= width
+    		|| y < 0 || y >= height) 
+    		return null;
+    	return board[y][x];
+    }
+
 }

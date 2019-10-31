@@ -18,35 +18,11 @@ public class Enemy extends Entity {
     }
     
     public void move() {
-    	Entity best = null;
-    	List<Entity> directions = getValidDirections();
-    	for (Entity direction: directions) {
-    		if (best == null) {
-    			best = direction;
-    			continue;
-    		}
-    		
-    		if (dungeon.getDistToPlayer(direction) < dungeon.getDistToPlayer(best)) {
-    			best = direction;
-    		}
-    	}
     	
-    	if (best != null) {
-    		x().set(best.getX());
-    		y().set(best.getY());
-    	}
     }
     
     public List<Entity> getValidDirections() {
-    	 List<Entity> directions = new ArrayList<>();
     	 
-    	 if (dungeon.canMove(this, up())) directions.add(up());
-    	 if (dungeon.canMove(this, down())) directions.add(down());
-    	 if (dungeon.canMove(this, left())) directions.add(left());
-    	 if (dungeon.canMove(this, right())) directions.add(right());
-    	 if (dungeon.canMove(this, stay())) directions.add(stay());
-    	 
-    	 return directions;
     }
 
     public Entity up() {

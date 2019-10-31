@@ -13,6 +13,7 @@ public class Entity {
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
+    private Tile position;
 
     /**
      * Create an entity positioned in square (x,y)
@@ -22,6 +23,7 @@ public class Entity {
     public Entity(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.position = null;
     }
 
     public IntegerProperty x() {
@@ -40,19 +42,13 @@ public class Entity {
         return x().get();
     }
     
-    public boolean overlap(Entity entity) {
-    	if (x().get() == entity.getX() && y().get() == entity.getY()) {
-    		return true;
-    	}
-    	return false;
+    public Tile getPosition() {
+    	return position;
     }
     
-    public boolean isBlocking(Entity entity) {
-    	return false;
-    }
-    
-    @Override
-    public String toString() {
-    	return "x: " + x.get() + ", y: " + y.get();
+    public void setPosition(Tile tile) {
+    	this.position = tile;
+    	x().set(tile.getX());
+    	y().set(tile.getY());
     }
 }

@@ -5,23 +5,20 @@ package unsw.dungeon;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity {
-
-    private Dungeon dungeon;
-
+public class Player extends Movable {
     /**
      * Create a player positioned in square (x,y)
      * @param x
      * @param y
      */
     public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
     }
 
     public void moveUp() {
-        if (getY() > 0)
-            y().set(getY() - 1);
+        if (getPosition().up() != null && dungeion) {
+        	
+        }
     }
 
     public void moveDown() {
