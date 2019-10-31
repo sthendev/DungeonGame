@@ -18,5 +18,7 @@ public class Exit extends Entity {
 		this.state = state;
 	}
 	
-	
+	public void handleInteraction() {
+		
+	}
 }
