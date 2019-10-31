@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -79,20 +77,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
-        entity.x().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable,
-                    Number oldValue, Number newValue) {
-                GridPane.setColumnIndex(node, newValue.intValue());
-            }
-        });
-        entity.y().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable,
-                    Number oldValue, Number newValue) {
-                GridPane.setRowIndex(node, newValue.intValue());
-            }
-        });
+        entity.addObserver(new UIUpdater(node));
     }
 
     /**

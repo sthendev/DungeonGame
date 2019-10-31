@@ -11,28 +11,33 @@ public class Player extends Movable {
      * @param x
      * @param y
      */
-    public Player(Dungeon dungeon, int x, int y) {
-        super(dungeon, x, y);
+    public Player(Dungeon dungeon, Tile position) {
+        super(dungeon, position);
     }
 
     public void moveUp() {
-        if (getPosition().up() != null && dungeion) {
-        	
-        }
+    	Tile target = getPosition().up();
+        attemptMove(target);
     }
 
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
-            y().set(getY() + 1);
+        Tile target = getPosition().down();
+        attemptMove(target);
     }
 
     public void moveLeft() {
-        if (getX() > 0)
-            x().set(getX() - 1);
+        Tile target = getPosition().left();
+        attemptMove(target);
     }
 
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
-            x().set(getX() + 1);
+        Tile target = getPosition().right();
+        attemptMove(target);
+    }
+    
+    public void attemptMove(Tile target) {
+    	if (target != null && dungeon.canMove(this, target)) {
+        	move(target);
+        }
     }
 }

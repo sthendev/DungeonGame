@@ -3,11 +3,6 @@
  */
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.awt.geom.Point2D;
-
 /**
  * A dungeon in the interactive dungeon player.
  *

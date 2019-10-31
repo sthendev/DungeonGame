@@ -1,45 +1,52 @@
 package unsw.dungeon;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * An entity in the dungeon.
  * @author Robert Clifton-Everest
  *
  */
-public class Entity {
+public class Entity implements Subject {
 
-    // IntegerProperty is used so that changes to the entities position can be
-    // externally observed.
-    private IntegerProperty x, y;
     private Tile position;
+    private List<Observer> observers;
 
     /**
      * Create an entity positioned in square (x,y)
      * @param x
      * @param y
      */
-    public Entity(int x, int y) {
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
-        this.position = null;
+    
+    public Entity(Tile position) {
+        this.position = position;
+        this.observers = new ArrayList<>();
     }
+    
+    @Override
+	public void addObserver(Observer obj) {
+		observers.add(obj);
+	}
 
-    public IntegerProperty x() {
-        return x;
-    }
-
-    public IntegerProperty y() {
-        return y;
-    }
-
-    public int getY() {
-        return y().get();
-    }
+	@Override
+	public void removeObserver(Observer obj) {
+		observers.remove(obj);
+	}
+	
+	@Override
+	public void notifyObservers() {
+		for (Observer observer : observers) {
+			observer.update(this);
+		}
+	}
 
     public int getX() {
-        return x().get();
+        return position.getX();
+    }
+  
+    public int getY() {
+        return position.getY();
     }
     
     public Tile getPosition() {
@@ -48,7 +55,6 @@ public class Entity {
     
     public void setPosition(Tile tile) {
     	this.position = tile;
-    	x().set(tile.getX());
-    	y().set(tile.getY());
+    	notifyObservers();
     }
 }

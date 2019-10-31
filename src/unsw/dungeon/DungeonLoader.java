@@ -50,23 +50,23 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(dungeon, x, y);
+            Player player = new Player(dungeon, dungeon.getTile(x, y));
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
             break;
         case "wall":
-            Wall wall = new Wall(x, y);
+            Wall wall = new Wall(dungeon.getTile(x, y));
             onLoad(wall);
             entity = wall;
             break;
         case "enemy":
-        	Enemy enemy = new Enemy(dungeon, x, y);
+        	Enemy enemy = new Enemy(dungeon, dungeon.getTile(x, y));
         	onLoad(enemy);
         	entity = enemy;
         	break;
         case "exit":
-        	Exit exit = new Exit(x, y);
+        	Exit exit = new Exit(dungeon.getTile(x, y));
         	onLoad(exit);
         	entity = exit;
         	break;

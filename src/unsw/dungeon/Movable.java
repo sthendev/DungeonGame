@@ -4,8 +4,8 @@ public class Movable extends Entity {
 	
 	Dungeon dungeon;
 	
-	Movable(Dungeon dungeon, int x, int y) {
-		super(x, y);
+	Movable(Dungeon dungeon, Tile position) {
+		super(position);
 		this.dungeon = dungeon;
 	}
     
