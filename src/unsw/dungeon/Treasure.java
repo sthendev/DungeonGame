@@ -4,8 +4,8 @@ public class Treasure extends Entity {
 	
 	private String name;
 
-	public Treasure(int x, int y, String name) {
-		super(x, y);
+	public Treasure(Dungeon d, int x, int y, String name) {
+		super(d, x, y);
 		this.name = name;
 	}
 

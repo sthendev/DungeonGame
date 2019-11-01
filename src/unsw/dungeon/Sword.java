@@ -6,8 +6,8 @@ public class Sword extends Entity {
 	private String name;
 	private int hits;
 	
-	public Sword(int x, int y, String name, int hits) {
-		super(x, y);
+	public Sword(Dungeon d, int x, int y, String name, int hits) {
+		super(d, x, y);
 		this.name = name;
 		this.hits = hits;
 	}
