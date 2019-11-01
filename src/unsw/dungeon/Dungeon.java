@@ -84,21 +84,19 @@ public class Dungeon implements Observer {
     	getEntities().get(x).get(y).add(entity);
     }
     
+    public void removeEntity(Entity entity, int x, int y) {
+    	getEntities().get(x).get(y).remove(entity);
+    }
+    
     public ArrayList<Entity> getTile(int x, int y) {
     	return getEntities().get(x).get(y);
     }
     
-    public boolean canMove(Entity entity, int x, int y) {
-    	if (target.getX() < 0 || target.getY() < 0
-    		|| target.getX() >= width || target.getY() >= height) {
-    		return false;
-    	}
-    	for (Entity e: entities) {
-    		if (e.overlap(target) && e.isBlocking(entity)) {
-    			return false;
-    		}
-    	}
-    	return true;
+    public boolean canMove(Entity e, int x, int y) {
+    	if (getTile(x, y).canMove(e)) {
+			return true;
+		}
+    	return false;
     }
 
     public void update(Subject s) {
@@ -117,7 +115,7 @@ public class Dungeon implements Observer {
 		    			en.handleInteraction(p);
 	    			}
 	    		}
-	    		if (goal.accomplished()) {
+	    		if (checkGoal()) {
 	    			endGame(true);
 	    		}
 	    		if (this.getEnemies().size() > 0) {
@@ -131,9 +129,13 @@ public class Dungeon implements Observer {
     		Enemy en = (Enemy) e;
     		if (en.getState().equals("dead")) {
     			getEnemies().remove(en);
-    			getEntities().get(en.getX()).get(en.getY()).remove(en);
+    			removeEntity(en, en.getX(), en.getY());
     		}
     	}
+    }
+    
+    public boolean checkGoal() {
+    	return goal.accomplished();
     }
     
     //Move all enemies after player executes a move

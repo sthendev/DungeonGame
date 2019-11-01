@@ -3,13 +3,13 @@ package unsw.dungeon;
 import java.util.*;
 
 public class Door extends Entity {
-
+	
 	private String name;
 	private Key key;
 	private String state;
 	
-	public Door(int x, int y, String name, Key key) {
-		super(x, y);
+	public Door(Dungeon d, int x, int y, String name, Key key) {
+		super(d, x, y);
 		this.name = name;
 		this.key = key;
 		this.state = "untriggered";
@@ -39,13 +39,22 @@ public class Door extends Entity {
 		this.state = state;
 	}
 	
-	public void toTrigger(Key k) {
-		if (state.equals("untriggered")) {
-			if (k.getDoor().equals(this)) {
-				state = "triggered";
+	public boolean isRight(Key k) {
+		if (k.getDoor().equals(this)) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public void handleInteraction(Entity e) {
+		if (e instanceof Player && state.equals("untriggered")) {
+			Player p = (Player) e;
+			if (isRight(p.keyHeld())) {
+				setState("triggered");
+				notifyObservers();
 			}
 		}
 	}
-	
 	
 }
