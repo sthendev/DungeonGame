@@ -33,6 +33,7 @@ public class Tile {
 	
 	public void removeEntity(Entity entity) {
 		entities.remove(entity);
+		entity.setPosition(null);
 	}
 	
 	public Tile up() {
@@ -66,11 +67,28 @@ public class Tile {
 		if (tile != null) tiles.add(tile); 
 	}
 	
-	public boolean canMove(Entity mover) {
+	public boolean canMove(Movable mover) {
 		for (Entity entity: entities) {
 			if (entity.isBlocking(mover)) return false;
 		}
 		return true;
+	}
+	
+	public void movedOn(Movable mover) {
+		
+		List<Entity> entitiesCopy = new ArrayList<>(entities);
+		
+		for (Entity entity : entitiesCopy) {
+			entity.meet(mover);
+		}
+    	dungeon.linkEntityTile(mover, this);
+	}
+	
+	public void movedOff(Movable mover) {
+		removeEntity(mover);
+		for (Entity entity : entities) {
+			entity.leave(mover);
+		}
 	}
 	
 	@Override

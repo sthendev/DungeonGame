@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -21,18 +20,22 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     //Images
     private Image playerImage;
+    private Image armedPlayer;
     private Image wallImage;
     private Image enemyImage;
     private Image exitImage;
+    private Image swordImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
+        armedPlayer = new Image("/human_new_sword.png");
         wallImage = new Image("/brick_brown_0.png");
-        enemyImage = new Image("/deep_elf_master_archer.png");
+        enemyImage = new Image("/gnome.png");
         exitImage = new Image("/exit.png");
+        swordImage = new Image("/greatsword_1_new.png");
     }
 
     @Override
@@ -58,6 +61,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView view = new ImageView(exitImage);
     	addEntity(exit, view);
     }
+    
+    @Override
+    public void onLoad(Sword sword) {
+    	ImageView view = new ImageView(swordImage);
+    	addEntity(sword, view);
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -74,10 +83,15 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param entity
      * @param node
      */
-    private void trackPosition(Entity entity, Node node) {
+    private void trackPosition(Entity entity, ImageView node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
-        entity.addObserver(new UIUpdater(node));
+        entity.addObserver(getUIUpdater(entity, node));
+    }
+    
+    private UIUpdater getUIUpdater(Entity entity, ImageView node) {
+    	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayer);
+    	return new UIUpdater(node);
     }
 
     /**

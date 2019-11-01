@@ -5,11 +5,20 @@ import java.util.ArrayList;
 
 public class Movable extends Entity {
 	
-	Dungeon dungeon;
+	private Dungeon dungeon;
+	private Tile prevPosition;
 	
 	Movable(Dungeon dungeon, Tile position) {
 		super(position);
 		this.dungeon = dungeon;
+	}
+	
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+	
+	public Tile getPrevPosition() {
+		return prevPosition;
 	}
     
 	public void moveMe(Tile tile) {
@@ -24,5 +33,11 @@ public class Movable extends Entity {
 		}
 		
 		return validMoves;
+	}
+	
+	@Override
+	public void setPosition(Tile tile) {
+		this.prevPosition = getPosition();
+		super.setPosition(tile);
 	}
 }

@@ -7,7 +7,7 @@ public class Wall extends Entity {
     }
     
     @Override
-    public boolean isBlocking(Entity entity) {
+    public boolean isBlocking(Movable mover) {
     	return true;
     }
 

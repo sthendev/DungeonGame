@@ -60,17 +60,21 @@ public class Dungeon {
     public void addEnemy(Enemy enemy) {
     	enemies.add(enemy);
     }
+    
+    public void killEnemy(Enemy enemy) {
+    	enemies.remove(enemy);
+    }
 
     public void addEntity(Entity entity) {
     	linkEntityTile(entity, board[entity.getY()][entity.getX()]);
     }
     
-    public void moveEntity(Entity entity, Tile tile) {
-    	entity.getPosition().removeEntity(entity);
-    	linkEntityTile(entity, tile);
+    public void moveEntity(Movable entity, Tile tile) {
+    	entity.getPosition().movedOff(entity);
+    	tile.movedOn(entity);
     }
     
-    private void linkEntityTile(Entity entity, Tile tile) {
+    public void linkEntityTile(Entity entity, Tile tile) {
     	tile.placeEntity(entity);
     	entity.setPosition(tile);
     }
@@ -124,6 +128,10 @@ public class Dungeon {
     	for (Enemy enemy : enemies) {
     		enemy.move();
     	}
+    }
+    
+    public void endGame() {
+    	System.out.println("Game over");
     }
 
 }

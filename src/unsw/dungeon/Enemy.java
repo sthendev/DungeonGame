@@ -17,11 +17,11 @@ public class Enemy extends Movable {
     }
     
     public boolean playerInSight() {
-    	if (dungeon.getPlayer().getX() != getX()
-    		&& dungeon.getPlayer().getY() != getY())
+    	if (getDungeon().getPlayer().getX() != getX()
+    		&& getDungeon().getPlayer().getY() != getY())
     		return false;
     	
-    	List<Tile> tilesBetween = dungeon.getTilesToPlayer(this);
+    	List<Tile> tilesBetween = getDungeon().getTilesToPlayer(this);
     	for (Tile tile : tilesBetween) {
     		if (!tile.canMove(this)) return false;
     	}
@@ -38,21 +38,36 @@ public class Enemy extends Movable {
     	Tile bestMove = getPosition();
     	
     	for (Tile tile : validMoves) {
-    		if (bestMove == null) {
-    			bestMove = tile;
-    			continue;
-    		}
-    		if (dungeon.distToPlayer(tile) < dungeon.distToPlayer(bestMove)) {
+    		if (getDungeon().distToPlayer(tile) < getDungeon().distToPlayer(bestMove)) {
     			bestMove = tile;
     		}
     	}
     	
-    	moveMe(bestMove);
+    	if (!bestMove.equals(getPosition())) moveMe(bestMove);
+    }
+    
+    public void dies() {
+    	getDungeon().killEnemy(this);
+    	getPosition().movedOff(this);
     }
     
     @Override
-    public boolean isBlocking(Entity entity) {
-    	if (entity instanceof Enemy) return true;
+    public boolean isBlocking(Movable mover) {
+    	if (mover instanceof Enemy) return true;
     	return false;
     }
+
+	@Override
+	public void meet(Movable mover) {
+		if (mover instanceof Player) {
+			Player player = (Player) mover;
+			if (player.hasSword() || player.isInvincible()) {
+				dies();
+			} else {
+				player.dies();
+			}
+			
+		}
+	}
+	
 }

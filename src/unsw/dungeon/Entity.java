@@ -58,7 +58,15 @@ public class Entity implements Subject {
     	notifyObservers();
     }
     
-    public boolean isBlocking(Entity entity) {
+    public boolean isBlocking(Movable mover) {
     	return false;
-    }
+    };
+    
+    public void meet(Movable mover) {
+    	return;
+    };
+    
+    public void leave(Movable mover) {
+    	return;
+    };
 }
