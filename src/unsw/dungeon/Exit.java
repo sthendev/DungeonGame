@@ -5,8 +5,8 @@ public class Exit extends Entity {
 	
 	public String state;
 
-	public Exit(int x, int y) {
-		super(x, y);
+	public Exit(Dungeon d, int x, int y) {
+		super(d, x, y);
 		this.state = "untriggered";
 	}
 
@@ -16,9 +16,13 @@ public class Exit extends Entity {
 
 	public void setState(String state) {
 		this.state = state;
+		notifyObservers();
 	}
 	
-	public void handleInteraction() {
-		
+	@Override
+	public void handleInteraction(Entity e) {
+		if (e instanceof Player && getDungeon().checkGoal()) {
+			setState("triggered"); 
+		}
 	}
 }

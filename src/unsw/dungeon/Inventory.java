@@ -1,12 +1,15 @@
 package unsw.dungeon;
 import java.util.*;
 
-public class Inventory {
+import unsw.dungeon.Observer;
+
+public class Inventory implements Subject {
 	
 	private ArrayList<Treasure> treasure;
 	private Key key;
 	private Sword sword;
 	private int invincibleTime;
+    private List<Observer> observers;
 
 	public Inventory() {
 		super();
@@ -14,19 +17,12 @@ public class Inventory {
 		this.key = null;
 		this.sword = null;
 		this.invincibleTime = 0;
+        this.observers = new ArrayList<>();
 	}
 
-	public ArrayList<Treasure> getTreasure() {
-		return treasure;
-	}
-
-	public void setTreasure(ArrayList<Treasure> treasure) {
-		this.treasure = treasure;
-	}
-	
 	public void addTreasure(Treasure t) {
 		treasure.add(t);
-		treasureCounter++;
+		notifyObservers();
 	}
 
 	public Key getKey() {
@@ -35,6 +31,7 @@ public class Inventory {
 
 	public void setKey(Key key) {
 		this.key = key;
+		notifyObservers();
 	}
 
 	public Sword getSword() {
@@ -43,6 +40,7 @@ public class Inventory {
 
 	public void setSword(Sword sword) {
 		this.sword = sword;
+		notifyObservers();
 	}
 
 	public int SwordHit() {
@@ -51,6 +49,7 @@ public class Inventory {
 	
 	public void useSword() {
 		sword.useHits();
+		notifyObservers();
 	}
 	
 	public int getInvincibleTime() {
@@ -59,8 +58,37 @@ public class Inventory {
 
 	public void pickPotion(int invincibleTime) {
 		this.invincibleTime += invincibleTime;
+		notifyObservers();
 	}
 	
 	//To-do: count down of invincible time
+
+	public ArrayList<Treasure> getTreasure() {
+		return treasure;
+	}
 	
+	public List<Observer> getObservers() {
+		return observers;
+	}
+
+	public void setObservers(List<Observer> observers) {
+		this.observers = observers;
+	}
+	
+	@Override
+	public void addObserver(Observer obj) {
+		observers.add(obj);
+	}
+
+	@Override
+	public void removeObserver(Observer obj) {
+		observers.remove(obj);
+	}
+	
+	@Override
+	public void notifyObservers() {
+		for (Observer o : getObservers()) {
+			o.update(this);
+		}
+	}
 }

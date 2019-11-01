@@ -7,11 +7,9 @@ import java.util.*;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Subject {
+public class Player extends Entity {
 
-    private Dungeon dungeon;
     private String name;
-    private ArrayList<Observer> observers;
     private int lastXMove;
     private int lastYMove;
     private String state;
@@ -23,26 +21,24 @@ public class Player extends Entity implements Subject {
      * @param y
      */
     public Player(Dungeon dungeon, String name, int x, int y, Inventory inv) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(dungeon, x, y);
         this.name = name;
-        this.observers = new ArrayList<Observer>();
         this.lastXMove = this.lastYMove = 0;
         this.state = "alive";
         this.inventory = inv;
     }
     
     public void move(int xMove, int yMove) {
-    	if (getY() > 0 && yMove > 0 || yMove < 0 && getY() < dungeon.getHeight() - 1) {
+    	if (getY() > 0 && yMove > 0 || yMove < 0 && getY() < getDungeon().getHeight() - 1) {
     		y().set(getY() + yMove);
     		setLastYMove(yMove);
     		setLastXMove(0);
-    	} else if (xMove > 0 && getX() < 0 || xMove < 0 && getX() < dungeon.getWidth() - 1) {
+    	} else if (xMove > 0 && getX() < 0 || xMove < 0 && getX() < getDungeon().getWidth() - 1) {
     		x().set(getX() + xMove);
     		setLastYMove(0);
     		setLastXMove(xMove);
     	}
-    	notifyObserver();
+    	notifyObservers();
     }
     
     public String getState() {
@@ -51,32 +47,7 @@ public class Player extends Entity implements Subject {
 
 	public void setState(String state) {
 		this.state = state;
-		notifyObserver();
-	}
-
-	@Override
-    public void addObserver(Observer o) {
-    	observers.add(o);
-    }
-    
-    @Override
-	public void removeObserver(Observer o) {
-		observers.remove(o);
-	}
-	
-	@Override
-	public void notifyObserver() {
-		for (Observer o : observers) {
-			o.update(this);
-		}
-	}
-
-	public Dungeon getDungeon() {
-		return dungeon;
-	}
-
-	public void setDungeon(Dungeon dungeon) {
-		this.dungeon = dungeon;
+		notifyObservers();
 	}
 
 	public String getName() {
@@ -86,11 +57,7 @@ public class Player extends Entity implements Subject {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public ArrayList<Observer> getObservers() {
-		return observers;
-	}
-
+	
 	public int getLastXMove() {
 		return lastXMove;
 	}
@@ -107,6 +74,14 @@ public class Player extends Entity implements Subject {
 		this.lastYMove = lastYMove;
 	}
 	
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
 	public boolean isInvincible() {
 		if (inventory.getInvincibleTime() > 0) {
 			return true;
@@ -122,6 +97,18 @@ public class Player extends Entity implements Subject {
 	
 	public void useSword() {
 		inventory.useSword();
+	}
+	
+	public Key keyHeld() {
+		return inventory.getKey();
+	}
+	
+	public void pickKey(Key k) {
+		inventory.setKey(k);
+	}
+	
+	public void pickPotion(Potion p) {
+		inventory.pickPotion(20);
 	}
 	
 	@Override
