@@ -93,7 +93,7 @@ public class Player extends Movable {
     	notifyObservers();
     }
     
-    public void turnComplete() {
+    public void newTurn() {
     	for (Entity item : inventory) {
     		if (item instanceof InvincibilityPotion) {
     			InvincibilityPotion potion = (InvincibilityPotion) item;

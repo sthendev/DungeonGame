@@ -6,7 +6,7 @@ public class InvincibilityPotion extends Entity {
 	
 	public InvincibilityPotion(Tile position) {
 		super(position);
-		this.moves = 10;
+		this.moves = 5;
 	}
 	
 	public int getMoves() {
@@ -15,6 +15,7 @@ public class InvincibilityPotion extends Entity {
 	
 	public void moved() {
 		this.moves -= 1;
+		System.out.println(moves);
 	}
 	
 	@Override

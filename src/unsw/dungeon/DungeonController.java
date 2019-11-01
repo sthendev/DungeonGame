@@ -50,6 +50,7 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	player.newTurn();
         switch (event.getCode()) {
         case UP:
             player.moveUp();
@@ -72,7 +73,6 @@ public class DungeonController {
         default:
             break;
         }
-        player.turnComplete();
     }
 
 }
