@@ -23,6 +23,7 @@ public class Dungeon implements Observer {
     private Goal goal;
     private ArrayList<Enemy> enemies;
     private ArrayList<Switch> switches;
+    private String state;
 
     public Dungeon(int width, int height, Goal goal) {
         this.width = width;
@@ -32,6 +33,7 @@ public class Dungeon implements Observer {
         this.player = null;
         this.goal = goal;
         this.switches = new ArrayList<Switch>();
+        this.state = "unfinished";
     }
     
     public ArrayList<ArrayList<ArrayList<Entity>>> getEntities() {
@@ -165,13 +167,24 @@ public class Dungeon implements Observer {
 		}
     }
     
+    //To-do
     public void endGame(boolean end) {
-    	
+    	if (end == true) {
+    		setState("complete");
+    	} else {
+    		setState("fail");
+    	}
     }
 
+    public String getState() {
+		return state;
+	}
 
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public int getWidth() {
+	public int getWidth() {
         return width;
     }
 
