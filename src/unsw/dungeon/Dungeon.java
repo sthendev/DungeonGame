@@ -125,7 +125,8 @@ public class Dungeon {
     }
     
     public void playTurn() {
-    	for (Enemy enemy : enemies) {
+    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+    	for (Enemy enemy : enemiesCopy) {
     		enemy.move();
     	}
     }

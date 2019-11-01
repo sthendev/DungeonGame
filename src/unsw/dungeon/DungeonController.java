@@ -72,6 +72,7 @@ public class DungeonController {
         default:
             break;
         }
+        player.turnComplete();
     }
 
 }

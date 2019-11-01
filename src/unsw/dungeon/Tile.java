@@ -75,13 +75,11 @@ public class Tile {
 	}
 	
 	public void movedOn(Movable mover) {
-		
 		List<Entity> entitiesCopy = new ArrayList<>(entities);
-		
 		for (Entity entity : entitiesCopy) {
 			entity.meet(mover);
 		}
-    	dungeon.linkEntityTile(mover, this);
+		if (mover.getStillExists()) dungeon.linkEntityTile(mover, this);
 	}
 	
 	public void movedOff(Movable mover) {

@@ -1033,6 +1033,11 @@
       "type": "enemy"
     },
     {
+      "x": 18,
+      "y": 6,
+      "type": "invincibility"
+    },
+    {
       "x": 1,
       "y": 3,
       "type": "sword"

@@ -76,6 +76,11 @@ public abstract class DungeonLoader {
         	onLoad(sword);
         	entity = sword;
         	break;
+        case "invincibility":
+        	InvincibilityPotion potion = new InvincibilityPotion(dungeon.getTile(x, y));
+        	onLoad(potion);
+        	entity = potion;
+        	break;
          // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
@@ -90,6 +95,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Exit exit);
     
     public abstract void onLoad(Sword sword);
+    
+    public abstract void onLoad(InvincibilityPotion potion);
 
     // TODO Create additional abstract methods for the other entities
 

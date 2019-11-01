@@ -47,8 +47,9 @@ public class Enemy extends Movable {
     }
     
     public void dies() {
+    	if (getPosition() != null) getPosition().movedOff(this);
     	getDungeon().killEnemy(this);
-    	getPosition().movedOff(this);
+    	ceaseExistence();
     }
     
     @Override
@@ -60,11 +61,12 @@ public class Enemy extends Movable {
 	@Override
 	public void meet(Movable mover) {
 		if (mover instanceof Player) {
+			System.out.println("meet player");
 			Player player = (Player) mover;
-			if (player.hasSword()) {
-				player.attack();
+			if (player.isInvincible()) {
 				dies();
-			} else if (player.isInvincible()) {
+			} else if (player.hasSword()) {
+				player.attack();
 				dies();
 			} else {
 				player.dies();

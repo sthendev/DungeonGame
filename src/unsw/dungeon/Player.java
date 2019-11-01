@@ -68,6 +68,9 @@ public class Player extends Movable {
     }
     
     public boolean isInvincible() {
+    	for (Entity item : inventory) {
+    		if (item instanceof InvincibilityPotion) return true;
+    	}
     	return false;
     }
     
@@ -90,6 +93,17 @@ public class Player extends Movable {
     	notifyObservers();
     }
     
+    public void turnComplete() {
+    	for (Entity item : inventory) {
+    		if (item instanceof InvincibilityPotion) {
+    			InvincibilityPotion potion = (InvincibilityPotion) item;
+    			potion.moved();
+    			if (potion.getMoves() == 0) inventory.remove(potion);
+    			break;
+    		}
+    	}
+    }
+    
     public void dies() {
     	getDungeon().endGame();
     }
@@ -97,6 +111,7 @@ public class Player extends Movable {
 	@Override
 	public void meet(Movable mover) {
 		if (mover instanceof Enemy) {
+			System.out.println("meet enemy");
 			Enemy enemy = (Enemy) mover;
 			if (isInvincible()) {
 				enemy.dies();

@@ -7,10 +7,12 @@ public class Movable extends Entity {
 	
 	private Dungeon dungeon;
 	private Tile prevPosition;
+	private boolean stillExists;
 	
 	Movable(Dungeon dungeon, Tile position) {
 		super(position);
 		this.dungeon = dungeon;
+		this.stillExists = true;
 	}
 	
 	public Dungeon getDungeon() {
@@ -19,6 +21,14 @@ public class Movable extends Entity {
 	
 	public Tile getPrevPosition() {
 		return prevPosition;
+	}
+	
+	public boolean getStillExists() {
+		return stillExists;
+	}
+	
+	public void ceaseExistence() {
+		this.stillExists = false;
 	}
     
 	public void moveMe(Tile tile) {

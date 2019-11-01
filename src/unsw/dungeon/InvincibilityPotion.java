@@ -1,20 +1,20 @@
 package unsw.dungeon;
 
-public class Sword extends Entity {
+public class InvincibilityPotion extends Entity {
 	
-	int hits;
+	private int moves;
 	
-	public Sword(Tile position) {
+	public InvincibilityPotion(Tile position) {
 		super(position);
-		this.hits = 5;
+		this.moves = 10;
 	}
 	
-	public int getHits() {
-		return hits;
+	public int getMoves() {
+		return moves;
 	}
 	
-	public void hit() {
-		this.hits -= 1;
+	public void moved() {
+		this.moves -= 1;
 	}
 	
 	@Override
@@ -25,4 +25,5 @@ public class Sword extends Entity {
 			player.addItem(this);
 		}
 	}
+	
 }
