@@ -99,6 +99,10 @@ public class Player extends Entity {
 		inventory.useSword();
 	}
 	
+	public Sword getSword() {
+		return inventory.getSword();
+	}
+	
 	public Key keyHeld() {
 		return inventory.getKey();
 	}
@@ -107,8 +111,20 @@ public class Player extends Entity {
 		inventory.setKey(k);
 	}
 	
+	public void useKey() {
+		inventory.setKey(null);
+	}
+	
+	public void pickSword(Sword s) {
+		inventory.setSword(s);
+	}
+	
 	public void pickPotion(Potion p) {
 		inventory.pickPotion(20);
+	}
+	
+	public void pickTreasure(Treasure t) {
+		inventory.addTreasure(t);
 	}
 	
 	@Override

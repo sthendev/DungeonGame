@@ -49,6 +49,9 @@ public class Inventory implements Subject {
 	
 	public void useSword() {
 		sword.useHits();
+		if (sword.getHits() == 0) {
+			setSword(null);
+		}
 		notifyObservers();
 	}
 	

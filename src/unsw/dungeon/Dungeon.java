@@ -22,6 +22,7 @@ public class Dungeon implements Observer {
     private Player player;
     private Goal goal;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Switch> switches;
 
     public Dungeon(int width, int height, Goal goal) {
         this.width = width;
@@ -30,16 +31,9 @@ public class Dungeon implements Observer {
         this.enemies = new ArrayList<Enemy>();
         this.player = null;
         this.goal = goal;
+        this.switches = new ArrayList<Switch>();
     }
     
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     public ArrayList<ArrayList<ArrayList<Entity>>> getEntities() {
 		return entities;
 	}
@@ -48,36 +42,28 @@ public class Dungeon implements Observer {
 		this.entities = entities;
 	}
 
-	public Goal getGoal() {
-		return goal;
-	}
-
-	public void setGoal(Goal goal) {
-		this.goal = goal;
-	}
-
-	public ArrayList<Enemy> getEnemies() {
-		return enemies;
-	}
-
-	public void setEnemies(ArrayList<Enemy> enemies) {
-		this.enemies = enemies;
-	}
-
-	public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-    
-    public int playerXPos() {
+	public int playerXPos() {
     	return player.getX();
     }
     
     public int playerYPos() {
     	return player.getY();
+    }
+    
+    public void addEnemy(Enemy e) {
+    	getEnemies().add(e);
+    }
+    
+    public void removeEnemy(Enemy e) {
+    	getEnemies().remove(e);
+    }
+    
+    public void addSwitch(Switch s) {
+    	getSwitches().add(s);
+    }
+    
+    public void removeSwitch(Switch s) {
+    	getSwitches().remove(s);
     }
     
     public void addEntity(Entity entity, int x, int y) {
@@ -109,9 +95,11 @@ public class Dungeon implements Observer {
     		if (p.getState().equals("alive")) {
     			// First interact with enemies if there's any
     			checkCoincide();
+    			// Then update status of all floor switches
+    			updateSwitches();
     			// Then interact with other props
 	    		for (Entity en : onSquare) {
-	    			if (!(en instanceof Enemy)) {
+	    			if (!(en instanceof Enemy || en instanceof Switch)) {
 		    			en.handleInteraction(p);
 	    			}
 	    		}
@@ -131,6 +119,12 @@ public class Dungeon implements Observer {
     			getEnemies().remove(en);
     			removeEntity(en, en.getX(), en.getY());
     		}
+    	}
+    }
+    
+    public void updateSwitches() {
+    	for (Switch s : getSwitches()) {
+    		s.checkState();
     	}
     }
     
@@ -175,4 +169,45 @@ public class Dungeon implements Observer {
     	
     }
 
+
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+	public Goal getGoal() {
+		return goal;
+	}
+
+	public void setGoal(Goal goal) {
+		this.goal = goal;
+	}
+
+	public ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public void setEnemies(ArrayList<Enemy> enemies) {
+		this.enemies = enemies;
+	}
+
+	public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    
+    public ArrayList<Switch> getSwitches() {
+		return switches;
+	}
+
+	public void setSwitches(ArrayList<Switch> switches) {
+		this.switches = switches;
+	}
 }
