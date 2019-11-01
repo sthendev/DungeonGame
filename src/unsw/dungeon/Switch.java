@@ -5,7 +5,6 @@ public class Switch extends Entity {
 	private int index;
 	private State triggered;
 	private State untriggered;
-	
 	private State state;
 	
 	public Switch(Dungeon d, int x, int y, int index, State state) {
@@ -18,21 +17,22 @@ public class Switch extends Entity {
 	
 	@Override
 	public void handleInteraction(Entity e) {
-		if (e instanceof Player || e instanceof Boulder) {
-			Player p = (Player) e;
-			if (p.keyHeld() != null) {
-				Key k = p.keyHeld();
-				int x = p.getX();
-				int y = p.getY();
-				k.setX(x);
-				k.setY(y);
-				getDungeon().addEntity(k, x, y);
+		state.toTrigger();
+	}
+	
+	public void checkState() {
+		int tri = 0;
+		Tile t = getDungeon().getTile(getX(), getY());
+		for (Entity e : t) {
+			if (e instanceof Player || e instanceof Boulder) {
+				tri = 1;
+				break;
 			}
-			p.pickKey(this);
-			setPlayer(p);
-			getDungeon().removeEntity(this, getX(), getY());
-			notifyObservers();
-			// How does javaFX know the key has swapped?
+		}
+		if (tri == 1) {
+			handleInteraction(this);
+		} else {
+			state.toUntrigger();
 		}
 	}
 	
@@ -58,6 +58,7 @@ public class Switch extends Entity {
 	
 	public void setState(State state) {
 		this.state = state;
+		notifyObservers();
 	}
 	
 }
