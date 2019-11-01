@@ -3,13 +3,11 @@ package unsw.dungeon;
 public class Key extends Entity {
 
 	private Door door;
-	private String name;
 	private Player player;
 
 	public Key(int x, int y, Door door, Dungeon d) {
 		super(d, x, y);
 		this.door = door;
-		this.name = door.getName();
 		this.player = null;
 	}
 	

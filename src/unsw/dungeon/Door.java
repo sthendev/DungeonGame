@@ -52,6 +52,7 @@ public class Door extends Entity {
 			Player p = (Player) e;
 			if (isRight(p.keyHeld())) {
 				setState("triggered");
+				p.useKey();
 				notifyObservers();
 			}
 		}
