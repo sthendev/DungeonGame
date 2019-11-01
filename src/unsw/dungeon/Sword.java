@@ -6,7 +6,7 @@ public class Sword extends Entity {
 	
 	public Sword(Tile position) {
 		super(position);
-		this.hits = 5;
+		this.hits = 1;
 	}
 	
 	public int getHits() {

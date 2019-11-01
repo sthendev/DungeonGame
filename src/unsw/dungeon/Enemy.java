@@ -61,7 +61,10 @@ public class Enemy extends Movable {
 	public void meet(Movable mover) {
 		if (mover instanceof Player) {
 			Player player = (Player) mover;
-			if (player.hasSword() || player.isInvincible()) {
+			if (player.hasSword()) {
+				player.attack();
+				dies();
+			} else if (player.isInvincible()) {
 				dies();
 			} else {
 				player.dies();

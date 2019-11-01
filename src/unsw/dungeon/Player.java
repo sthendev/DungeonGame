@@ -87,6 +87,7 @@ public class Player extends Movable {
     			break;
     		}
     	}
+    	notifyObservers();
     }
     
     public void dies() {
