@@ -83,7 +83,7 @@ public class Player extends Movable {
 	}
 	
 	public boolean hasSword() {
-		if (inventory.SwordHit() > 0) {
+		if (inventory.getSword() != null) {
 			return true;
 		}
 		return false;
