@@ -12,7 +12,7 @@ public class Wall extends Entity {
     }
     
     @Override
-	public void handleInteraction(Entity e) {
+	public void notifyComing(Movable e) {
 		//Do nothing
 	}
 }

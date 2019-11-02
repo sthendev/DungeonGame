@@ -3,10 +3,12 @@ package unsw.dungeon;
 public class InvincibilityPotion extends Entity {
 	
 	private int moves;
+	private Player player;
 	
 	public InvincibilityPotion(Tile position) {
 		super(position);
 		this.moves = 5;
+		this.player = null;
 	}
 	
 	public int getMoves() {
