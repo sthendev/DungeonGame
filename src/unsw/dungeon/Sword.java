@@ -9,6 +9,7 @@ public class Sword extends Entity {
 	public Sword(Tile position) {
 		super(position);
 		this.hits = 5;
+		this.player = null;
 	}
 	
 	@Override
@@ -18,7 +19,7 @@ public class Sword extends Entity {
 			if (p.getSword() != null) {
 				Sword s = p.getSword();
 				s.setCurrentTile(p.getCurrentTile());
-				getCurrentTile().placeEntity(this);
+				getCurrentTile().placeEntity(s);
 			}
 			p.pickSword(this);
 			setPlayer(p);
@@ -32,14 +33,6 @@ public class Sword extends Entity {
 	
 	public void useHits() {
 		this.hits--;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Player getPlayer() {

@@ -1,4 +1,5 @@
 package unsw.dungeon;
+import java.util.*;
 
 public class Switch extends Entity {
 
@@ -7,8 +8,8 @@ public class Switch extends Entity {
 	private State untriggered;
 	private State state;
 	
-	public Switch(Dungeon d, int x, int y, int index, State state) {
-		super(d, x, y);
+	public Switch(Tile tile, int index, State state) {
+		super(tile);
 		this.index = index;
 		this.triggered = new Triggered(this);
 		this.untriggered = new Untriggered(this);
@@ -22,15 +23,17 @@ public class Switch extends Entity {
 	
 	public void checkState() {
 		int tri = 0;
-		Tile t = getDungeon().getTile(getX(), getY());
-		for (Entity e : t) {
+		Movable m = null;
+		List<Entity> en = this.entityOverlapped();
+		for (Entity e : en) {
 			if (e instanceof Player || e instanceof Boulder) {
 				tri = 1;
+				m = (Movable) e;
 				break;
 			}
 		}
 		if (tri == 1) {
-			handleInteraction(this);
+			notifyComing(m);
 		} else {
 			state.toUntrigger();
 		}

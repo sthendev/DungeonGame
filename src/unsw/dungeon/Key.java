@@ -5,8 +5,8 @@ public class Key extends Entity {
 	private Player player;
 	private int id;
 
-	public Key(int id, int x, int y, Dungeon d) {
-		super(d, x, y);
+	public Key(int id, Tile t) {
+		super(t);
 		this.id = id;
 		this.player = null;
 	}
@@ -17,17 +17,12 @@ public class Key extends Entity {
 			Player p = (Player) e;
 			if (p.keyHeld() != null) {
 				Key k = p.keyHeld();
-				int x = p.getX();
-				int y = p.getY();
-				k.setX(x);
-				k.setY(y);
-				getDungeon().addEntity(k, x, y);
+				k.setCurrentTile(p.getCurrentTile());
+				getCurrentTile().placeEntity(k);
 			}
 			p.pickKey(this);
 			setPlayer(p);
-			getDungeon().removeEntity(this, getX(), getY());
-			notifyObservers();
-			// How does javaFX know the key has swapped?
+			getCurrentTile().removeEntity(this);
 		}
 	}
 
@@ -38,10 +33,6 @@ public class Key extends Entity {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return door.getName();
 	}
 
 	public Player getPlayer() {
