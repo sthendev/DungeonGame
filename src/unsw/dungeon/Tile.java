@@ -48,7 +48,7 @@ public class Tile {
 	}
 	
 	public Tile getAdjacentTile(int xMove, int yMove) {
-		return dungeon.getTile(x + xMove, y + yMove);
+		return dungeon.getTile(x + xMove, y - yMove);
 	}
 	
 	public Direction getDirectionOfTile(Tile tile) {
