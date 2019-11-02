@@ -43,10 +43,10 @@ public class Tile {
 	public List<Tile> getSurroundingTiles() {
 		List<Tile> tiles = new ArrayList<>();
 		
-		addIfNotNull(tiles, up());
-		addIfNotNull(tiles, down());
-		addIfNotNull(tiles, left());
-		addIfNotNull(tiles, right());
+		addIfNotNull(tiles, getAdjacentTile(0, 1));
+		addIfNotNull(tiles, getAdjacentTile(0, -1));
+		addIfNotNull(tiles, getAdjacentTile(-1, 0));
+		addIfNotNull(tiles, getAdjacentTile(1, 0));
 		
 		return tiles;
 	}
@@ -65,9 +65,9 @@ public class Tile {
 	public void movedOn(Movable mover) {
 		List<Entity> entitiesCopy = new ArrayList<>(entities);
 		for (Entity entity : entitiesCopy) {
-			entity.meet(mover);
+			entity.notifyComing(mover);
 		}
-		if (mover.getStillExists()) dungeon.linkEntityTile(mover, this);
+		if (mover.getStillExists()) dungeon.addEntity(mover, this.x, this.y);
 	}
 	
 	public void movedOff(Movable mover) {
