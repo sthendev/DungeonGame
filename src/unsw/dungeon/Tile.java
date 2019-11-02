@@ -33,23 +33,11 @@ public class Tile {
 	
 	public void removeEntity(Entity entity) {
 		entities.remove(entity);
-		entity.setPosition(null);
+		entity.setCurrentTile(null);
 	}
 	
-	public Tile up() {
-		return dungeon.getTile(x, y - 1);
-	}
-	
-	public Tile down() {
-		return dungeon.getTile(x, y + 1);
-	}
-	
-	public Tile left() {
-		return dungeon.getTile(x - 1, y);
-	}
-	
-	public Tile right() {
-		return dungeon.getTile(x + 1, y);
+	public Tile getAdjacentTile(int xMove, int yMove) {
+		return dungeon.getTile(x + xMove, y + yMove);
 	}
 	
 	public List<Tile> getSurroundingTiles() {
@@ -85,7 +73,7 @@ public class Tile {
 	public void movedOff(Movable mover) {
 		removeEntity(mover);
 		for (Entity entity : entities) {
-			entity.leave(mover);
+			entity.notifyLeaving(mover);
 		}
 	}
 	
