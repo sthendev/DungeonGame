@@ -3,26 +3,36 @@ import java.util.*;
 
 public class Exit extends Entity {
 	
-	public String state;
+	private boolean state;
+	private Dungeon dungeon;
 
-	public Exit(Tile position) {
+	public Exit(Dungeon d, Tile position) {
         super(position);
-		this.state = "untriggered";
+		this.state = false;
+		this.dungeon = d;
     }
 
-	public String getState() {
+	public boolean getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(boolean state) {
 		this.state = state;
 		notifyObservers();
 	}
 	
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
+	}
+
 	@Override
-	public void handleInteraction(Entity e) {
-		if (e instanceof Player && getDungeon().checkGoal()) {
-			setState("triggered"); 
+	public void notifyComing(Movable e) {
+		if (e instanceof Player && dungeon.checkGoal()) {
+			setState(true); 
 		}
 	}
 	
@@ -31,4 +41,5 @@ public class Exit extends Entity {
 		if (mover instanceof Enemy) return true;
 		return false;
 	}
+	
 }

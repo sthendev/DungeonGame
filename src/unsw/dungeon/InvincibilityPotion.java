@@ -13,11 +13,6 @@ public class InvincibilityPotion extends Entity {
 		return moves;
 	}
 	
-	public void moved() {
-		this.moves -= 1;
-		System.out.println(moves);
-	}
-	
 	public Player getPlayer() {
 		return player;
 	}

@@ -22,6 +22,12 @@ public class Player extends Movable {
      * @param y
      */
 
+	public Player(Dungeon dungeon, Tile position, String name) {
+		super(dungeon, position);
+		this.inventory = new Inventory();
+		this.name = name;
+	}
+	
 	public void Move(int xMove, int yMove) {
 		Tile target = getAdjacentTile(xMove, yMove);
 		if (target != null && target.canMove(this)) {
@@ -31,6 +37,7 @@ public class Player extends Movable {
 			pauseTransition.play();
 		}
 	}
+
 	@Override
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Enemy) {
@@ -68,14 +75,7 @@ public class Player extends Movable {
 	}
 
 	public void newTurn() {
-    	for (Entity item : inventory) {
-    		if (item instanceof InvincibilityPotion) {
-    			InvincibilityPotion potion = (InvincibilityPotion) item;
-    			potion.moved();
-    			if (potion.getMoves() == 0) inventory.remove(potion);
-    			break;
-    		}
-    	}
+    	inventory.usePotion();
 	}
 	
 	public boolean hasSword() {
@@ -110,7 +110,7 @@ public class Player extends Movable {
 	}
 	
 	public void pickPotion(InvincibilityPotion p) {
-		inventory.pickPotion(20);
+		inventory.pickPotion(p.getMoves());
 	}
 	
 	public void pickTreasure(Treasure t) {

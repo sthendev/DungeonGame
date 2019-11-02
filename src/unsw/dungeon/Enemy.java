@@ -27,8 +27,8 @@ public class Enemy extends Movable {
     	}
     	
     	return true;
-    	
     }
+    
     public void move() {
     	if (!alarmed && playerInSight()) this.alarmed = true;
     	if (!alarmed) return;
@@ -47,7 +47,7 @@ public class Enemy extends Movable {
     
     public void dies() {
     	if (getCurrentTile() != null) getCurrentTile().movedOff(this);
-    	getDungeon().killEnemy(this);
+    	getDungeon().removeEnemy(this);
     	ceaseExistence();
     }
     
@@ -64,7 +64,7 @@ public class Enemy extends Movable {
 			if (player.isInvincible()) {
 				dies();
 			} else if (player.hasSword()) {
-				player.attack();
+				player.useSword();
 				dies();
 			} else {
 				player.dies();

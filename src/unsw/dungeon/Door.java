@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-import java.util.*;
 
 public class Door extends Entity {
 	
@@ -37,6 +36,7 @@ public class Door extends Entity {
 
 	public void setState(String state) {
 		this.state = state;
+		notifyObservers();
 	}
 	
 	public boolean isRight(Key k) {
@@ -53,7 +53,6 @@ public class Door extends Entity {
 			if (isRight(p.keyHeld())) {
 				setState("triggered");
 				p.useKey();
-				notifyObservers();
 			}
 		}
 	}

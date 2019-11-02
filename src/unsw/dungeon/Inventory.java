@@ -59,11 +59,15 @@ public class Inventory implements Subject {
 		return invincibleTime;
 	}
 
-	public void pickPotion(int invincibleTime) {
-		this.invincibleTime += invincibleTime;
+	public void pickPotion(int increment) {
+		invincibleTime += increment;
 		notifyObservers();
 	}
 	
+	public void usePotion() {
+		invincibleTime--;
+		notifyObservers();
+	}
 	//To-do: count down of invincible time
 
 	public ArrayList<Treasure> getTreasure() {
