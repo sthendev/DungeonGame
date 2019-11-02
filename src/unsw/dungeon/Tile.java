@@ -52,13 +52,13 @@ public class Tile {
 	}
 	
 	public Direction getDirectionOfTile(Tile tile) {
-		if (up() == tile) {
+		if (getAdjacentTile(0, 1).equals(tile)) {
 			return Direction.UP;
-		} else if (down() == tile) {
+		} else if (getAdjacentTile(0, -1).equals(tile)) {
 			return Direction.DOWN;
-		} else if (left() == tile) {
+		} else if (getAdjacentTile(-1, 0).equals(tile)) {
 			return Direction.LEFT;
-		} else if (right() == tile) {
+		} else if (getAdjacentTile(1, 0).equals(tile)) {
 			return Direction.RIGHT;
 		} else {
 			return null;
@@ -92,7 +92,10 @@ public class Tile {
 		for (Entity entity : entitiesCopy) {
 			entity.notifyComing(mover);
 		}
-		if (mover.getStillExists() && mover.getPosition() == null) dungeon.addEntity(mover, this.x, this.y);
+		if (mover.getStillExists() && mover.getCurrentTile() == null) {
+			addEntity(mover);
+			mover.setCurrentTile(this);
+		}
 	}
 	
 	public void movedOff(Movable mover) {
