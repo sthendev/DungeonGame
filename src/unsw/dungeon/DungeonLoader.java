@@ -109,7 +109,12 @@ public abstract class DungeonLoader {
         	onLoad(door);
         	entity = door;
         	break;
-        	
+        case "portal":
+        	id = json.getInt("id");
+        	Portal portal = new Portal(id, dungeon.getTile(x, y));
+        	onLoad(portal);
+        	entity = portal;
+        	break;
          // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
@@ -136,6 +141,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Key key);
     
     public abstract void onLoad(Door door);
+    
+    public abstract void onLoad(Portal portal);
 
     // TODO Create additional abstract methods for the other entities
 

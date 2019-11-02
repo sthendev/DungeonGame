@@ -93,7 +93,7 @@ public class Tile {
 		for (Entity entity : entitiesCopy) {
 			entity.meet(mover);
 		}
-		if (mover.getStillExists()) dungeon.linkEntityTile(mover, this);
+		if (mover.getStillExists() && mover.getPosition() == null) dungeon.linkEntityTile(mover, this);
 	}
 	
 	public void movedOff(Movable mover) {

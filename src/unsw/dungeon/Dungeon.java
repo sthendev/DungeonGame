@@ -53,7 +53,7 @@ public class Dungeon implements Observer {
     	return height;
     }
     
-    public List<Entity> getAllEntitites() {
+    public List<Entity> getAllEntities() {
     	List<Entity> entities = new ArrayList<>();
     	
     	for (int x = 0; x < width; x++) {
@@ -90,11 +90,26 @@ public class Dungeon implements Observer {
     }
 
     public void addEntity(Entity entity) {
+    	if (entity instanceof Portal) {
+    		linkPortals((Portal) entity);
+    	}
     	linkEntityTile(entity, board[entity.getY()][entity.getX()]);
     }
     
+    public void linkPortals(Portal portal) {
+		for (Entity e : getAllEntities()) {
+			if (e instanceof Portal) {
+				Portal otherPortal = (Portal) e;
+				if (otherPortal.getId() == portal.getId()) {
+					otherPortal.setLinkedPortal(portal);
+					portal.setLinkedPortal(otherPortal);
+				}
+			}
+		}
+    }
+    
     public void moveEntity(Movable entity, Tile tile) {
-    	entity.getPosition().movedOff(entity);
+    	if (entity.getPosition() != null) entity.getPosition().movedOff(entity);
     	tile.movedOn(entity);
     }
     
