@@ -68,7 +68,12 @@ public class Dungeon implements Observer {
     public void removeEnemy(Enemy e) {
     	getEnemies().remove(e);
     }
-
+    
+    public void moveEntity(Movable entity, Tile tile) {
+    	entity.getCurrentTile().movedOff(entity);
+    	tile.movedOn(entity);
+    }
+    
     public void addEntity(Entity entity, int x, int y) {
     	Tile tile = getTile(x, y);
     	tile.placeEntity(entity);
@@ -81,21 +86,23 @@ public class Dungeon implements Observer {
 
     public void update(Subject s) {
     	Entity e = (Entity) s;
-    	int x = e.getX();
-    	int y = e.getY();
-		Tile onSquare = getEntities().get(x).get(y);
+		List<Entity> onSquare = e.entityOverlapped();
     	if (e instanceof Player) {
     		Player p = (Player) e;
-    		if (p.getState().equals("alive")) {
-    			// First interact with enemies if there's any
-    			checkCoincide();
-    			// Then update status of all floor switches
-    			updateSwitches();
-    			// Then interact with other props
+    		if (p.getStillExists() == true) {
 	    		for (Entity en : onSquare) {
-	    			if (!(en instanceof Enemy || en instanceof Switch)) {
-		    			en.handleInteraction(p);
-	    			}
+	    			// First interact with enemies if there's any
+	    			checkCoincide();
+	    			// Then update status of all floor switches
+	    			updateSwitches();
+	    			// Then interact with other props
+		    		for (Entity en : onSquare) {
+		    			if (!(en instanceof Enemy) {
+			    			en.handleInteraction(p);
+		    			}
+		    		}
+
+	    			en.notifyComing(p);
 	    		}
 	    		if (checkGoal()) {
 	    			endGame(true);
@@ -116,12 +123,15 @@ public class Dungeon implements Observer {
     	}
     }
     
-    public void updateSwitches() {
-    	for (Switch s : getSwitches()) {
-    		s.checkState();
-    	}
+  //Check if player meets enemy after a change in the game
+    public void checkCoincide() {
+    	for (Enemy enemy : getEnemies()) {
+			if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
+				enemy.handleInteraction(player);
+			}
+		}
     }
-    
+
     public boolean checkGoal() {
     	return goal.accomplished();
     }
@@ -133,24 +143,13 @@ public class Dungeon implements Observer {
 		}
     }
     
-    //Check if player meets enemy after a change in the game
-    public void checkCoincide() {
-    	for (Enemy enemy : getEnemies()) {
-			if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
-				enemy.handleInteraction(player);
-			}
-		}
-    }
-    
     //All enemies interact with props on the square they stand on after moving
     public void enemyInteraction() {
 		// First interact with player if there's any
     	checkCoincide();
 		// Then interact with other props
     	for (Enemy e : getEnemies()) {
-    		int x = e.getX();
-        	int y = e.getY();
-    		ArrayList<Entity> onSquare = getEntities().get(x).get(y);
+    		List<Entity> onSquare = e.entityOverlapped();
     		for (Entity en : onSquare) {
     			if (!(en instanceof Player)) {
         			en.handleInteraction(e);
@@ -202,11 +201,6 @@ public class Dungeon implements Observer {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-    
-    public void moveEntity(Movable entity, Tile tile) {
-    	entity.getPosition().movedOff(entity);
-    	tile.movedOn(entity);
     }
     
     public void linkEntityTile(Entity entity, Tile tile) {

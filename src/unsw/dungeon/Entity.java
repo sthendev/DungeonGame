@@ -62,7 +62,11 @@ abstract public class Entity implements Subject {
     	this.position = tile;
     	notifyObservers();
     }
-
+    
+    public List<Entity> entityOverlapped() {
+    	return position.getEntities();
+    }
+    
     public Tile getAdjacentTile(int x, int y) {
 		return position.getAdjacentTile(x, y);
     }
