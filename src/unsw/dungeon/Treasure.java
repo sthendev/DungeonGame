@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 public class Treasure extends Entity {
 	
-	private boolean collected;
+	private boolean collected = false;
 
 	public Treasure(Tile t) {
 		super(t);

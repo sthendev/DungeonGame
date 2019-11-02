@@ -77,6 +77,11 @@ abstract public class Entity implements Subject {
     	return false;
     };
     
+    //Default not blocking line of sight of enemies
+    public boolean isTransparent() {
+    	return true;
+    }
+
     //Default behaviour is not notifying
     public void notifyLeaving(Movable mover) {
     	

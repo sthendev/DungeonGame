@@ -17,11 +17,12 @@ public class Door extends Entity {
 	
 	@Override
 	public boolean isBlocking(Movable mover) {
+		notifyComing(mover);
 		return !opened;
 	}
 
 	public boolean isRight(Key k) {
-		if (k.getId() == id) {
+		if (k != null && k.getId() == id) {
 			return true;
 		}
 		return false;
@@ -34,8 +35,16 @@ public class Door extends Entity {
 			if (isRight(p.keyHeld())) {
 				opened = true;
 				p.useKey();
+				notifyObservers();
 			}
 		}
 	}
+	
+	@Override
+	public boolean isTransparent() {
+		if (opened) return true;
+		return false;
+	}
+
 	
 }
