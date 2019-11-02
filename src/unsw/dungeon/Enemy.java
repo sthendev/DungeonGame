@@ -50,6 +50,7 @@ public class Enemy extends Movable {
     	if (getPosition() != null) getPosition().movedOff(this);
     	getDungeon().killEnemy(this);
     	ceaseExistence();
+    	notifyObservers();
     }
     
     @Override
@@ -61,7 +62,6 @@ public class Enemy extends Movable {
 	@Override
 	public void meet(Movable mover) {
 		if (mover instanceof Player) {
-			System.out.println("meet player");
 			Player player = (Player) mover;
 			if (player.isInvincible()) {
 				dies();

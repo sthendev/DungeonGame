@@ -64,7 +64,6 @@ public class Player extends Movable {
     public void attemptMove(Tile target) {
     	if (target != null && canMove(target)) {
         	moveMe(target);
-        	System.out.println(target);
         	PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
         	pauseTransition.setOnFinished(event -> getDungeon().playTurn());
         	pauseTransition.play();

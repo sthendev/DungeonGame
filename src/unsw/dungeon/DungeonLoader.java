@@ -35,6 +35,8 @@ public abstract class DungeonLoader {
         Dungeon dungeon = new Dungeon(width, height);
 
         JSONArray jsonEntities = json.getJSONArray("entities");
+        
+        dungeon.setGoal(parseGoal(json.getJSONObject("goal-condition")));
 
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
@@ -118,6 +120,39 @@ public abstract class DungeonLoader {
          // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
+    }
+    
+    private Goal parseGoal(JSONObject goalCondition) {
+    	Goal goal = getGoal(goalCondition.getString("goal"));
+    	JSONArray subgoals = goalCondition.optJSONArray("subgoals");
+    	if (subgoals != null) {
+    		CompositeGoal compositeGoal = (CompositeGoal) goal;
+    		for (int i = 0; i < subgoals.length(); i++) {
+    			Goal subgoal = parseGoal(subgoals.getJSONObject(i));
+    			compositeGoal.addGoal(subgoal);
+    		}
+    	}
+    	return goal;
+    }
+    
+    private Goal getGoal(String goal) {
+    	switch (goal) {
+    	case "AND":
+    		return new AndGoal();
+    	case "OR":
+    		return new OrGoal();
+    	case "exit":
+    		return new ExitGoal();
+    	case "boulders":
+    		return new SwitchesGoal();
+    	case "enemies":
+    		return new EnemiesGoal();
+    	case "treasure":
+    		return new TreasureGoal();
+    	default:
+    		return null;
+    	}
+    		
     }
 
     public abstract void onLoad(Entity player);

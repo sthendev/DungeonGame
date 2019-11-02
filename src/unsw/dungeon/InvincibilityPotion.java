@@ -15,7 +15,6 @@ public class InvincibilityPotion extends Entity {
 	
 	public void moved() {
 		this.moves -= 1;
-		System.out.println(moves);
 	}
 	
 	@Override

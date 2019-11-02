@@ -23,6 +23,7 @@ public class Dungeon implements Observer {
     private Tile[][] board;
     private Player player;
     private List<Enemy> enemies;
+    private Goal goal;
     private OffensiveEnemy offensiveStrategy;
     private DefensiveEnemy defensiveStrategy;
 
@@ -64,6 +65,10 @@ public class Dungeon implements Observer {
     	
     	return entities;
     }
+    
+    public void setGoal(Goal goal) {
+    	this.goal = goal;
+    }
 
     public Player getPlayer() {
         return player;
@@ -94,6 +99,11 @@ public class Dungeon implements Observer {
     		linkPortals((Portal) entity);
     	}
     	linkEntityTile(entity, board[entity.getY()][entity.getX()]);
+    	linkToGoal(entity);
+    }
+    
+    public void linkToGoal(Entity entity) {
+    	goal.linkEntity(entity);
     }
     
     public void linkPortals(Portal portal) {
@@ -103,6 +113,7 @@ public class Dungeon implements Observer {
 				if (otherPortal.getId() == portal.getId()) {
 					otherPortal.setLinkedPortal(portal);
 					portal.setLinkedPortal(otherPortal);
+					break;
 				}
 			}
 		}
