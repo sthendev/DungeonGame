@@ -26,7 +26,7 @@ public class UIUpdater implements Observer {
 	public void update(Subject obj) {
 		if (obj instanceof Entity) {
 			Entity entity = (Entity) obj;
-			if (entity.getPosition() == null) {
+			if (entity.getCurrentTile() == null) {
 				node.setImage(null);
 			} else {
 				if (node.getImage() == null) {

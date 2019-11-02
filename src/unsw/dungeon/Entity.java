@@ -1,14 +1,15 @@
 package unsw.dungeon;
 
-import java.util.List;
-import java.util.ArrayList;
+import javafx.beans.property.IntegerProperty;
+import java.util.*;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * An entity in the dungeon.
  * @author Robert Clifton-Everest
  *
  */
-public class Entity implements Subject {
+abstract public class Entity implements Subject {
 
     private Tile position;
     private List<Observer> observers;
@@ -36,9 +37,13 @@ public class Entity implements Subject {
 	
 	@Override
 	public void notifyObservers() {
-		for (Observer observer : observers) {
-			observer.update(this);
+		for (Observer o : getObservers()) {
+			o.update(this);
 		}
+	}
+	
+    public List<Observer> getObservers() {
+		return observers;
 	}
 
     public int getX() {
@@ -49,24 +54,28 @@ public class Entity implements Subject {
         return position.getY();
     }
     
-    public Tile getPosition() {
+    public Tile getCurrentTile() {
     	return position;
     }
     
-    public void setPosition(Tile tile) {
+    public void setCurrentTile(Tile tile) {
     	this.position = tile;
     	notifyObservers();
     }
+
+    public Tile getAdjacentTile(int x, int y) {
+		return position.getAdjacentTile(x, y);
+    }
     
+    //Default behaviour is not blocking
     public boolean isBlocking(Movable mover) {
     	return false;
     };
     
-    public void meet(Movable mover) {
-    	return;
+    //Default behaviour is not notifying
+    public void notifyLeaving(Movable mover) {
+    	
     };
-    
-    public void leave(Movable mover) {
-    	return;
-    };
+
+	abstract public void notifyComing(Movable mover);
 }

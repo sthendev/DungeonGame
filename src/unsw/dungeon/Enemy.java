@@ -29,13 +29,12 @@ public class Enemy extends Movable {
     	return true;
     	
     }
-    
     public void move() {
     	if (!alarmed && playerInSight()) this.alarmed = true;
     	if (!alarmed) return;
     	
     	List<Tile> validMoves = getValidMoves();
-    	Tile bestMove = getPosition();
+    	Tile bestMove = getCurrentTile();
     	
     	for (Tile tile : validMoves) {
     		if (getDungeon().distToPlayer(tile) < getDungeon().distToPlayer(bestMove)) {
@@ -43,11 +42,11 @@ public class Enemy extends Movable {
     		}
     	}
     	
-    	if (!bestMove.equals(getPosition())) moveMe(bestMove);
+    	if (!bestMove.equals(getCurrentTile())) moveMe(bestMove);
     }
     
     public void dies() {
-    	if (getPosition() != null) getPosition().movedOff(this);
+    	if (getCurrentTile() != null) getCurrentTile().movedOff(this);
     	getDungeon().killEnemy(this);
     	ceaseExistence();
     }
@@ -59,9 +58,8 @@ public class Enemy extends Movable {
     }
 
 	@Override
-	public void meet(Movable mover) {
+	public void notifyComing(Movable mover) {
 		if (mover instanceof Player) {
-			System.out.println("meet player");
 			Player player = (Player) mover;
 			if (player.isInvincible()) {
 				dies();
@@ -71,7 +69,6 @@ public class Enemy extends Movable {
 			} else {
 				player.dies();
 			}
-			
 		}
 	}
 	
