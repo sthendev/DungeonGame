@@ -18,12 +18,21 @@ public class InvincibilityPotion extends Entity {
 		System.out.println(moves);
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	@Override
-	public void meet(Movable mover) {
-		if (mover instanceof Player) {
-			Player player = (Player) mover;
-			getPosition().removeEntity(this);
-			player.addItem(this);
+	public void notifyComing(Movable e) {
+		if (e instanceof Player) {
+			Player p = (Player) e;
+			p.pickPotion(this);
+			setPlayer(p);
+			getCurrentTile().removeEntity(this);
 		}
 	}
 	

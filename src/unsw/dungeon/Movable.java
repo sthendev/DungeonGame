@@ -38,7 +38,7 @@ public class Movable extends Entity {
 	public List<Tile> getValidMoves() {
 		List<Tile> validMoves = new ArrayList<>();
 		
-		for (Tile tile : getPosition().getSurroundingTiles()) {
+		for (Tile tile : getCurrentTile().getSurroundingTiles()) {
 			if (tile.canMove(this)) validMoves.add(tile);
 		}
 		
@@ -46,8 +46,8 @@ public class Movable extends Entity {
 	}
 	
 	@Override
-	public void setPosition(Tile tile) {
-		this.prevPosition = getPosition();
-		super.setPosition(tile);
+	public void setCurrentTile(Tile tile) {
+		this.prevPosition = getCurrentTile();
+		super.setCurrentTile(tile);
 	}
 }

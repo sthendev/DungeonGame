@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-import java.util.List;
+import java.util.*;
 
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
@@ -14,86 +14,64 @@ import java.util.ArrayList;
  */
 public class Player extends Movable {
 	
-	private List<Entity> inventory;
-	
+	private Inventory inventory;
+	private String name;
     /**
      * Create a player positioned in square (x,y)
      * @param x
      * @param y
      */
-    public Player(Dungeon dungeon, Tile position) {
-        super(dungeon, position);
-        this.inventory = new ArrayList<>();
-    }
     
-    public void addItem(Entity item) {
-    	inventory.add(item);
-    }
-    
-    public void removeItem(Entity item) {
-    	inventory.remove(item);
-    }
+    public String getState() {
+		return state;
+	}
 
-    public void moveUp() {
-        attemptMove(getPosition().up());
-    }
+	public void Move(int xMove, int yMove) {
+		Tile target = getAdjacentTile(xMove, yMove);
+		if (target != null && target.canMove(this)) {
+			moveMe(target);
+			PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
+			pauseTransition.setOnFinished(event -> getDungeon().playTurn());
+			pauseTransition.play();
+		}
+	}
+	@Override
+	public void notifyComing(Movable mover) {
+		if (mover instanceof Enemy) {
+			Enemy enemy = (Enemy) mover;
+			enemy.notifyComing(this);
+		}
+	}
 
-    public void moveDown() {
-        attemptMove(getPosition().down());
-    }
+	public void dies() {
+    	getDungeon().endGame(false);
+	}
+	
+	public String getName() {
+		return name;
+	}
 
-    public void moveLeft() {
-        attemptMove(getPosition().left());
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
 
-    public void moveRight() {
-        attemptMove(getPosition().right());
-    }
-    
-    public void stay() {
-        getDungeon().playTurn();
-    }
-    
-    public void dropKey() {
-    	
-    }
-    
-    public void attemptMove(Tile target) {
-    	if (target != null && target.canMove(this)) {
-        	moveMe(target);
-        	PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
-        	pauseTransition.setOnFinished(event -> getDungeon().playTurn());
-        	pauseTransition.play();
-        }
-    }
-    
-    public boolean isInvincible() {
-    	for (Entity item : inventory) {
-    		if (item instanceof InvincibilityPotion) return true;
-    	}
-    	return false;
-    }
-    
-    public boolean hasSword() {
-    	for (Entity item : inventory) {
-    		if (item instanceof Sword) return true;
-    	}
-    	return false;
-    }
-    
-    public void attack() {
-    	for (Entity item : inventory) {
-    		if (item instanceof Sword) {
-    			Sword sword = (Sword) item;
-    			sword.hit();
-    			if (sword.getHits() == 0) inventory.remove(sword);
-    			break;
-    		}
-    	}
-    	notifyObservers();
-    }
-    
-    public void newTurn() {
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
+	public boolean isInvincible() {
+		if (inventory.getInvincibleTime() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public void newTurn() {
     	for (Entity item : inventory) {
     		if (item instanceof InvincibilityPotion) {
     			InvincibilityPotion potion = (InvincibilityPotion) item;
@@ -102,22 +80,44 @@ public class Player extends Movable {
     			break;
     		}
     	}
-    }
-    
-    public void dies() {
-    	getDungeon().endGame();
-    }
-
-	@Override
-	public void meet(Movable mover) {
-		if (mover instanceof Enemy) {
-			System.out.println("meet enemy");
-			Enemy enemy = (Enemy) mover;
-			if (isInvincible()) {
-				enemy.dies();
-			} else {
-				dies();
-			}
+	}
+	
+	public boolean hasSword() {
+		if (inventory.SwordHit() > 0) {
+			return true;
 		}
+		return false;
+	}
+	
+	public void useSword() {
+		inventory.useSword();
+	}
+	
+	public Sword getSword() {
+		return inventory.getSword();
+	}
+	
+	public Key keyHeld() {
+		return inventory.getKey();
+	}
+	
+	public void pickKey(Key k) {
+		inventory.setKey(k);
+	}
+	
+	public void useKey() {
+		inventory.setKey(null);
+	}
+	
+	public void pickSword(Sword s) {
+		inventory.setSword(s);
+	}
+	
+	public void pickPotion(InvincibilityPotion p) {
+		inventory.pickPotion(20);
+	}
+	
+	public void pickTreasure(Treasure t) {
+		inventory.addTreasure(t);
 	}
 }

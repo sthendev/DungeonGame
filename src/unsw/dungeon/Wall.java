@@ -10,5 +10,9 @@ public class Wall extends Entity {
     public boolean isBlocking(Movable mover) {
     	return true;
     }
-
+    
+    @Override
+	public void handleInteraction(Entity e) {
+		//Do nothing
+	}
 }
