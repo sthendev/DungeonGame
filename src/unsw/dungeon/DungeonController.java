@@ -53,24 +53,16 @@ public class DungeonController {
     	player.newTurn();
         switch (event.getCode()) {
         case UP:
-        	if (dungeon.canMove(player, player.getX(), player.getY() + 1)) {
-        		player.move(0, 1);
-        	}
+        	player.Move(0, 1);
             break;
         case DOWN:
-        	if (dungeon.canMove(player, player.getX(), player.getY() - 1)) {
-                player.move(0, -1);
-        	}
+        	player.Move(0, -1);
             break;
         case LEFT:
-        	if (dungeon.canMove(player, player.getX() - 1, player.getY())) {
-                player.moveLeft(-1, 0);
-        	}
+        	player.Move(-1, 0);
             break;
         case RIGHT:
-        	if (dungeon.canMove(player, player.getX() + 1, player.getY())) {
-                player.moveRight(1, 0);
-        	}
+        	player.Move(1, 0);
             break;
         case S:
         	player.stay();
