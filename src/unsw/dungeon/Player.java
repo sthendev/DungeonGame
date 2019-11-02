@@ -21,10 +21,6 @@ public class Player extends Movable {
      * @param x
      * @param y
      */
-    
-    public String getState() {
-		return state;
-	}
 
 	public void Move(int xMove, int yMove) {
 		Tile target = getAdjacentTile(xMove, yMove);
