@@ -32,8 +32,8 @@ public abstract class DungeonLoader {
         int width = json.getInt("width");
         int height = json.getInt("height");
         
-        Goal kill = new EnemiesGoal();
-        Dungeon dungeon = new Dungeon(width, height, kill);
+        Goal enemies = new EnemiesGoal();
+        Dungeon dungeon = new Dungeon(width, height, enemies);
 
         JSONArray jsonEntities = json.getJSONArray("entities");
         
