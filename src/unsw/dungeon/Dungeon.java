@@ -23,6 +23,7 @@ public class Dungeon implements Observer {
 	private Tile[][] board;
     private Player player;
     private List<Enemy> enemies;
+    private int switchNo;
     private Goal goal;
     private String state;
     private MovementStrategy offensiveStrategy;
@@ -33,6 +34,7 @@ public class Dungeon implements Observer {
         this.width = width;
 		this.height = height;
         this.enemies = new ArrayList<Enemy>();
+        this.switchNo = 0;
         this.player = null;
         this.enemies = new ArrayList<>();
         this.offensiveStrategy = new OffensiveEnemy();
@@ -48,6 +50,9 @@ public class Dungeon implements Observer {
     			board[row][col] = new Tile(this, col, row);
     		}
     	}
+    }
+    public void addSwitch() {
+    	switchNo++;
     }
     
     public Tile getTile(int x, int y) {
@@ -228,5 +233,9 @@ public class Dungeon implements Observer {
 	public Player getPlayer() {
         return player;
     }
+
+	public int getSwitchNo() {
+		return switchNo;
+	}
 
 }
