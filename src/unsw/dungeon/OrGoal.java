@@ -1,26 +1,13 @@
 package unsw.dungeon;
 
-public class OrGoal extends Composite {
-
-	public OrGoal(String name, Dungeon dungeon) {
-		super(name, dungeon);
-	}
+public class OrGoal extends CompositeGoal {
 
 	@Override
-	public boolean accomplished() {
-		boolean result = false;
-		for (Goal g : getChildren()) {
-			result |= g.accomplished();
+	public boolean satisfied() {
+		for (Goal goal : getGoals()) {
+			if (goal.satisfied()) return true;
 		}
-		return result;
-	}
-	
-	public void add(Goal g) {
-		getChildren().add(g);
-	}
-	
-	public void remove(Goal g) {
-		getChildren().remove(g);
+		return false;
 	}
 
 }

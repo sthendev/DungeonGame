@@ -35,6 +35,8 @@ public abstract class DungeonLoader {
         Dungeon dungeon = new Dungeon(width, height);
 
         JSONArray jsonEntities = json.getJSONArray("entities");
+        
+        dungeon.setGoal(parseGoal(json.getJSONObject("goal-condition")));
 
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
@@ -46,6 +48,7 @@ public abstract class DungeonLoader {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
+        int id;
 
         Entity entity = null;
         switch (type) {
@@ -61,7 +64,7 @@ public abstract class DungeonLoader {
             entity = wall;
             break;
         case "enemy":
-        	Enemy enemy = new Enemy(dungeon, dungeon.getTile(x, y));
+        	Enemy enemy = new Enemy(dungeon, dungeon.getTile(x, y), new OffensiveEnemy());
         	dungeon.addEnemy(enemy);
         	onLoad(enemy);
         	entity = enemy;
@@ -81,9 +84,75 @@ public abstract class DungeonLoader {
         	onLoad(potion);
         	entity = potion;
         	break;
+        case "boulder":
+        	Boulder boulder = new Boulder(dungeon, dungeon.getTile(x, y));
+        	onLoad(boulder);
+        	entity = boulder;
+        	break;
+        case "switch":
+        	FloorSwitch floorSwitch = new FloorSwitch(dungeon.getTile(x, y));
+        	onLoad(floorSwitch);
+        	entity = floorSwitch;
+        	break;
+        case "treasure":
+        	Treasure treasure = new Treasure(dungeon.getTile(x, y));
+        	onLoad(treasure);
+        	entity = treasure;
+        	break;
+        case "key":
+        	id = json.getInt("id");
+        	Key key = new Key(id, dungeon.getTile(x, y));
+        	onLoad(key);
+        	entity = key;
+        	break;
+        case "door":
+        	id = json.getInt("id");
+        	Door door = new Door(id, dungeon.getTile(x, y));
+        	onLoad(door);
+        	entity = door;
+        	break;
+        case "portal":
+        	id = json.getInt("id");
+        	Portal portal = new Portal(id, dungeon.getTile(x, y));
+        	onLoad(portal);
+        	entity = portal;
+        	break;
          // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
+    }
+    
+    private Goal parseGoal(JSONObject goalCondition) {
+    	Goal goal = getGoal(goalCondition.getString("goal"));
+    	JSONArray subgoals = goalCondition.optJSONArray("subgoals");
+    	if (subgoals != null) {
+    		CompositeGoal compositeGoal = (CompositeGoal) goal;
+    		for (int i = 0; i < subgoals.length(); i++) {
+    			Goal subgoal = parseGoal(subgoals.getJSONObject(i));
+    			compositeGoal.addGoal(subgoal);
+    		}
+    	}
+    	return goal;
+    }
+    
+    private Goal getGoal(String goal) {
+    	switch (goal) {
+    	case "AND":
+    		return new AndGoal();
+    	case "OR":
+    		return new OrGoal();
+    	case "exit":
+    		return new ExitGoal();
+    	case "boulders":
+    		return new SwitchesGoal();
+    	case "enemies":
+    		return new EnemiesGoal();
+    	case "treasure":
+    		return new TreasureGoal();
+    	default:
+    		return null;
+    	}
+    		
     }
 
     public abstract void onLoad(Entity player);
@@ -97,6 +166,18 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Sword sword);
     
     public abstract void onLoad(InvincibilityPotion potion);
+    
+    public abstract void onLoad(Boulder boulder);
+    
+    public abstract void onLoad(FloorSwitch floorSwitch);
+    
+    public abstract void onLoad(Treasure treasure);
+    
+    public abstract void onLoad(Key key);
+    
+    public abstract void onLoad(Door door);
+    
+    public abstract void onLoad(Portal portal);
 
     // TODO Create additional abstract methods for the other entities
 

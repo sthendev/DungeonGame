@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
 public interface Goal {
-	public boolean accomplished();
+	public boolean satisfied();
+	public void linkEntity(Entity entity);
 }

@@ -75,9 +75,6 @@ public class DungeonController {
         case S:
         	player.stay();
         	break;
-        case D:
-        	player.dropKey();
-        	break;
         default:
             break;
         }
