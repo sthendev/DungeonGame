@@ -12,8 +12,8 @@ public class Boulder extends Movable {
 			return true;
 		} else if (mover instanceof Player) {
 			Direction playerDirection = getCurrentTile().getDirectionOfTile(mover.getCurrentTile());
-			if (playerDirection == Direction.UP && canMove(getAdjacentTile(0, 1))) return false;
-			else if (playerDirection == Direction.DOWN && canMove(getAdjacentTile(0, -1))) return false;
+			if (playerDirection == Direction.UP && canMove(getAdjacentTile(0, -1))) return false;
+			else if (playerDirection == Direction.DOWN && canMove(getAdjacentTile(0, 1))) return false;
 			else if (playerDirection == Direction.LEFT && canMove(getAdjacentTile(1, 0))) return false;
 			else if (playerDirection == Direction.RIGHT && canMove(getAdjacentTile(-1, 0))) return false;
 		}
