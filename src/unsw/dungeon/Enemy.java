@@ -1,10 +1,9 @@
 package unsw.dungeon;
 
-import java.util.List;
-
 public class Enemy extends Movable {
 	
 	private boolean alarmed;
+	private Searcher ghostSearcher;
 	
 	MovementStrategy strategy;
 
@@ -17,6 +16,7 @@ public class Enemy extends Movable {
         super(dungeon, position);
         this.alarmed = false;
         this.strategy = strategy;
+        this.ghostSearcher = new GhostSearcher();
     }
     
     public void setStrategy(MovementStrategy strategy) {
@@ -24,17 +24,9 @@ public class Enemy extends Movable {
     }
     
     public boolean playerInSight() {
-    	if (getDungeon().getPlayer().getX() != getX()
-    		&& getDungeon().getPlayer().getY() != getY())
-    		return false;
-    	
-    	List<Tile> tilesBetween = getDungeon().getTilesToPlayer(this);
-    	for (Tile tile : tilesBetween) {
-    		if (!tile.canMove(this)) return false;
-    	}
-    	
-    	return true;
-    	
+    	Path tilesToPlayer = ghostSearcher.search(this, getDungeon().getPlayer().getPosition());
+    	if (tilesToPlayer.allTransparent(this)) return true;
+    	return false;
     }
     
     public void move() {

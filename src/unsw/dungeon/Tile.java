@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.List;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class Tile {
@@ -93,8 +94,15 @@ public class Tile {
 	}
 	
 	public boolean canMove(Movable mover) {
-		for (Entity entity: entities) {
+		for (Entity entity : entities) {
 			if (entity.isBlocking(mover)) return false;
+		}
+		return true;
+	}
+	
+	public boolean allTransparentEntities() {
+		for (Entity entity : entities) {
+			if (!entity.isTransparent()) return false;
 		}
 		return true;
 	}
@@ -113,6 +121,11 @@ public class Tile {
 			entity.leave(mover);
 		}
 	}
+	
+	public double distToTile(Tile target) {
+    	return Point2D.distance((double) getX(), (double) getY(),
+    			(double) target.getX(), (double) target.getY());
+    }
 	
 	@Override
 	public String toString() {

@@ -6,8 +6,6 @@ package unsw.dungeon;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.awt.geom.Point2D;
-
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -24,8 +22,8 @@ public class Dungeon implements Observer {
     private Player player;
     private List<Enemy> enemies;
     private Goal goal;
-    private OffensiveEnemy offensiveStrategy;
-    private DefensiveEnemy defensiveStrategy;
+    private MovementStrategy offensiveStrategy;
+    private MovementStrategy defensiveStrategy;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -141,42 +139,41 @@ public class Dungeon implements Observer {
     	return board[y][x];
     }
     
-    public List<Tile> getTilesToPlayer(Entity entity) {
-    	List<Tile> tiles = new ArrayList<>();
-    	
-    	int entityX = entity.getX();
-    	int entityY = entity.getY();
-    	int playerX = player.getX();
-    	int playerY = player.getY();
-    	
-    	if (entityX == playerX) {
-    		if (entityY < playerY) {
-    			for (int i = entityY + 1; i <= playerY; i++) {
-    				tiles.add(board[i][entityX]);
-    			}
-    		} else if (entityY > playerY) {
-    			for (int i = entityY - 1; i >= playerY; i--) {
-    				tiles.add(board[i][entityX]);
-    			}
-    		}
-    	} else if (entityY == playerY) {
-    		if (entityX < playerX) {
-    			for (int i = entityX + 1; i <= playerX; i++) {
-    				tiles.add(board[entityY][i]);
-    			}
-    		} else if (entityX > playerX) {
-    			for (int i = entityX - 1; i >= playerX; i--) {
-    				tiles.add(board[entityY][i]);
-    			}
-    		}
-    	}
-    	
-    	return tiles;
-    }
+//    public List<Tile> getTilesToPlayer(Entity entity) {
+//    	List<Tile> tiles = new ArrayList<>();
+//    	
+//    	int entityX = entity.getX();
+//    	int entityY = entity.getY();
+//    	int playerX = player.getX();
+//    	int playerY = player.getY();
+//    	
+//    	if (entityX == playerX) {
+//    		if (entityY < playerY) {
+//    			for (int i = entityY + 1; i <= playerY; i++) {
+//    				tiles.add(board[i][entityX]);
+//    			}
+//    		} else if (entityY > playerY) {
+//    			for (int i = entityY - 1; i >= playerY; i--) {
+//    				tiles.add(board[i][entityX]);
+//    			}
+//    		}
+//    	} else if (entityY == playerY) {
+//    		if (entityX < playerX) {
+//    			for (int i = entityX + 1; i <= playerX; i++) {
+//    				tiles.add(board[entityY][i]);
+//    			}
+//    		} else if (entityX > playerX) {
+//    			for (int i = entityX - 1; i >= playerX; i--) {
+//    				tiles.add(board[entityY][i]);
+//    			}
+//    		}
+//    	}
+//    	
+//    	return tiles;
+//    }
     
     public double distToPlayer(Tile tile) {
-    	return Point2D.distance((double) tile.getX(), (double) tile.getY(),
-    			(double) player.getX(), (double) player.getY());
+    	return tile.distToTile(player.getPosition());
     }
     
     public void playTurn() {

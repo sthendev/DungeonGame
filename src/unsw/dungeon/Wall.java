@@ -10,5 +10,10 @@ public class Wall extends Entity {
     public boolean isBlocking(Movable mover) {
     	return true;
     }
+    
+    @Override
+    public boolean isTransparent() {
+    	return false;
+    }
 
 }

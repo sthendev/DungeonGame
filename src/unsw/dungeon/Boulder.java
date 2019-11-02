@@ -31,4 +31,9 @@ public class Boulder extends Movable {
 		}
 	}
 	
+	@Override
+	public boolean isTransparent() {
+		return false;
+	}
+	
 }

@@ -70,4 +70,8 @@ public abstract class Entity implements Subject {
     public void leave(Movable mover) {
     	return;
     };
+    
+    public boolean isTransparent() {
+    	return true;
+    }
 }
