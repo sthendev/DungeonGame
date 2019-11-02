@@ -31,8 +31,9 @@ public abstract class DungeonLoader {
     public Dungeon load() {
         int width = json.getInt("width");
         int height = json.getInt("height");
-
-        Dungeon dungeon = new Dungeon(width, height);
+        
+        Goal kill = new EnemiesGoal();
+        Dungeon dungeon = new Dungeon(width, height, kill);
 
         JSONArray jsonEntities = json.getJSONArray("entities");
         
@@ -53,7 +54,7 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(dungeon, dungeon.getTile(x, y));
+            Player player = new Player(dungeon, dungeon.getTile(x, y), "YouKnowWho");
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
