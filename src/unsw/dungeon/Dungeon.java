@@ -44,7 +44,6 @@ public class Dungeon implements Observer {
     		}
     	}
     }
-
     
     public Tile getTile(int x, int y) {
     	if (x < 0 || x >= width
@@ -83,26 +82,64 @@ public class Dungeon implements Observer {
     public void removeEntity(Entity e, int x, int y) {
     	getTile(x, y).removeEntity(e);
     }
-
+    
+    public List<Tile> getTilesToPlayer(Entity entity) {
+    	List<Tile> tiles = new ArrayList<>();
+    	
+    	int entityX = entity.getX();
+    	int entityY = entity.getY();
+    	int playerX = player.getX();
+    	int playerY = player.getY();
+    	
+    	if (entityX == playerX) {
+    		if (entityY < playerY) {
+    			for (int i = entityY + 1; i <= playerY; i++) {
+    				tiles.add(board[i][entityX]);
+    			}
+    		} else if (entityY > playerY) {
+    			for (int i = entityY - 1; i >= playerY; i--) {
+    				tiles.add(board[i][entityX]);
+    			}
+    		}
+    	} else if (entityY == playerY) {
+    		if (entityX < playerX) {
+    			for (int i = entityX + 1; i <= playerX; i++) {
+    				tiles.add(board[entityY][i]);
+    			}
+    		} else if (entityX > playerX) {
+    			for (int i = entityX - 1; i >= playerX; i--) {
+    				tiles.add(board[entityY][i]);
+    			}
+    		}
+    	}
+    	
+    	return tiles;
+    }
+    
+    public double distToPlayer(Tile tile) {
+    	return Point2D.distance((double) tile.getX(), (double) tile.getY(),
+    			(double) player.getX(), (double) player.getY());
+    }
+    
+    public void playTurn() {
+    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+    	for (Enemy enemy : enemiesCopy) {
+    		enemy.move();
+    	}
+    }
     public void update(Subject s) {
     	Entity e = (Entity) s;
 		List<Entity> onSquare = e.entityOverlapped();
     	if (e instanceof Player) {
     		Player p = (Player) e;
     		if (p.getStillExists() == true) {
+    			// First interact with enemies if there's any
+    			checkCoincide();
+    			// Then interact with other props
 	    		for (Entity en : onSquare) {
-	    			// First interact with enemies if there's any
-	    			checkCoincide();
-	    			// Then update status of all floor switches
-	    			updateSwitches();
-	    			// Then interact with other props
-		    		for (Entity en : onSquare) {
-		    			if (!(en instanceof Enemy) {
-			    			en.handleInteraction(p);
-		    			}
-		    		}
-
-	    			en.notifyComing(p);
+	    			if (!(en instanceof Enemy)) {
+	    				en.notifyComing(p);
+	    			}
 	    		}
 	    		if (checkGoal()) {
 	    			endGame(true);
@@ -111,14 +148,8 @@ public class Dungeon implements Observer {
 		    		moveEnemy(); //Enemies move after the player in one go
 		    		enemyInteraction(); //Then interact with entities
 	    		}
-    		} else if (p.getState().equals("dead")) {
+    		} else if (p.getStillExists() == false) {
     			endGame(false);
-    		}
-    	} else if (e instanceof Enemy) {
-    		Enemy en = (Enemy) e;
-    		if (en.getState().equals("dead")) {
-    			getEnemies().remove(en);
-    			removeEntity(en, en.getX(), en.getY());
     		}
     	}
     }
@@ -127,7 +158,7 @@ public class Dungeon implements Observer {
     public void checkCoincide() {
     	for (Enemy enemy : getEnemies()) {
 			if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
-				enemy.handleInteraction(player);
+				enemy.notifyComing(player);
 			}
 		}
     }
@@ -152,7 +183,7 @@ public class Dungeon implements Observer {
     		List<Entity> onSquare = e.entityOverlapped();
     		for (Entity en : onSquare) {
     			if (!(en instanceof Player)) {
-        			en.handleInteraction(e);
+        			en.notifyComing(e);
     			}
     		}
 		}
@@ -201,60 +232,6 @@ public class Dungeon implements Observer {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-    
-    public void linkEntityTile(Entity entity, Tile tile) {
-    	tile.placeEntity(entity);
-    	entity.setPosition(tile);
-    }
-    
-    public List<Tile> getTilesToPlayer(Entity entity) {
-    	List<Tile> tiles = new ArrayList<>();
-    	
-    	int entityX = entity.getX();
-    	int entityY = entity.getY();
-    	int playerX = player.getX();
-    	int playerY = player.getY();
-    	
-    	if (entityX == playerX) {
-    		if (entityY < playerY) {
-    			for (int i = entityY + 1; i <= playerY; i++) {
-    				tiles.add(board[i][entityX]);
-    			}
-    		} else if (entityY > playerY) {
-    			for (int i = entityY - 1; i >= playerY; i--) {
-    				tiles.add(board[i][entityX]);
-    			}
-    		}
-    	} else if (entityY == playerY) {
-    		if (entityX < playerX) {
-    			for (int i = entityX + 1; i <= playerX; i++) {
-    				tiles.add(board[entityY][i]);
-    			}
-    		} else if (entityX > playerX) {
-    			for (int i = entityX - 1; i >= playerX; i--) {
-    				tiles.add(board[entityY][i]);
-    			}
-    		}
-    	}
-    	
-    	return tiles;
-    }
-    
-    public double distToPlayer(Tile tile) {
-    	return Point2D.distance((double) tile.getX(), (double) tile.getY(),
-    			(double) player.getX(), (double) player.getY());
-    }
-    
-    public void playTurn() {
-    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
-    	for (Enemy enemy : enemiesCopy) {
-    		enemy.move();
-    	}
-    }
-    
-    public void endGame() {
-    	System.out.println("Game over");
     }
 
 }

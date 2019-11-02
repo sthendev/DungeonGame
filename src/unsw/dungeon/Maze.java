@@ -1,15 +1,28 @@
 package unsw.dungeon;
 
-import java.util.*;
 
-public class Maze implements Goal {
+public class Maze implements Goal, Observer {
 
 	private String name = "maze";
 	private Dungeon dungeon;
+	private boolean state = false;
 
 	public Maze (Dungeon d) {
 		super();
 		this.dungeon = d;
+	}
+
+	public boolean accomplished() {
+		return state;
+	}
+	
+	public void update(Subject s) {
+		if (s instanceof Exit) {
+			Exit e = (Exit) s;
+			if (e.getState() == true) {
+				state = true;
+			}
+		}
 	}
 
 	public String getName() {
@@ -20,14 +33,19 @@ public class Maze implements Goal {
 		this.name = name;
 	}
 	
-	public boolean accomplished() {
-		int x = dungeon.playerXPos();
-		int y = dungeon.playerYPos();
-		for (Entity e : dungeon.getTile(x, y)) {
-			if (e instanceof Exit) {
-				return true;
-			}
-		}
-		return false;
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
+	}
+
+	public boolean getState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
 	}
 }
