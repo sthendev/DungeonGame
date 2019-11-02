@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Boulder extends Entity {
+public class Boulder extends Movable {
 	
 	public Boulder(Dungeon dungeon, Tile position) {
 		super(dungeon, position);

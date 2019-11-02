@@ -28,6 +28,17 @@ public class Tile {
 	}
 	
 	public void placeEntity(Entity entity) {
+		if (entity instanceof Movable) {
+			Movable mover = (Movable) entity;
+			List<Entity> entitiesCopy = new ArrayList<>(entities);
+			for (Entity e : entitiesCopy) {
+				e.notifyComing(mover);
+			}
+		}
+		addEntity(entity);
+	}
+	
+	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 	
@@ -38,6 +49,20 @@ public class Tile {
 	
 	public Tile getAdjacentTile(int xMove, int yMove) {
 		return dungeon.getTile(x + xMove, y + yMove);
+	}
+	
+	public Direction getDirectionOfTile(Tile tile) {
+		if (up() == tile) {
+			return Direction.UP;
+		} else if (down() == tile) {
+			return Direction.DOWN;
+		} else if (left() == tile) {
+			return Direction.LEFT;
+		} else if (right() == tile) {
+			return Direction.RIGHT;
+		} else {
+			return null;
+		}
 	}
 	
 	public List<Tile> getSurroundingTiles() {
@@ -67,7 +92,7 @@ public class Tile {
 		for (Entity entity : entitiesCopy) {
 			entity.notifyComing(mover);
 		}
-		if (mover.getStillExists()) dungeon.addEntity(mover, this.x, this.y);
+		if (mover.getStillExists() && mover.getPosition() == null) dungeon.addEntity(mover, this.x, this.y);
 	}
 	
 	public void movedOff(Movable mover) {

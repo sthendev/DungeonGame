@@ -20,24 +20,38 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     //Images
     private Image playerImage;
-    private Image armedPlayer;
+    private Image armedPlayerImage;
     private Image wallImage;
     private Image enemyImage;
     private Image exitImage;
     private Image swordImage;
     private Image invincibilityPotionImage;
+    private Image boulderImage;
+    private Image floorSwitchImage;
+    private Image treasureImage;
+    private Image keyImage;
+    private Image closedDoorImage;
+    private Image openDoorImage;
+    private Image portalImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
-        armedPlayer = new Image("/human_new_sword.png");
+        armedPlayerImage = new Image("/human_new_sword.png");
         wallImage = new Image("/brick_brown_0.png");
         enemyImage = new Image("/gnome.png");
         exitImage = new Image("/exit.png");
         swordImage = new Image("/greatsword_1_new.png");
         invincibilityPotionImage = new Image("/brilliant_blue_new.png");
+        boulderImage = new Image("/boulder.png");
+        floorSwitchImage = new Image("/pressure_plate.png");
+        treasureImage = new Image("/gold_pile.png");
+        keyImage = new Image("/key.png");
+        closedDoorImage = new Image("/closed_door.png");
+        openDoorImage = new Image("/open_door.png");
+        portalImage = new Image("/portal.png");
     }
 
     @Override
@@ -75,6 +89,42 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView view = new ImageView(invincibilityPotionImage);
     	addEntity(potion, view);
     }
+    
+    @Override
+    public void onLoad(Boulder boulder) {
+    	ImageView view = new ImageView(boulderImage);
+    	addEntity(boulder, view);
+    }
+    
+    @Override
+    public void onLoad(FloorSwitch floorSwitch) {
+    	ImageView view = new ImageView(floorSwitchImage);
+    	addEntity(floorSwitch, view);
+    }
+    
+    @Override
+    public void onLoad(Treasure treasure) {
+    	ImageView view = new ImageView(treasureImage);
+    	addEntity(treasure, view);
+    }
+    
+    @Override
+    public void onLoad(Key key) {
+    	ImageView view = new ImageView(keyImage);
+    	addEntity(key, view);
+    }
+    
+    @Override
+    public void onLoad(Door door) {
+    	ImageView view =  new ImageView(closedDoorImage);
+    	addEntity(door, view);
+    }
+    
+    @Override
+    public void onLoad(Portal portal) {
+    	ImageView view = new ImageView(portalImage);
+    	addEntity(portal, view);
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -98,7 +148,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     private UIUpdater getUIUpdater(Entity entity, ImageView node) {
-    	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayer);
+    	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayerImage);
+    	if (entity instanceof Door) return new DoorUIUpdater(node, openDoorImage);
     	return new UIUpdater(node);
     }
 

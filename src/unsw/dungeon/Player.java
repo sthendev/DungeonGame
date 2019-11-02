@@ -37,6 +37,10 @@ public class Player extends Movable {
 			pauseTransition.play();
 		}
 	}
+    
+    public void stay() {
+        getDungeon().playTurn();
+    }
 
 	@Override
 	public void notifyComing(Movable mover) {

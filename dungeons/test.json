@@ -108,11 +108,6 @@
       "type": "wall"
     },
     {
-      "x": 1,
-      "y": 1,
-      "type": "player"
-    },
-    {
       "x": 2,
       "y": 1,
       "type": "wall"
@@ -920,6 +915,111 @@
     {
       "x": 17,
       "y": 16,
+      "type": "wall"
+    },
+    {
+      "x": 19,
+      "y": 16,
+      "type": "wall"
+    },
+    {
+      "x": 0,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 1,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 3,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 4,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 5,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 7,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 16,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 18,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 19,
+      "y": 17,
       "type": "wall"
     },
     {
@@ -928,109 +1028,48 @@
       "type": "exit"
     },
     {
-      "x": 19,
-      "y": 16,
-      "type": "wall"
-    },
-    {
-      "x": 0,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 1,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 2,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 3,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 4,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 5,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 7,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 8,
-      "y": 17,
-      "type": "wall"
-    },
-    {
       "x": 9,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 10,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 11,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 14,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 15,
-      "y": 17,
-      "type": "wall"
+      "y": 16,
+      "type": "portal",
+      "id": 0
     },
     {
       "x": 16,
-      "y": 17,
-      "type": "wall"
+      "y": 8,
+      "type": "portal",
+      "id": 0
     },
     {
-      "x": 17,
-      "y": 17,
-      "type": "wall"
+      "x": 14,
+      "y": 4,
+      "type": "key",
+      "id": 0
     },
     {
       "x": 18,
-      "y": 17,
-      "type": "wall"
+      "y": 6,
+      "type": "invincibility"
     },
     {
-      "x": 19,
-      "y": 17,
-      "type": "wall"
+      "x": 18,
+      "y": 15,
+      "type": "enemy"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "type": "sword"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "player"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "door",
+      "id": 0
     }
   ],
   "goal-condition": {

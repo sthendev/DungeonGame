@@ -5,15 +5,22 @@ import java.util.List;
 public class Enemy extends Movable {
 	
 	private boolean alarmed;
+	
+	MovementStrategy strategy;
 
     /**
      * Create a player positioned in square (x,y)
      * @param x
      * @param y
      */
-    public Enemy(Dungeon dungeon, Tile position) {
+    public Enemy(Dungeon dungeon, Tile position, MovementStrategy strategy) {
         super(dungeon, position);
         this.alarmed = false;
+        this.strategy = strategy;
+    }
+    
+    public void setStrategy(MovementStrategy strategy) {
+    	this.strategy = strategy;
     }
     
     public boolean playerInSight() {
@@ -33,14 +40,7 @@ public class Enemy extends Movable {
     	if (!alarmed && playerInSight()) this.alarmed = true;
     	if (!alarmed) return;
     	
-    	List<Tile> validMoves = getValidMoves();
-    	Tile bestMove = getCurrentTile();
-    	
-    	for (Tile tile : validMoves) {
-    		if (getDungeon().distToPlayer(tile) < getDungeon().distToPlayer(bestMove)) {
-    			bestMove = tile;
-    		}
-    	}
+    	Tile bestMove = strategy.getBestMove(this);
     	
     	if (!bestMove.equals(getCurrentTile())) moveMe(bestMove);
     }
