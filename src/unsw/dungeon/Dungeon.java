@@ -52,6 +52,18 @@ public class Dungeon implements Observer {
     public int getHeight() {
     	return height;
     }
+    
+    public List<Entity> getAllEntitites() {
+    	List<Entity> entities = new ArrayList<>();
+    	
+    	for (int x = 0; x < width; x++) {
+    		for (int y = 0; y < height; y++) {
+    			entities.addAll(getTile(x, y).getEntities());
+    		}
+    	}
+    	
+    	return entities;
+    }
 
     public Player getPlayer() {
         return player;

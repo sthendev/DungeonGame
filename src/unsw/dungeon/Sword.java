@@ -21,8 +21,10 @@ public class Sword extends Entity {
 	public void meet(Movable mover) {
 		if (mover instanceof Player) {
 			Player player = (Player) mover;
-			getPosition().removeEntity(this);
-			player.addItem(this);
+			if (!player.hasSword()) {
+				getPosition().removeEntity(this);
+				player.addItem(this);
+			}
 		}
 	}
 }

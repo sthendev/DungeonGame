@@ -56,13 +56,15 @@ public class Player extends Movable {
         getDungeon().playTurn();
     }
     
-    public void dropKey() {
-    	
+    public void dropItem(Entity item) {
+    	removeItem(item);
+    	getDungeon().addEntity(item);
     }
     
     public void attemptMove(Tile target) {
     	if (target != null && canMove(target)) {
         	moveMe(target);
+        	System.out.println(target);
         	PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
         	pauseTransition.setOnFinished(event -> getDungeon().playTurn());
         	pauseTransition.play();
@@ -81,6 +83,15 @@ public class Player extends Movable {
     		if (item instanceof Sword) return true;
     	}
     	return false;
+    }
+    
+    public Key getKey() {
+    	for (Entity item : inventory) {
+    		if (item instanceof Key) {
+    			return (Key) item;
+    		}
+    	}
+    	return null;
     }
     
     public void attack() {

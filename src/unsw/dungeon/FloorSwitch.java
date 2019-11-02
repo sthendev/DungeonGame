@@ -17,6 +17,7 @@ public class FloorSwitch extends Entity {
 	public void meet(Movable mover) {
 		if (mover instanceof Boulder) {
 			this.triggered = true;
+			notifyObservers();
 		}
 	}
 	
@@ -24,6 +25,7 @@ public class FloorSwitch extends Entity {
 	public void leave(Movable mover) {
 		if (mover instanceof Boulder) {
 			this.triggered = false;
+			notifyObservers();
 		}
 	}
 

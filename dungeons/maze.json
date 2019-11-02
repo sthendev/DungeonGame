@@ -1028,14 +1028,20 @@
       "type": "exit"
     },
     {
-      "x": 18,
-      "y": 15,
-      "type": "enemy"
+      "x": 14,
+      "y": 4,
+      "type": "key",
+      "id": 0
     },
     {
       "x": 18,
       "y": 6,
       "type": "invincibility"
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "type": "enemy"
     },
     {
       "x": 1,
@@ -1046,6 +1052,12 @@
       "x": 1,
       "y": 1,
       "type": "player"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "door",
+      "id": 0
     }
   ],
   "goal-condition": {

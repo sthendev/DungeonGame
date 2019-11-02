@@ -29,6 +29,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image boulderImage;
     private Image floorSwitchImage;
     private Image treasureImage;
+    private Image keyImage;
+    private Image closedDoorImage;
+    private Image openDoorImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -44,6 +47,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         boulderImage = new Image("/boulder.png");
         floorSwitchImage = new Image("/pressure_plate.png");
         treasureImage = new Image("/gold_pile.png");
+        keyImage = new Image("/key.png");
+        closedDoorImage = new Image("/closed_door.png");
+        openDoorImage = new Image("/open_door.png");
     }
 
     @Override
@@ -99,6 +105,18 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView view = new ImageView(treasureImage);
     	addEntity(treasure, view);
     }
+    
+    @Override
+    public void onLoad(Key key) {
+    	ImageView view = new ImageView(keyImage);
+    	addEntity(key, view);
+    }
+    
+    @Override
+    public void onLoad(Door door) {
+    	ImageView view =  new ImageView(closedDoorImage);
+    	addEntity(door, view);
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -123,6 +141,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     
     private UIUpdater getUIUpdater(Entity entity, ImageView node) {
     	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayerImage);
+    	if (entity instanceof Door) return new DoorUIUpdater(node, openDoorImage);
     	return new UIUpdater(node);
     }
 
