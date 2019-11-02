@@ -98,7 +98,7 @@ public class Dungeon implements Observer {
     	if (entity instanceof Portal) {
     		linkPortals((Portal) entity);
     	}
-    	linkEntityTile(entity, board[entity.getY()][entity.getX()]);
+    	placeEntityTile(entity, board[entity.getY()][entity.getX()]);
     	linkToGoal(entity);
     }
     
@@ -124,8 +124,13 @@ public class Dungeon implements Observer {
     	tile.movedOn(entity);
     }
     
-    public void linkEntityTile(Entity entity, Tile tile) {
+    public void placeEntityTile(Entity entity, Tile tile) {
     	tile.placeEntity(entity);
+    	entity.setPosition(tile);
+    }
+    
+    public void linkEntityTile(Entity entity, Tile tile) {
+    	tile.addEntity(entity);
     	entity.setPosition(tile);
     }
     
@@ -175,9 +180,13 @@ public class Dungeon implements Observer {
     }
     
     public void playTurn() {
-    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
-    	for (Enemy enemy : enemiesCopy) {
-    		enemy.move();
+    	if (!goal.satisfied()) {
+	    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+	    	for (Enemy enemy : enemiesCopy) {
+	    		enemy.move();
+	    	}
+    	} else {
+    		System.out.println("Congrats you completed the level");
     	}
     }
     

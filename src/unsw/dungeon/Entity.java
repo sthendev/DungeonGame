@@ -36,7 +36,8 @@ public abstract class Entity implements Subject {
 	
 	@Override
 	public void notifyObservers() {
-		for (Observer observer : observers) {
+		List<Observer> observersCopy = new ArrayList<>(observers);
+		for (Observer observer : observersCopy) {
 			observer.update(this);
 		}
 	}

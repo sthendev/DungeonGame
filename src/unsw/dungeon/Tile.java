@@ -28,6 +28,17 @@ public class Tile {
 	}
 	
 	public void placeEntity(Entity entity) {
+		if (entity instanceof Movable) {
+			Movable mover = (Movable) entity;
+			List<Entity> entitiesCopy = new ArrayList<>(entities);
+			for (Entity e : entitiesCopy) {
+				e.meet(mover);
+			}
+		}
+		addEntity(entity);
+	}
+	
+	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 	
