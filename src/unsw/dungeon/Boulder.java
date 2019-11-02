@@ -30,6 +30,11 @@ public class Boulder extends Movable {
 			else if (playerDirection == Direction.RIGHT) moveMe(getAdjacentTile(-1, 0));
 		}
 	}
+	
+	@Override
+	public boolean isTransparent() {
+		return false;
+	}
 
 
 	

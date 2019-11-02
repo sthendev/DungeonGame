@@ -20,6 +20,7 @@ public class SwitchesGoal implements Goal, Observer {
 			FloorSwitch floorSwitch = (FloorSwitch) obj;
 			if (floorSwitch.isTriggered()) {
 				this.untriggeredSwitches--;
+				System.out.println("triggeredddd");
 			} else {
 				this.untriggeredSwitches++;
 			}
