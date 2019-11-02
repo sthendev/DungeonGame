@@ -1046,6 +1046,11 @@
       "id": 0
     },
     {
+      "x": 17,
+      "y": 4,
+      "type": "treasure",
+    },
+    {
       "x": 18,
       "y": 6,
       "type": "invincibility"

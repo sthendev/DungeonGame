@@ -79,7 +79,9 @@ public class Player extends Movable {
 	}
 
 	public void newTurn() {
-    	inventory.usePotion();
+		if (inventory.getInvincibleTime() > 0) {
+	    	inventory.usePotion();
+		}
 	}
 	
 	public boolean hasSword() {

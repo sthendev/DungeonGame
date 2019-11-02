@@ -25,8 +25,9 @@ public class Dungeon implements Observer {
     private List<Enemy> enemies;
     private Goal goal;
     private String state;
-    private OffensiveEnemy offensiveStrategy;
-    private DefensiveEnemy defensiveStrategy;
+    private MovementStrategy offensiveStrategy;
+    private MovementStrategy defensiveStrategy;
+
 
     public Dungeon(int width, int height, Goal goal) {
         this.width = width;
@@ -69,9 +70,9 @@ public class Dungeon implements Observer {
     }
 
     public void setPlayer(Player player) {
-    	if (this.player != null) player.removeObserver(this);
+    	if (this.player != null) player.getInventory().removeObserver(this);
         this.player = player;
-        player.addObserver(this);
+        player.getInventory().addObserver(this);
     }
     public int playerXPos() {
 		return player.getX();
@@ -134,42 +135,8 @@ public class Dungeon implements Observer {
     	entity.setCurrentTile(tile);
     }
     
-    public List<Tile> getTilesToPlayer(Entity entity) {
-    	List<Tile> tiles = new ArrayList<>();
-    	
-    	int entityX = entity.getX();
-    	int entityY = entity.getY();
-    	int playerX = player.getX();
-    	int playerY = player.getY();
-    	
-    	if (entityX == playerX) {
-    		if (entityY < playerY) {
-    			for (int i = entityY + 1; i <= playerY; i++) {
-    				tiles.add(board[i][entityX]);
-    			}
-    		} else if (entityY > playerY) {
-    			for (int i = entityY - 1; i >= playerY; i--) {
-    				tiles.add(board[i][entityX]);
-    			}
-    		}
-    	} else if (entityY == playerY) {
-    		if (entityX < playerX) {
-    			for (int i = entityX + 1; i <= playerX; i++) {
-    				tiles.add(board[entityY][i]);
-    			}
-    		} else if (entityX > playerX) {
-    			for (int i = entityX - 1; i >= playerX; i--) {
-    				tiles.add(board[entityY][i]);
-    			}
-    		}
-    	}
-    	
-    	return tiles;
-    }
-    
     public double distToPlayer(Tile tile) {
-    	return Point2D.distance((double) tile.getX(), (double) tile.getY(),
-    			(double) player.getX(), (double) player.getY());
+    	return tile.distToTile(player.getCurrentTile());
     }
     
     public void playTurn() {
@@ -185,11 +152,11 @@ public class Dungeon implements Observer {
 	
 	@Override
     public void update(Subject s) {
-    	Entity e = (Entity) s;
-    	if (e instanceof Player) {
-			Player player = (Player) s;
+    	if (s instanceof Inventory) {
+			System.out.println("no");
 			if (player.isInvincible()) {
 				setEnemyStrategy(defensiveStrategy);
+				System.out.println("yes");
 			} else {
 				setEnemyStrategy(offensiveStrategy);
 			}
@@ -203,10 +170,6 @@ public class Dungeon implements Observer {
 				enemy.notifyComing(player);
 			}
 		}
-    }
-
-    public boolean checkGoal() {
-    	return goal.satisfied();
     }
     
     //All enemies interact with props on the square they stand on after moving
@@ -239,6 +202,7 @@ public class Dungeon implements Observer {
 
 	public void setState(String state) {
 		this.state = state;
+		System.out.println(state);
 	}
 
 	public int getWidth() {

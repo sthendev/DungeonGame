@@ -17,6 +17,7 @@ public class FloorSwitch extends Entity {
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Boulder) {
 			this.triggered = true;
+			System.out.println("biu");
 			notifyObservers();
 		}
 	}
