@@ -28,10 +28,12 @@ public class Player extends Movable {
     
     public void addItem(Entity item) {
     	inventory.add(item);
+    	notifyObservers();
     }
     
     public void removeItem(Entity item) {
     	inventory.remove(item);
+    	notifyObservers();
     }
 
     public void moveUp() {
@@ -59,7 +61,7 @@ public class Player extends Movable {
     }
     
     public void attemptMove(Tile target) {
-    	if (target != null && target.canMove(this)) {
+    	if (target != null && canMove(target)) {
         	moveMe(target);
         	PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
         	pauseTransition.setOnFinished(event -> getDungeon().playTurn());
@@ -111,7 +113,6 @@ public class Player extends Movable {
 	@Override
 	public void meet(Movable mover) {
 		if (mover instanceof Enemy) {
-			System.out.println("meet enemy");
 			Enemy enemy = (Enemy) mover;
 			if (isInvincible()) {
 				enemy.dies();

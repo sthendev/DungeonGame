@@ -17,18 +17,22 @@ import java.awt.geom.Point2D;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon {
+public class Dungeon implements Observer {
 
     private int width, height;
     private Tile[][] board;
     private Player player;
     private List<Enemy> enemies;
+    private OffensiveEnemy offensiveStrategy;
+    private DefensiveEnemy defensiveStrategy;
 
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.player = null;
         this.enemies = new ArrayList<>();
+        this.offensiveStrategy = new OffensiveEnemy();
+        this.defensiveStrategy = new DefensiveEnemy();
         initializeBoard(width, height);
     }
     
@@ -54,7 +58,9 @@ public class Dungeon {
     }
 
     public void setPlayer(Player player) {
+    	if (this.player != null) player.removeObserver(this);
         this.player = player;
+        player.addObserver(this);
     }
     
     public void addEnemy(Enemy enemy) {
@@ -63,6 +69,12 @@ public class Dungeon {
     
     public void killEnemy(Enemy enemy) {
     	enemies.remove(enemy);
+    }
+    
+    public void setEnemyStrategy(MovementStrategy strategy) {
+    	for (Enemy enemy : enemies) {
+    		enemy.setStrategy(strategy);
+    	}
     }
 
     public void addEntity(Entity entity) {
@@ -134,5 +146,18 @@ public class Dungeon {
     public void endGame() {
     	System.out.println("Game over");
     }
+
+	@Override
+	public void update(Subject obj) {
+		if (obj instanceof Player) {
+			Player player = (Player) obj;
+			if (player.isInvincible()) {
+				setEnemyStrategy(defensiveStrategy);
+			} else {
+				setEnemyStrategy(offensiveStrategy);
+			}
+		}
+		
+	}
 
 }

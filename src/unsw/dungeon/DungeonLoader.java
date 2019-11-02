@@ -61,7 +61,7 @@ public abstract class DungeonLoader {
             entity = wall;
             break;
         case "enemy":
-        	Enemy enemy = new Enemy(dungeon, dungeon.getTile(x, y));
+        	Enemy enemy = new Enemy(dungeon, dungeon.getTile(x, y), new OffensiveEnemy());
         	dungeon.addEnemy(enemy);
         	onLoad(enemy);
         	entity = enemy;
@@ -81,6 +81,21 @@ public abstract class DungeonLoader {
         	onLoad(potion);
         	entity = potion;
         	break;
+        case "boulder":
+        	Boulder boulder = new Boulder(dungeon, dungeon.getTile(x, y));
+        	onLoad(boulder);
+        	entity = boulder;
+        	break;
+        case "switch":
+        	FloorSwitch floorSwitch = new FloorSwitch(dungeon.getTile(x, y));
+        	onLoad(floorSwitch);
+        	entity = floorSwitch;
+        	break;
+        case "treasure":
+        	Treasure treasure = new Treasure(dungeon.getTile(x, y));
+        	onLoad(treasure);
+        	entity = treasure;
+        	break;
          // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
@@ -97,6 +112,12 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Sword sword);
     
     public abstract void onLoad(InvincibilityPotion potion);
+    
+    public abstract void onLoad(Boulder boulder);
+    
+    public abstract void onLoad(FloorSwitch floorSwitch);
+    
+    public abstract void onLoad(Treasure treasure);
 
     // TODO Create additional abstract methods for the other entities
 

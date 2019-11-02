@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Robert Clifton-Everest
  *
  */
-public class Entity implements Subject {
+public abstract class Entity implements Subject {
 
     private Tile position;
     private List<Observer> observers;

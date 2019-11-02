@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Movable extends Entity {
+public abstract class Movable extends Entity {
 	
 	private Dungeon dungeon;
 	private Tile prevPosition;
@@ -35,11 +35,15 @@ public class Movable extends Entity {
 		dungeon.moveEntity(this, tile);
 	}
 	
+	public boolean canMove(Tile tile) {
+		return tile.canMove(this);
+	}
+	
 	public List<Tile> getValidMoves() {
 		List<Tile> validMoves = new ArrayList<>();
 		
 		for (Tile tile : getPosition().getSurroundingTiles()) {
-			if (tile.canMove(this)) validMoves.add(tile);
+			if (canMove(tile)) validMoves.add(tile);
 		}
 		
 		return validMoves;

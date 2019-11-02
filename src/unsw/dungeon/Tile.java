@@ -52,6 +52,20 @@ public class Tile {
 		return dungeon.getTile(x + 1, y);
 	}
 	
+	public Direction getDirectionOfTile(Tile tile) {
+		if (up() == tile) {
+			return Direction.UP;
+		} else if (down() == tile) {
+			return Direction.DOWN;
+		} else if (left() == tile) {
+			return Direction.LEFT;
+		} else if (right() == tile) {
+			return Direction.RIGHT;
+		} else {
+			return null;
+		}
+	}
+	
 	public List<Tile> getSurroundingTiles() {
 		List<Tile> tiles = new ArrayList<>();
 		
