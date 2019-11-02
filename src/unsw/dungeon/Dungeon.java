@@ -22,16 +22,20 @@ public class Dungeon implements Observer {
     private int width, height;
 	private Tile[][] board;
     private Player player;
+    private List<Enemy> enemies;
     private Goal goal;
-    private ArrayList<Enemy> enemies;
     private String state;
+    private OffensiveEnemy offensiveStrategy;
+    private DefensiveEnemy defensiveStrategy;
 
     public Dungeon(int width, int height, Goal goal) {
         this.width = width;
 		this.height = height;
         this.enemies = new ArrayList<Enemy>();
         this.player = null;
-        this.goal = goal;
+        this.enemies = new ArrayList<>();
+        this.offensiveStrategy = new OffensiveEnemy();
+        this.defensiveStrategy = new DefensiveEnemy();
         this.state = "unfinished";
         initializeBoard(width, height);
     }
@@ -52,35 +56,82 @@ public class Dungeon implements Observer {
     	return board[y][x];
     }
     
-	public int playerXPos() {
-    	return player.getX();
+    public List<Entity> getAllEntities() {
+    	List<Entity> entities = new ArrayList<>();
+    	
+    	for (int x = 0; x < width; x++) {
+    		for (int y = 0; y < height; y++) {
+    			entities.addAll(getTile(x, y).getEntities());
+    		}
+    	}
+    	
+    	return entities;
     }
-    
+
+    public void setPlayer(Player player) {
+    	if (this.player != null) player.removeObserver(this);
+        this.player = player;
+        player.addObserver(this);
+    }
+    public int playerXPos() {
+		return player.getX();
+	}
+
     public int playerYPos() {
     	return player.getY();
-    }
+	}
     
-    public void addEnemy(Enemy e) {
+    public void moveEntity(Movable entity, Tile tile) {
+    	if (entity.getCurrentTile() != null) entity.getCurrentTile().movedOff(entity);
+    	tile.movedOn(entity);
+    }
+
+	public void addEntity(Entity entity) {
+    	if (entity instanceof Portal) {
+    		linkPortals((Portal) entity);
+    	}
+    	placeEntityTile(entity, board[entity.getY()][entity.getX()]);
+    	linkToGoal(entity);
+    }
+
+    public void removeEntity(Entity e, int x, int y) {
+		getTile(x, y).removeEntity(e);
+	}
+
+	public void addEnemy(Enemy e) {
     	getEnemies().add(e);
     }
     
     public void removeEnemy(Enemy e) {
     	getEnemies().remove(e);
+	}
+	
+    public void setEnemyStrategy(MovementStrategy strategy) {
+    	for (Enemy enemy : enemies) {
+    		enemy.setStrategy(strategy);
+    	}
     }
     
-    public void moveEntity(Movable entity, Tile tile) {
-    	entity.getCurrentTile().movedOff(entity);
-    	tile.movedOn(entity);
+    public void linkToGoal(Entity entity) {
+    	goal.linkEntity(entity);
     }
     
-    public void addEntity(Entity entity, int x, int y) {
-    	Tile tile = getTile(x, y);
+    public void linkPortals(Portal portal) {
+		for (Entity e : getAllEntities()) {
+			if (e instanceof Portal) {
+				Portal otherPortal = (Portal) e;
+				if (otherPortal.getId() == portal.getId()) {
+					otherPortal.setLinkedPortal(portal);
+					portal.setLinkedPortal(otherPortal);
+					break;
+				}
+			}
+		}
+    }
+    
+    public void placeEntityTile(Entity entity, Tile tile) {
     	tile.placeEntity(entity);
     	entity.setCurrentTile(tile);
-    }
-    
-    public void removeEntity(Entity e, int x, int y) {
-    	getTile(x, y).removeEntity(e);
     }
     
     public List<Tile> getTilesToPlayer(Entity entity) {
@@ -122,36 +173,27 @@ public class Dungeon implements Observer {
     }
     
     public void playTurn() {
-    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
-    	for (Enemy enemy : enemiesCopy) {
-    		enemy.move();
+    	if (!goal.satisfied()) {
+	    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+	    	for (Enemy enemy : enemiesCopy) {
+	    		enemy.move();
+	    	}
+    	} else {
+    		endGame(true);
     	}
-    }
+	}
+	
+	@Override
     public void update(Subject s) {
     	Entity e = (Entity) s;
-		List<Entity> onSquare = e.entityOverlapped();
     	if (e instanceof Player) {
-    		Player p = (Player) e;
-    		if (p.getStillExists() == true) {
-    			// First interact with enemies if there's any
-    			checkCoincide();
-    			// Then interact with other props
-	    		for (Entity en : onSquare) {
-	    			if (!(en instanceof Enemy)) {
-	    				en.notifyComing(p);
-	    			}
-	    		}
-	    		if (checkGoal()) {
-	    			endGame(true);
-	    		}
-	    		if (this.getEnemies().size() > 0) {
-		    		moveEnemy(); //Enemies move after the player in one go
-		    		enemyInteraction(); //Then interact with entities
-	    		}
-    		} else if (p.getStillExists() == false) {
-    			endGame(false);
-    		}
-    	}
+			Player player = (Player) s;
+			if (player.isInvincible()) {
+				setEnemyStrategy(defensiveStrategy);
+			} else {
+				setEnemyStrategy(offensiveStrategy);
+			}
+		}
     }
     
   //Check if player meets enemy after a change in the game
@@ -164,14 +206,7 @@ public class Dungeon implements Observer {
     }
 
     public boolean checkGoal() {
-    	return goal.accomplished();
-    }
-    
-    //Move all enemies after player executes a move
-    public void moveEnemy() {
-		for (Enemy e : getEnemies()) {
-			e.move();
-		}
+    	return goal.satisfied();
     }
     
     //All enemies interact with props on the square they stand on after moving
@@ -222,16 +257,12 @@ public class Dungeon implements Observer {
 		this.goal = goal;
 	}
 
-	public ArrayList<Enemy> getEnemies() {
+	public List<Enemy> getEnemies() {
 		return enemies;
 	}
 
 	public Player getPlayer() {
         return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
 }

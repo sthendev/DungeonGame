@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 public class Treasure extends Entity {
 	
+	private boolean collected;
 
 	public Treasure(Tile t) {
 		super(t);
@@ -12,9 +13,13 @@ public class Treasure extends Entity {
 		if (e instanceof Player) {
 			Player p = (Player) e;
 			p.pickTreasure(this);
+			this.collected = true;
 			getCurrentTile().removeEntity(this);
 		}
 	}
 	
+	public boolean isCollected() {
+		return collected;
+	}
 	
 }
