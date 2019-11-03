@@ -6,8 +6,6 @@ package unsw.dungeon;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.awt.geom.Point2D;
-
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -23,23 +21,20 @@ public class Dungeon implements Observer {
 	private Tile[][] board;
     private Player player;
     private List<Enemy> enemies;
-    private int switchNo;
     private Goal goal;
-    private String state;
     private MovementStrategy offensiveStrategy;
     private MovementStrategy defensiveStrategy;
+    private boolean gameOver;
 
-
-    public Dungeon(int width, int height, Goal goal) {
+    public Dungeon(int width, int height) {
         this.width = width;
 		this.height = height;
         this.enemies = new ArrayList<Enemy>();
-        this.switchNo = 0;
         this.player = null;
         this.enemies = new ArrayList<>();
         this.offensiveStrategy = new OffensiveEnemy();
         this.defensiveStrategy = new DefensiveEnemy();
-        this.state = "unfinished";
+        this.gameOver = false;
         initializeBoard(width, height);
     }
     
@@ -51,13 +46,10 @@ public class Dungeon implements Observer {
     		}
     	}
     }
-    public void addSwitch() {
-    	switchNo++;
-    }
     
     public Tile getTile(int x, int y) {
-    	if (x < 0 || x >= width
-    		|| y < 0 || y >= height) 
+    	if (x < 0 || x >= getWidth()
+    		|| y < 0 || y >= getHeight()) 
     		return null;
     	return board[y][x];
     }
@@ -65,8 +57,8 @@ public class Dungeon implements Observer {
     public List<Entity> getAllEntities() {
     	List<Entity> entities = new ArrayList<>();
     	
-    	for (int x = 0; x < width; x++) {
-    		for (int y = 0; y < height; y++) {
+    	for (int x = 0; x < getWidth(); x++) {
+    		for (int y = 0; y < getHeight(); y++) {
     			entities.addAll(getTile(x, y).getEntities());
     		}
     	}
@@ -79,13 +71,6 @@ public class Dungeon implements Observer {
         this.player = player;
         player.getInventory().addObserver(this);
     }
-    public int playerXPos() {
-		return player.getX();
-	}
-
-    public int playerYPos() {
-    	return player.getY();
-	}
     
     public void moveEntity(Movable entity, Tile tile) {
     	if (entity.getCurrentTile() != null) entity.getCurrentTile().movedOff(entity);
@@ -94,15 +79,13 @@ public class Dungeon implements Observer {
 
 	public void addEntity(Entity entity) {
     	if (entity instanceof Portal) {
+    		if (getPortalCountById((Portal) entity) == 2) return;
     		linkPortals((Portal) entity);
     	}
     	placeEntityTile(entity, board[entity.getY()][entity.getX()]);
     	linkToGoal(entity);
     }
 
-    public void removeEntity(Entity e, int x, int y) {
-		getTile(x, y).removeEntity(e);
-	}
 
 	public void addEnemy(Enemy e) {
     	getEnemies().add(e);
@@ -113,13 +96,26 @@ public class Dungeon implements Observer {
 	}
 	
     public void setEnemyStrategy(MovementStrategy strategy) {
-    	for (Enemy enemy : enemies) {
+    	for (Enemy enemy : getEnemies()) {
     		enemy.setStrategy(strategy);
     	}
     }
     
+    public int getPortalCountById(Portal portal) {
+    	int count = 0;
+    	for (Entity e : getAllEntities()) {
+			if (e instanceof Portal) {
+				Portal otherPortal = (Portal) e;
+				if (otherPortal.getId() == portal.getId()) {
+					count++;
+				}
+			}
+		}
+    	return count;
+    }
+    
     public void linkToGoal(Entity entity) {
-    	goal.linkEntity(entity);
+    	getGoal().linkEntity(entity);
     }
     
     public void linkPortals(Portal portal) {
@@ -141,12 +137,12 @@ public class Dungeon implements Observer {
     }
     
     public double distToPlayer(Tile tile) {
-    	return tile.distToTile(player.getCurrentTile());
+    	return tile.distToTile(getPlayer().getCurrentTile());
     }
     
     public void playTurn() {
-    	if (!goal.satisfied()) {
-	    	List<Enemy> enemiesCopy = new ArrayList<>(enemies);
+    	if (!getGoal().satisfied()) {
+	    	List<Enemy> enemiesCopy = new ArrayList<>(getEnemies());
 	    	for (Enemy enemy : enemiesCopy) {
 	    		enemy.move();
 	    	}
@@ -158,57 +154,23 @@ public class Dungeon implements Observer {
 	@Override
     public void update(Subject s) {
     	if (s instanceof Inventory) {
-			System.out.println("no");
-			if (player.isInvincible()) {
+			if (getPlayer().isInvincible()) {
 				setEnemyStrategy(defensiveStrategy);
-				System.out.println("yes");
 			} else {
 				setEnemyStrategy(offensiveStrategy);
 			}
 		}
     }
     
-  //Check if player meets enemy after a change in the game
-    public void checkCoincide() {
-    	for (Enemy enemy : getEnemies()) {
-			if (enemy.getX() == player.getX() && enemy.getY() == player.getY()) {
-				enemy.notifyComing(player);
-			}
-		}
-    }
-    
-    //All enemies interact with props on the square they stand on after moving
-    public void enemyInteraction() {
-		// First interact with player if there's any
-    	checkCoincide();
-		// Then interact with other props
-    	for (Enemy e : getEnemies()) {
-    		List<Entity> onSquare = e.entityOverlapped();
-    		for (Entity en : onSquare) {
-    			if (!(en instanceof Player)) {
-        			en.notifyComing(e);
-    			}
-    		}
-		}
-    }
-    
     //To-do
     public void endGame(boolean end) {
     	if (end == true) {
-    		setState("complete");
+    		System.out.println("complete");
     	} else {
-    		setState("fail");
+    		System.out.println("fail");
     	}
+    	this.gameOver = true;
     }
-
-    public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-		System.out.println(state);
-	}
 
 	public int getWidth() {
         return width;
@@ -233,9 +195,9 @@ public class Dungeon implements Observer {
 	public Player getPlayer() {
         return player;
     }
-
-	public int getSwitchNo() {
-		return switchNo;
+	
+	public boolean gameOver() {
+		return gameOver;
 	}
 
 }

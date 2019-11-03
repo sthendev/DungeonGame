@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import java.util.List;
-
 public class Enemy extends Movable {
 	
 	private boolean alarmed;
@@ -50,6 +48,7 @@ public class Enemy extends Movable {
     @Override
     public boolean isBlocking(Movable mover) {
     	if (mover instanceof Enemy) return true;
+    	else if (mover instanceof Boulder) return true;
     	return false;
     }
 

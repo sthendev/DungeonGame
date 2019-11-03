@@ -42,10 +42,6 @@ public class Inventory implements Subject {
 		this.sword = sword;
 		notifyObservers();
 	}
-
-	public int SwordHit() {
-		return sword.getHits();
-	}
 	
 	public void useSword() {
 		sword.useHits();
@@ -68,18 +64,9 @@ public class Inventory implements Subject {
 		invincibleTime--;
 		notifyObservers();
 	}
-	//To-do: count down of invincible time
-
-	public ArrayList<Treasure> getTreasure() {
-		return treasure;
-	}
 	
 	public List<Observer> getObservers() {
 		return observers;
-	}
-
-	public void setObservers(List<Observer> observers) {
-		this.observers = observers;
 	}
 	
 	@Override

@@ -1,15 +1,12 @@
 package unsw.dungeon;
-import java.util.*;
 
 public class Sword extends Entity {
 	
 	private int hits;
-	private Player player;
 	
 	public Sword(Tile position) {
 		super(position);
 		this.hits = 5;
-		this.player = null;
 	}
 	
 	@Override
@@ -22,7 +19,6 @@ public class Sword extends Entity {
 				getCurrentTile().placeEntity(s);
 			}
 			p.pickSword(this);
-			setPlayer(p);
 			getCurrentTile().removeEntity(this);
 		}
 	}
@@ -33,14 +29,6 @@ public class Sword extends Entity {
 	
 	public void useHits() {
 		this.hits--;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 	
 	

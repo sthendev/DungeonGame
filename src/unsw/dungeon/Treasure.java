@@ -4,8 +4,8 @@ public class Treasure extends Entity {
 	
 	private boolean collected = false;
 
-	public Treasure(Tile t) {
-		super(t);
+	public Treasure(Tile tile) {
+		super(tile);
 	}
 	
 	@Override

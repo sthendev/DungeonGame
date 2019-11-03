@@ -1,8 +1,7 @@
 package unsw.dungeon;
 
-import javafx.beans.property.IntegerProperty;
-import java.util.*;
-import javafx.beans.property.SimpleIntegerProperty;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * An entity in the dungeon.
@@ -42,10 +41,6 @@ abstract public class Entity implements Subject {
 			observer.update(this);
 		}
 	}
-	
-    public List<Observer> getObservers() {
-		return observers;
-	}
 
     public int getX() {
         return position.getX();
@@ -62,10 +57,6 @@ abstract public class Entity implements Subject {
     public void setCurrentTile(Tile tile) {
     	this.position = tile;
     	notifyObservers();
-    }
-    
-    public List<Entity> entityOverlapped() {
-    	return position.getEntities();
     }
     
     public Tile getAdjacentTile(int x, int y) {
@@ -86,6 +77,9 @@ abstract public class Entity implements Subject {
     public void notifyLeaving(Movable mover) {
     	
     };
-
-	abstract public void notifyComing(Movable mover);
+    
+    //Default behaviour is not notifying
+	public void notifyComing(Movable mover) {
+		
+	}
 }

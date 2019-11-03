@@ -12,11 +12,6 @@ public class Wall extends Entity {
     }
     
     @Override
-	public void notifyComing(Movable e) {
-		//Do nothing
-	}
-    
-    @Override
     public boolean isTransparent() {
     	return false;
     }
