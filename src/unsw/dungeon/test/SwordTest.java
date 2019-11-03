@@ -4,12 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import unsw.dungeon.Dungeon;
-import unsw.dungeon.Goal;
-import unsw.dungeon.AndGoal;
-import unsw.dungeon.Entity;
 import unsw.dungeon.Tile;
 import unsw.dungeon.Sword;
 import unsw.dungeon.Player;
@@ -85,6 +80,5 @@ public class SwordTest {
 		
 		enemy.notifyComing(player);
 		assertEquals(dungeon.getEnemies().contains(enemy), false);
-		
 	}
 }
