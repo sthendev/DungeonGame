@@ -1,14 +1,12 @@
 package unsw.dungeon;
 
 public class Key extends Entity {
-
-	private Player player;
+	
 	private int id;
 
-	public Key(int id, Tile t) {
-		super(t);
+	public Key(int id, Tile tile) {
+		super(tile);
 		this.id = id;
-		this.player = null;
 	}
 	
 	@Override
@@ -21,7 +19,6 @@ public class Key extends Entity {
 				getCurrentTile().placeEntity(k);
 			}
 			p.pickKey(this);
-			setPlayer(p);
 			getCurrentTile().removeEntity(this);
 		}
 	}
@@ -29,18 +26,6 @@ public class Key extends Entity {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 }

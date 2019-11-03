@@ -1,11 +1,7 @@
 package unsw.dungeon;
 
-import java.util.*;
-
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
 
 /**
  * The player entity
@@ -15,17 +11,15 @@ import java.util.ArrayList;
 public class Player extends Movable {
 	
 	private Inventory inventory;
-	private String name;
     /**
      * Create a player positioned in square (x,y)
      * @param x
      * @param y
      */
 
-	public Player(Dungeon dungeon, Tile position, String name) {
+	public Player(Dungeon dungeon, Tile position) {
 		super(dungeon, position);
 		this.inventory = new Inventory();
-		this.name = name;
 	}
 	
 	public void Move(int xMove, int yMove) {
@@ -54,21 +48,8 @@ public class Player extends Movable {
     	getDungeon().endGame(false);
 	}
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
 	public Inventory getInventory() {
 		return inventory;
-	}
-
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
 	}
 
 	public boolean isInvincible() {

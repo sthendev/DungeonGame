@@ -54,9 +54,4 @@ public abstract class Movable extends Entity {
 		this.prevPosition = getCurrentTile();
 		super.setCurrentTile(tile);
 	}
-	
-	@Override
-	public void notifyComing(Movable mover) {
-		
-	}
 }

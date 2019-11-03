@@ -1,5 +1,4 @@
 package unsw.dungeon;
-import java.util.*;
 
 public class Exit extends Entity {
 	

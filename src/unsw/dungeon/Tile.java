@@ -3,7 +3,6 @@ package unsw.dungeon;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D;
 
 public class Tile {
 	private int x, y;
@@ -32,10 +31,7 @@ public class Tile {
 	public void placeEntity(Entity entity) {
 		if (entity instanceof Movable) {
 			Movable mover = (Movable) entity;
-			List<Entity> entitiesCopy = new ArrayList<>(entities);
-			for (Entity e : entitiesCopy) {
-				e.notifyComing(mover);
-			}
+			handleInteractionsComing(mover);
 		}
 		addEntity(entity);
 	}
@@ -114,7 +110,19 @@ public class Tile {
 	
 	public void movedOff(Movable mover) {
 		removeEntity(mover);
-		for (Entity entity : entities) {
+		handleInteractionsLeaving(mover);
+	}
+	
+	public void handleInteractionsComing(Movable mover) {
+		List<Entity> entitiesCopy = new ArrayList<>(entities);
+		for (Entity e : entitiesCopy) {
+			e.notifyComing(mover);
+		}
+	}
+	
+	public void handleInteractionsLeaving(Movable mover) {
+		List<Entity> entitiesCopy = new ArrayList<>(entities);
+		for (Entity entity : entitiesCopy) {
 			entity.notifyLeaving(mover);
 		}
 	}
