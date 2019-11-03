@@ -42,8 +42,7 @@ public class Door extends Entity {
 	
 	@Override
 	public boolean isTransparent() {
-		if (opened) return true;
-		return false;
+		return isOpened();
 	}
 
 	
