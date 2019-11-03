@@ -71,7 +71,6 @@ public class BoulderTest {
 		assertEquals(p.getX(), 13);
 		assertEquals(p.getY(), 11);
 		
-
 		assertEquals(b.getX(), 11);
 		assertEquals(b.getY(), 9);
 		assertEquals(b1.getX(), 12);
