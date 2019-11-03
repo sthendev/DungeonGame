@@ -11,7 +11,10 @@ public class BoulderTest {
 	public void boulderTest() {
 
 		Dungeon d = new Dungeon(20, 20);
+		ExitGoal g = new ExitGoal();
+		d.setGoal(g);
 		Player p = new Player(d, d.getTile(10, 11));
+        d.setPlayer(p);
 		d.addEntity(p);
 		Wall w = new Wall(d.getTile(11, 10));
 		d.addEntity(w);
@@ -59,6 +62,7 @@ public class BoulderTest {
     	p.Move(0, -1);
     	p.Move(0, -1);
     	p.Move(0, -1);
+    	p.Move(0, -1);
     	p.Move(1, 0);
     	p.Move(1, 0);
     	p.Move(1, 0);
@@ -68,13 +72,13 @@ public class BoulderTest {
 		assertEquals(p.getY(), 11);
 		
 
-		assertEquals(b.getY(), 11);
+		assertEquals(b.getX(), 11);
 		assertEquals(b.getY(), 9);
-		assertEquals(b1.getY(), 12);
+		assertEquals(b1.getX(), 12);
 		assertEquals(b1.getY(), 9);
-		assertEquals(b3.getY(), 12);
+		assertEquals(b3.getX(), 12);
 		assertEquals(b3.getY(), 8);
-		assertEquals(b4.getY(), 12);
+		assertEquals(b4.getX(), 12);
 		assertEquals(b4.getY(), 11);
 	}
 	
