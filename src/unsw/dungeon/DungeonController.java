@@ -50,6 +50,7 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	if (dungeon.gameOver()) return;
     	player.newTurn();
         switch (event.getCode()) {
         case UP:
