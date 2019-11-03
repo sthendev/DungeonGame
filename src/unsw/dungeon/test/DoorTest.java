@@ -13,24 +13,6 @@ import unsw.dungeon.Key;
 public class DoorTest {
 	
 	@Test
-	public void initialDoorTest() {
-		Door door = new Door(0, null);
-		
-		assertEquals(door.isOpened(), false);
-		assertEquals(door.isTransparent(), false);
-	}
-	
-	@Test
-	public void rightKeyTest() {
-		Door door = new Door(0, null);
-		
-		Key rightKey = new Key(0, null);
-		assertEquals(door.isRight(rightKey), true);
-		Key wrongKey = new Key(1, null);
-		assertEquals(door.isRight(wrongKey), false);
-	}
-	
-	@Test
 	public void closedDoorTest() {
 		Door door  = new Door(0, null);
 		
@@ -46,28 +28,6 @@ public class DoorTest {
 		assertEquals(door.isBlocking(playerWrongKey), true);
 		assertEquals(door.isBlocking(enemy), true);
 		assertEquals(door.isBlocking(boulder), true);
-	}
-	
-	@Test
-	public void playerComingTest() {
-		Door door = new Door(0, null);
-		
-		Player playerWrongKey = new Player(null, null);
-		Key wrongKey = new Key(1, null);
-		playerWrongKey.pickKey(wrongKey);
-		
-		Player playerRightKey = new Player(null, null);
-		Key rightKey = new Key(0, null);
-		playerRightKey.pickKey(rightKey);
-		
-		door.notifyComing(playerWrongKey);
-		assertEquals(door.isOpened(), false);
-		assertEquals(playerWrongKey.keyHeld(), wrongKey);
-		
-		
-		door.notifyComing(playerRightKey);
-		assertEquals(door.isOpened(), true);
-		assertEquals(playerRightKey.keyHeld(), null);
 	}
 	
 	@Test
