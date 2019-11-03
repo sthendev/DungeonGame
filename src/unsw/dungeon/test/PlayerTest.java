@@ -12,6 +12,8 @@ public class PlayerTest {
 
 		Dungeon d = new Dungeon(20, 20);
 		Player p = new Player(d, d.getTile(10, 10));
+		ExitGoal g = new ExitGoal();
+		d.setGoal(g);
 		d.addEntity(p);
 		Wall w = new Wall(d.getTile(11, 10));
 		d.addEntity(w);

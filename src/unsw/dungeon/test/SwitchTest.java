@@ -11,7 +11,10 @@ public class SwitchTest {
 	public void switchTest() {
 
 		Dungeon d = new Dungeon(20, 20);
+		ExitGoal g = new ExitGoal();
+		d.setGoal(g);
 		Player p = new Player(d, d.getTile(10, 11));
+        d.setPlayer(p);
 		d.addEntity(p);
 		FloorSwitch s = new FloorSwitch(d.getTile(11, 11));
     	d.addEntity(s);

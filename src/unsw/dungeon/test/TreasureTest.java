@@ -13,6 +13,9 @@ public class TreasureTest {
 
 		Dungeon d = new Dungeon(20, 20);
 		Player p = new Player(d, d.getTile(10, 10));
+		ExitGoal g = new ExitGoal();
+		d.setGoal(g);
+        d.setPlayer(p);
 		d.addEntity(p);
 		Treasure t = new Treasure(d.getTile(10, 11));
 		d.addEntity(t);
