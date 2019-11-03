@@ -12,7 +12,10 @@ public class KeyTest {
 	public void keyTest() {
 
 		Dungeon d = new Dungeon(20, 20);
+		ExitGoal g = new ExitGoal();
+		d.setGoal(g);
 		Player p = new Player(d, d.getTile(10, 10));
+		d.setPlayer(p);
 		d.addEntity(p);
 		Key t = new Key(1, d.getTile(10, 11));
 		d.addEntity(t);

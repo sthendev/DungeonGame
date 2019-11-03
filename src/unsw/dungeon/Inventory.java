@@ -19,6 +19,10 @@ public class Inventory implements Subject {
 		this.invincibleTime = 0;
         this.observers = new ArrayList<>();
 	}
+	
+	public ArrayList<Treasure> getTreasure() {
+		return treasure;
+	}
 
 	public void addTreasure(Treasure t) {
 		treasure.add(t);

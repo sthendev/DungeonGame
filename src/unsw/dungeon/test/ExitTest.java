@@ -15,8 +15,9 @@ public class ExitTest {
 		ExitGoal g = new ExitGoal();
 		d.setGoal(g);
 		Player p = new Player(d, d.getTile(10, 10));
+		d.setPlayer(p);
 		d.addEntity(p);
-		Exit e = new Exit(d.getTile(11, 0));
+		Exit e = new Exit(d.getTile(11, 10));
 		d.addEntity(e);
 
 		assertEquals(e.playerIsHere(), false);
