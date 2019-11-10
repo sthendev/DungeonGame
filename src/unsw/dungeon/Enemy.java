@@ -21,6 +21,7 @@ public class Enemy extends Movable {
     
     public void setStrategy(MovementStrategy strategy) {
     	this.strategy = strategy;
+    	notifyObservers();
     }
     
     public boolean playerInSight() {

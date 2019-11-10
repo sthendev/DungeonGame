@@ -45,7 +45,14 @@ public abstract class Movable extends Entity {
 		for (Tile tile : getCurrentTile().getSurroundingTiles()) {
 			if (canMove(tile)) validMoves.add(tile);
 		}
-		
+		return validMoves;
+	}
+	
+	public List<Tile> getValidMovesFromTile(Tile tile) {
+		List<Tile> validMoves = new ArrayList<>();
+		for (Tile t : tile.getSurroundingTiles()) {
+			if (canMove(t)) validMoves.add(t);
+		}
 		return validMoves;
 	}
 	

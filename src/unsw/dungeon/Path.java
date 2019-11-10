@@ -18,8 +18,21 @@ public class Path {
 		path.add(tile);
 	}
 	
+	public void addFront(Tile tile) {
+		path.add(0, tile);
+	}
+	
+	public boolean isEmpty() {
+		return path.isEmpty();
+	}
+	
 	public Tile getEnd() {
 		return path.get(path.size() - 1);
+	}
+	
+	public Tile getNext() {
+		if (path.size() > 1) return path.get(1);
+		return null;
 	}
 	
 	public boolean allTransparent(Movable mover) {
