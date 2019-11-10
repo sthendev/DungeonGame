@@ -24,6 +24,7 @@ public class Dungeon implements Observer {
     private Goal goal;
     private MovementStrategy offensiveStrategy;
     private MovementStrategy defensiveStrategy;
+    private MovementStrategy idleStrategy;
     private boolean gameOver;
 
     public Dungeon(int width, int height) {
@@ -34,6 +35,7 @@ public class Dungeon implements Observer {
         this.enemies = new ArrayList<>();
         this.offensiveStrategy = new OffensiveEnemy();
         this.defensiveStrategy = new DefensiveEnemy();
+        this.idleStrategy = new IdleEnemy();
         this.gameOver = false;
         initializeBoard(width, height);
     }
@@ -156,6 +158,8 @@ public class Dungeon implements Observer {
     	if (s instanceof Inventory) {
 			if (getPlayer().isInvincible()) {
 				setEnemyStrategy(defensiveStrategy);
+			} else if (getPlayer().isFreezing()) {
+				setEnemyStrategy(idleStrategy);
 			} else {
 				setEnemyStrategy(offensiveStrategy);
 			}
