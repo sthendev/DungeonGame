@@ -58,11 +58,16 @@ public class Player extends Movable {
 		}
 		return false;
 	}
+	
+	public boolean isFreezing() {
+		if (inventory.getFreezeTime() > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	public void newTurn() {
-		if (inventory.getInvincibleTime() > 0) {
-	    	inventory.usePotion();
-		}
+		inventory.usePotions();
 	}
 	
 	public boolean hasSword() {
@@ -96,8 +101,8 @@ public class Player extends Movable {
 		inventory.setSword(s);
 	}
 	
-	public void pickPotion(InvincibilityPotion p) {
-		inventory.pickPotion(p.getMoves());
+	public void pickPotion(TurnBasedPotion p) {
+		inventory.pickPotion(p);
 	}
 	
 	public void pickTreasure(Treasure t) {

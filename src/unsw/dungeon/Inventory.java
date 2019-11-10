@@ -9,6 +9,7 @@ public class Inventory implements Subject {
 	private Key key;
 	private Sword sword;
 	private int invincibleTime;
+	private int freezeTime;
     private List<Observer> observers;
 
 	public Inventory() {
@@ -17,6 +18,7 @@ public class Inventory implements Subject {
 		this.key = null;
 		this.sword = null;
 		this.invincibleTime = 0;
+		this.freezeTime = 0;
         this.observers = new ArrayList<>();
 	}
 	
@@ -58,14 +60,24 @@ public class Inventory implements Subject {
 	public int getInvincibleTime() {
 		return invincibleTime;
 	}
+	
+	public int getFreezeTime() {
+		return freezeTime;
+	}
 
-	public void pickPotion(int increment) {
-		invincibleTime += increment;
+	public void pickPotion(TurnBasedPotion p) {
+		if (p instanceof InvincibilityPotion) {
+			this.invincibleTime += p.getMoves();
+		} else if (p instanceof FreezePotion) {
+			this.freezeTime += p.getMoves();
+			this.invincibleTime = 0;
+		}
 		notifyObservers();
 	}
 	
-	public void usePotion() {
-		invincibleTime--;
+	public void usePotions() {
+		if (invincibleTime > 0) invincibleTime--;
+		if (freezeTime > 0) freezeTime--;
 		notifyObservers();
 	}
 	

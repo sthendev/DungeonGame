@@ -33,6 +33,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image closedDoorImage;
     private Image openDoorImage;
     private Image portalImage;
+    private Image frozenEnemyImage;
+    private Image freezingPotionImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -52,6 +54,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         closedDoorImage = new Image("/closed_door.png");
         openDoorImage = new Image("/open_door.png");
         portalImage = new Image("/portal.png");
+        frozenEnemyImage = new Image("/gnome_frozen.png");
+        freezingPotionImage = new Image("/freeze_potion.png");
     }
 
     @Override
@@ -125,6 +129,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView view = new ImageView(portalImage);
     	addEntity(portal, view);
     }
+    
+    @Override
+    public void onLoad(FreezePotion potion) {
+    	ImageView view = new ImageView(freezingPotionImage);
+    	addEntity(potion, view);
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -150,6 +160,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private UIUpdater getUIUpdater(Entity entity, ImageView node) {
     	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayerImage);
     	if (entity instanceof Door) return new DoorUIUpdater(node, openDoorImage);
+    	if (entity instanceof Enemy) return new EnemyUIUpdater(node, frozenEnemyImage);
     	return new UIUpdater(node);
     }
 
