@@ -1,21 +1,16 @@
 package unsw.dungeon;
 
-import java.util.List;
-
 public class OffensiveEnemy implements MovementStrategy {
+	
+	private AStarSearcher searcher = new AStarSearcher();
 
 	@Override
 	public Tile getBestMove(Movable mover) {
-		List<Tile> validMoves = mover.getValidMoves();
-    	Tile bestMove = mover.getCurrentTile();
-    	
-    	for (Tile tile : validMoves) {
-    		if (mover.getDungeon().distToPlayer(tile) < mover.getDungeon().distToPlayer(bestMove)) {
-    			bestMove = tile;
-    		}
-    	}
-    	
-    	return bestMove;
+		Path searchPath = searcher.search(mover, mover.getDungeon().getPlayer().getCurrentTile());
+		if (!searchPath.isEmpty() && searchPath.getNext() != null) {
+			return searchPath.getNext();
+		}
+		return mover.getCurrentTile();
 	}
 
 }
