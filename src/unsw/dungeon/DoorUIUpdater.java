@@ -18,6 +18,7 @@ public class DoorUIUpdater extends UIUpdater {
 			if (door.isOpened()) {
 				getNode().setImage(openDoorImage);
 			}
+			super.update(obj);
 		}
 	}
 }

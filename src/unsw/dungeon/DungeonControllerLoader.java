@@ -21,10 +21,12 @@ public class DungeonControllerLoader extends DungeonLoader {
     //Images
     private Image playerImage;
     private Image armedPlayerImage;
+    private Image hammerPlayerImage;
     private Image wallImage;
     private Image enemyImage;
     private Image exitImage;
     private Image swordImage;
+    private Image hammerImage;
     private Image invincibilityPotionImage;
     private Image boulderImage;
     private Image floorSwitchImage;
@@ -35,6 +37,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image portalImage;
     private Image frozenEnemyImage;
     private Image freezingPotionImage;
+    private Image ghostPotionImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -42,10 +45,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         armedPlayerImage = new Image("/human_new_sword.png");
+        hammerPlayerImage = new Image("/human_hammer.png");
         wallImage = new Image("/brick_brown_0.png");
         enemyImage = new Image("/gnome.png");
         exitImage = new Image("/exit.png");
         swordImage = new Image("/greatsword_1_new.png");
+        hammerImage = new Image("/hammer.png");
         invincibilityPotionImage = new Image("/brilliant_blue_new.png");
         boulderImage = new Image("/boulder.png");
         floorSwitchImage = new Image("/pressure_plate.png");
@@ -56,6 +61,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         portalImage = new Image("/portal.png");
         frozenEnemyImage = new Image("/gnome_frozen.png");
         freezingPotionImage = new Image("/freeze_potion.png");
+        ghostPotionImage = new Image("/ghost_potion.png");
     }
 
     @Override
@@ -135,6 +141,18 @@ public class DungeonControllerLoader extends DungeonLoader {
     	ImageView view = new ImageView(freezingPotionImage);
     	addEntity(potion, view);
     }
+    
+    @Override
+    public void onLoad(GhostPotion potion) {
+    	ImageView view = new ImageView(ghostPotionImage);
+    	addEntity(potion, view);
+    }
+    
+    @Override
+    public void onLoad(Hammer hammer) {
+    	ImageView view = new ImageView(hammerImage);
+    	addEntity(hammer, view);
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
@@ -158,7 +176,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     private UIUpdater getUIUpdater(Entity entity, ImageView node) {
-    	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayerImage);
+    	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayerImage, hammerPlayerImage);
     	if (entity instanceof Door) return new DoorUIUpdater(node, openDoorImage);
     	if (entity instanceof Enemy) return new EnemyUIUpdater(node, frozenEnemyImage);
     	return new UIUpdater(node);

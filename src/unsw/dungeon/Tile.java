@@ -28,6 +28,20 @@ public class Tile {
 		return entities;
 	}
 	
+	public boolean hasWall() {
+		for (Entity entity : entities) {
+			if (entity instanceof Wall) return true;
+		}
+		return false;
+	}
+	
+	public boolean hasClosedDoor() {
+		for (Entity entity : entities) {
+			if (entity instanceof Door && !((Door) entity).isOpened()) return true;
+		}
+		return false;
+	}
+	
 	public void placeEntity(Entity entity) {
 		if (entity instanceof Movable) {
 			Movable mover = (Movable) entity;
@@ -59,6 +73,21 @@ public class Tile {
 			return Direction.LEFT;
 		} else if (getAdjacentTile(1, 0).equals(tile)) {
 			return Direction.RIGHT;
+		} else {
+			return null;
+		}
+	}
+	
+	public Tile getOppositeTile(Tile sourceTile) {
+		Direction sourceDirection = getDirectionOfTile(sourceTile);
+		if (sourceDirection == Direction.UP) {
+			return getAdjacentTile(0, -1);
+		} else if (sourceDirection == Direction.DOWN) {
+			return getAdjacentTile(0, 1);
+		} else if (sourceDirection == Direction.LEFT) {
+			return getAdjacentTile(1, 0);
+		} else if (sourceDirection == Direction.RIGHT) {
+			return getAdjacentTile(-1, 0);
 		} else {
 			return null;
 		}

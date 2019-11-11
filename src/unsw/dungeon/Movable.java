@@ -19,7 +19,7 @@ public abstract class Movable extends Entity {
 		return dungeon;
 	}
 	
-	public Tile getPrevPosition() {
+	public Tile getPreviousTile() {
 		return prevPosition;
 	}
 	

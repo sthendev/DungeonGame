@@ -19,10 +19,10 @@ public class SwordTest {
 		tile.addEntity(sword);
 		
 		Player player = new Player(null, null);
-		assertEquals(player.getSword(), null);
+		assertEquals(player.toolHeld(), null);
 		
 		tile.movedOn(player);
-		assertEquals(player.getSword(), sword);
+		assertEquals(player.toolHeld(), sword);
 		assertEquals(tile.getEntities().contains(sword), false);
 	}
 	
@@ -34,15 +34,15 @@ public class SwordTest {
 		player.pickItem(sword);
 		assertEquals(sword.getHits(), 5);
 		
-		player.useSword();
+		player.useTool();
 		assertEquals(sword.getHits(), 4);
 		
 		for (int i = 0; i < 4; i++) {
-			player.useSword();
+			player.useTool();
 		}
 		
 		assertEquals(sword.getHits(), 0);
-		assertEquals(player.getSword(), null);
+		assertEquals(player.toolHeld(), null);
 	}
 	
 	@Test
@@ -53,13 +53,13 @@ public class SwordTest {
 		
 		Sword swordA =  new Sword(null);
 		player.pickItem(swordA);
-		player.useSword();
+		player.useTool();
 		
 		Sword swordB = new Sword(tile);
 		tile.addEntity(swordB);
 		
 		tile.movedOn(player);
-		assertEquals(player.getSword(), swordB);
+		assertEquals(player.toolHeld(), swordB);
 		assertEquals(tile.getEntities().contains(swordA), true);
 		assertEquals(swordA.getHits(), 4);
 	}

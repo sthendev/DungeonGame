@@ -41,22 +41,22 @@ public class Inventory implements Subject {
 		}
 		return null;
 	}
-
-	public Sword getSword() {
+	
+	public HitBasedTool getTool() {
 		for (Entity item : items) {
-			if (item instanceof Sword) return (Sword) item;
+			if (item instanceof HitBasedTool) return (HitBasedTool) item;
 		}
 		return null;
 	}
 	
-	public void useSword() {
+	public void useTool() {
 		List<Entity> itemsCopy = new ArrayList<>(items);
 		for (Entity item : itemsCopy) {
-			if (item instanceof Sword) {
-				Sword sword = (Sword) item;
-				sword.useHit();
-				if (sword.getHits() <= 0) {
-					removeItem(sword);
+			if (item instanceof HitBasedTool) {
+				HitBasedTool tool = (HitBasedTool) item;
+				tool.useHit();
+				if (tool.getHits() <= 0) {
+					removeItem(tool);
 				}
 				break;
 			}
@@ -77,6 +77,13 @@ public class Inventory implements Subject {
 		}
 		return null;
 	}
+	
+	public GhostPotion getGhostPotion() {
+		for (Entity item : items) {
+			if (item instanceof GhostPotion) return (GhostPotion) item;
+		}
+		return null;
+	}
 
 	public void addPotion(TurnBasedPotion p) {
 		if (p instanceof InvincibilityPotion) {
@@ -88,6 +95,13 @@ public class Inventory implements Subject {
 			}
 		} else if (p instanceof FreezePotion) {
 			FreezePotion existing = getFreezePotion();
+			if (existing != null) { 
+				existing.extendMoves(p.getMoves());
+			} else {
+				items.add(p);
+			}
+		} else if (p instanceof GhostPotion) {
+			GhostPotion existing = getGhostPotion();
 			if (existing != null) { 
 				existing.extendMoves(p.getMoves());
 			} else {

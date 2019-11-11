@@ -29,8 +29,7 @@ public class Portal extends Entity {
 	@Override
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Player) {
-			Player player = (Player) mover;
-			player.setCurrentTile(linkedPortal.getCurrentTile());
+			mover.setCurrentTile(linkedPortal.getCurrentTile());
 		}
 	}
 }
