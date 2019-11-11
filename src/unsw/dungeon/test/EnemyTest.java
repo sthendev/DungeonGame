@@ -39,7 +39,7 @@ public class EnemyTest {
 		Player player = new Player(dungeon, dungeon.getTile(2, 2));
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
-		player.pickPotion(new InvincibilityPotion(null));
+		player.pickItem(new InvincibilityPotion(null));
 		
 		dungeon.playTurn();
 		assertEquals(enemy.getCurrentTile(), dungeon.getTile(2, 0));

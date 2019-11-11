@@ -20,7 +20,6 @@ public class Node {
 	}
 	
 	public int getPathCost() {
-		int cost = 0;
 		if (prev == null) {
 			return 0;
 		} else {

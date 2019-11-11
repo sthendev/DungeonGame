@@ -13,12 +13,11 @@ public class Key extends Entity {
 	public void notifyComing(Movable e) {
 		if (e instanceof Player) {
 			Player p = (Player) e;
-			if (p.keyHeld() != null) {
-				Key k = p.keyHeld();
-				k.setCurrentTile(p.getCurrentTile());
-				getCurrentTile().placeEntity(k);
+			Key k = p.keyHeld();
+			if (k != null) {
+				p.dropItem(k, getCurrentTile());
 			}
-			p.pickKey(this);
+			p.pickItem(this);
 			getCurrentTile().removeEntity(this);
 		}
 	}

@@ -13,11 +13,19 @@ public abstract class TurnBasedPotion extends Entity {
 		return moves;
 	}
 	
+	public void useMove() {
+		this.moves--;
+	}
+	
+	public void extendMoves(int moves) {
+		this.moves += moves;
+	}
+	
 	@Override
 	public void notifyComing(Movable e) {
 		if (e instanceof Player) {
 			Player p = (Player) e;
-			p.pickPotion(this);
+			p.pickItem(this);
 			getCurrentTile().removeEntity(this);
 		}
 	}

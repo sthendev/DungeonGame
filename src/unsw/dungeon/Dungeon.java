@@ -135,7 +135,6 @@ public class Dungeon implements Observer {
     
     public void placeEntityTile(Entity entity, Tile tile) {
     	tile.placeEntity(entity);
-    	entity.setCurrentTile(tile);
     }
     
     public double distToPlayer(Tile tile) {
@@ -156,13 +155,15 @@ public class Dungeon implements Observer {
 	@Override
     public void update(Subject s) {
     	if (s instanceof Inventory) {
+    		if (getPlayer().isFreezing()) {
+				setEnemyStrategy(idleStrategy);
+				return;
+			}
 			if (getPlayer().isInvincible()) {
 				setEnemyStrategy(defensiveStrategy);
-			} else if (getPlayer().isFreezing()) {
-				setEnemyStrategy(idleStrategy);
-			} else {
-				setEnemyStrategy(offensiveStrategy);
+				return;
 			}
+			setEnemyStrategy(offensiveStrategy);
 		}
     }
     

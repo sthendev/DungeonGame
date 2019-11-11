@@ -22,7 +22,7 @@ public class EnemyGoalTest {
 
 		assertEquals(dungeon.getGoal().satisfied(), false);
 		Sword sword = new Sword(null);
-		player.pickSword(sword);
+		player.pickItem(sword);
 		player.Move(1, 0);
 		assertEquals(dungeon.getGoal().satisfied(), true);
 	}

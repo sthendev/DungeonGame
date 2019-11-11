@@ -31,7 +31,7 @@ public class SwordTest {
 		Player player = new Player(null, null);
 		Sword sword = new Sword(null);
 		
-		player.pickSword(sword);
+		player.pickItem(sword);
 		assertEquals(sword.getHits(), 5);
 		
 		player.useSword();
@@ -52,7 +52,7 @@ public class SwordTest {
 		Player player = new Player(null, null);
 		
 		Sword swordA =  new Sword(null);
-		player.pickSword(swordA);
+		player.pickItem(swordA);
 		player.useSword();
 		
 		Sword swordB = new Sword(tile);
@@ -76,7 +76,7 @@ public class SwordTest {
 		tile.addEntity(enemy);
 		
 		Sword sword = new Sword(null);
-		player.pickSword(sword);
+		player.pickItem(sword);
 		
 		enemy.notifyComing(player);
 		assertEquals(dungeon.getEnemies().contains(enemy), false);

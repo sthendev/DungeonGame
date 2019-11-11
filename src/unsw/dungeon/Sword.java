@@ -13,12 +13,11 @@ public class Sword extends Entity {
 	public void notifyComing(Movable e) {
 		if (e instanceof Player) {
 			Player p = (Player) e;
-			if (p.getSword() != null) {
-				Sword s = p.getSword();
-				s.setCurrentTile(p.getCurrentTile());
-				getCurrentTile().placeEntity(s);
+			Sword s = p.getSword();
+			if (s != null) {
+				p.dropItem(s, getCurrentTile());
 			}
-			p.pickSword(this);
+			p.pickItem(this);
 			getCurrentTile().removeEntity(this);
 		}
 	}
@@ -27,7 +26,7 @@ public class Sword extends Entity {
 		return hits;
 	}
 	
-	public void useHits() {
+	public void useHit() {
 		this.hits--;
 	}
 	
