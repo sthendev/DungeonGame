@@ -20,7 +20,7 @@ public class DoorTest {
 		
 		Player playerNoKey = new Player(null, null);
 		Player playerWrongKey = new Player(null, null);
-		playerWrongKey.pickKey(wrongKey);
+		playerWrongKey.pickItem(wrongKey);
 		Enemy enemy =  new Enemy(null, null, null);
 		Boulder boulder = new Boulder(null, null);
 	
@@ -36,7 +36,7 @@ public class DoorTest {
 		
 		Key rightKey = new Key(0, null);
 		Player playerRightKey = new Player(null, null);
-		playerRightKey.pickKey(rightKey);
+		playerRightKey.pickItem(rightKey);
 		
 		assertEquals(door.isBlocking(playerRightKey), false);
 		assertEquals(door.isOpened(), true);
@@ -46,7 +46,7 @@ public class DoorTest {
 		
 		Player playerNoKey = new Player(null, null);
 		Player playerWrongKey = new Player(null, null);
-		playerWrongKey.pickKey(wrongKey);
+		playerWrongKey.pickItem(wrongKey);
 		Enemy enemy =  new Enemy(null, null, null);
 		Boulder boulder = new Boulder(null, null);
 

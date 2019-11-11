@@ -31,17 +31,17 @@ public class PotionTest {
 		Player player = new Player(null, null);
 		InvincibilityPotion potion = new InvincibilityPotion(null);
 		
-		player.pickPotion(potion);
-		assertEquals(player.getInventory().getInvincibleTime(), 5);
+		player.pickItem(potion);
+		assertEquals(player.getInventory().getInvincibilityPotion().getMoves(), 5);
 		
 		player.newTurn();
-		assertEquals(player.getInventory().getInvincibleTime(), 4);
+		assertEquals(player.getInventory().getInvincibilityPotion().getMoves(), 4);
 		
 		for (int i = 0; i < 4; i++) {
 			player.newTurn();
 		}
 		
-		assertEquals(player.getInventory().getInvincibleTime(), 0);
+		assertEquals(player.getInventory().getInvincibilityPotion(), null);
 		assertEquals(player.isInvincible(), false);
 	}
 	
@@ -51,16 +51,16 @@ public class PotionTest {
 		InvincibilityPotion potion = new InvincibilityPotion(null);
 		InvincibilityPotion potion2 = new InvincibilityPotion(null);
 		
-		player.pickPotion(potion);
+		player.pickItem(potion);
 		
 		for (int i = 0; i < 4; i++) {
 			player.newTurn();
 		}
 		
-		assertEquals(player.getInventory().getInvincibleTime(), 1);
-		player.pickPotion(potion2);
+		assertEquals(player.getInventory().getInvincibilityPotion().getMoves(), 1);
+		player.pickItem(potion2);
 		
-		assertEquals(player.getInventory().getInvincibleTime(), 6);
+		assertEquals(player.getInventory().getInvincibilityPotion().getMoves(), 6);
 	}
 	
 	@Test
@@ -75,7 +75,7 @@ public class PotionTest {
 		tile.addEntity(enemy);
 		
 		InvincibilityPotion potion = new InvincibilityPotion(null);
-		player.pickPotion(potion);
+		player.pickItem(potion);
 		
 		enemy.notifyComing(player);
 		assertEquals(dungeon.getEnemies().contains(enemy), false);

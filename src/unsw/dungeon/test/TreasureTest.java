@@ -20,9 +20,9 @@ public class TreasureTest {
 		Treasure t = new Treasure(d.getTile(10, 11));
 		d.addEntity(t);
 
-		assertEquals(p.getInventory().getTreasure().size(), 0);
+		assertEquals(p.getInventory().getTreasureCount(), 0);
 		p.Move(0, -1);
-		assertEquals(p.getInventory().getTreasure().size(), 1);
+		assertEquals(p.getInventory().getTreasureCount(), 1);
 		assertEquals(p.getCurrentTile().getEntities().contains(t), false);
 	}
 	

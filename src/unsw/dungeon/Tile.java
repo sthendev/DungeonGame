@@ -34,6 +34,7 @@ public class Tile {
 			handleInteractionsComing(mover);
 		}
 		addEntity(entity);
+		entity.setCurrentTile(this);
 	}
 	
 	public void addEntity(Entity entity) {

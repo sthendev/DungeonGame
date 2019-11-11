@@ -51,18 +51,23 @@ public class Player extends Movable {
 	public Inventory getInventory() {
 		return inventory;
 	}
+	
+	public void pickItem(Entity item) {
+		inventory.addItem(item);
+	}
+	
+	public void dropItem(Entity item, Tile tile) {
+		inventory.removeItem(item);
+		tile.placeEntity(item);
+	}
 
 	public boolean isInvincible() {
-		if (inventory.getInvincibleTime() > 0) {
-			return true;
-		}
+		if (inventory.getInvincibilityPotion() != null) return true;
 		return false;
 	}
 	
 	public boolean isFreezing() {
-		if (inventory.getFreezeTime() > 0) {
-			return true;
-		}
+		if (inventory.getFreezePotion() != null) return true;
 		return false;
 	}
 
@@ -89,23 +94,7 @@ public class Player extends Movable {
 		return inventory.getKey();
 	}
 	
-	public void pickKey(Key k) {
-		inventory.setKey(k);
-	}
-	
 	public void useKey() {
-		inventory.setKey(null);
-	}
-	
-	public void pickSword(Sword s) {
-		inventory.setSword(s);
-	}
-	
-	public void pickPotion(TurnBasedPotion p) {
-		inventory.pickPotion(p);
-	}
-	
-	public void pickTreasure(Treasure t) {
-		inventory.addTreasure(t);
+		inventory.removeItem(keyHeld());
 	}
 }

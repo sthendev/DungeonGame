@@ -5,84 +5,109 @@ import unsw.dungeon.Observer;
 
 public class Inventory implements Subject {
 	
-	private ArrayList<Treasure> treasure;
-	private Key key;
-	private Sword sword;
-	private int invincibleTime;
-	private int freezeTime;
+	private List<Entity> items;
     private List<Observer> observers;
 
 	public Inventory() {
-		super();
-		this.treasure = new ArrayList<Treasure>();
-		this.key = null;
-		this.sword = null;
-		this.invincibleTime = 0;
-		this.freezeTime = 0;
+		this.items = new ArrayList<>();
         this.observers = new ArrayList<>();
 	}
 	
-	public ArrayList<Treasure> getTreasure() {
-		return treasure;
+	public int getTreasureCount() {
+		int count = 0;
+		for (Entity item : items) {
+			if (item instanceof Treasure) count++;
+		}
+		return count;
 	}
-
-	public void addTreasure(Treasure t) {
-		treasure.add(t);
+	
+	public void addItem(Entity item) {
+		if (item instanceof TurnBasedPotion) {
+			addPotion((TurnBasedPotion) item);
+		} else {
+			items.add(item);
+		}
+		notifyObservers();
+	}
+	
+	public void removeItem(Entity item) {
+		items.remove(item);
 		notifyObservers();
 	}
 
 	public Key getKey() {
-		return key;
-	}
-
-	public void setKey(Key key) {
-		this.key = key;
-		notifyObservers();
+		for (Entity item : items) {
+			if (item instanceof Key) return (Key) item;
+		}
+		return null;
 	}
 
 	public Sword getSword() {
-		return sword;
-	}
-
-	public void setSword(Sword sword) {
-		this.sword = sword;
-		notifyObservers();
+		for (Entity item : items) {
+			if (item instanceof Sword) return (Sword) item;
+		}
+		return null;
 	}
 	
 	public void useSword() {
-		sword.useHits();
-		if (sword.getHits() == 0) {
-			setSword(null);
+		List<Entity> itemsCopy = new ArrayList<>(items);
+		for (Entity item : itemsCopy) {
+			if (item instanceof Sword) {
+				Sword sword = (Sword) item;
+				sword.useHit();
+				if (sword.getHits() <= 0) {
+					removeItem(sword);
+				}
+				break;
+			}
 		}
 		notifyObservers();
 	}
 	
-	public int getInvincibleTime() {
-		return invincibleTime;
+	public InvincibilityPotion getInvincibilityPotion() {
+		for (Entity item : items) {
+			if (item instanceof InvincibilityPotion) return (InvincibilityPotion) item;
+		}
+		return null;
 	}
 	
-	public int getFreezeTime() {
-		return freezeTime;
+	public FreezePotion getFreezePotion() {
+		for (Entity item : items) {
+			if (item instanceof FreezePotion) return (FreezePotion) item;
+		}
+		return null;
 	}
 
-	public void pickPotion(TurnBasedPotion p) {
+	public void addPotion(TurnBasedPotion p) {
 		if (p instanceof InvincibilityPotion) {
-			this.invincibleTime += p.getMoves();
+			InvincibilityPotion existing = getInvincibilityPotion();
+			if (existing != null) { 
+				existing.extendMoves(p.getMoves());
+			} else {
+				items.add(p);
+			}
 		} else if (p instanceof FreezePotion) {
-			this.freezeTime += p.getMoves();
-			this.invincibleTime = 0;
+			FreezePotion existing = getFreezePotion();
+			if (existing != null) { 
+				existing.extendMoves(p.getMoves());
+			} else {
+				items.add(p);
+			}
 		}
-		notifyObservers();
 	}
 	
 	public void usePotions() {
-		if (invincibleTime > 0) invincibleTime--;
-		if (freezeTime > 0) freezeTime--;
+		List<Entity> itemsCopy = new ArrayList<>(items);
+		for (Entity item : itemsCopy) {
+			if (item instanceof TurnBasedPotion) {
+				TurnBasedPotion potion = (TurnBasedPotion) item;
+				potion.useMove();
+				if (potion.getMoves() <= 0) {
+					removeItem(potion);
+				}
+			}
+		}
 		notifyObservers();
-	}
-	
-	public List<Observer> getObservers() {
-		return observers;
 	}
 	
 	@Override
@@ -97,7 +122,7 @@ public class Inventory implements Subject {
 	
 	@Override
 	public void notifyObservers() {
-		for (Observer o : getObservers()) {
+		for (Observer o : observers) {
 			o.update(this);
 		}
 	}

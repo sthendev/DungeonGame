@@ -12,7 +12,7 @@ public class Treasure extends Entity {
 	public void notifyComing(Movable e) {
 		if (e instanceof Player) {
 			Player p = (Player) e;
-			p.pickTreasure(this);
+			p.pickItem(this);
 			this.collected = true;
 			getCurrentTile().removeEntity(this);
 		}
