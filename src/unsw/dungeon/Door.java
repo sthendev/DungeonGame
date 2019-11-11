@@ -17,8 +17,11 @@ public class Door extends Entity {
 	
 	@Override
 	public boolean isBlocking(Movable mover) {
-		notifyComing(mover);
-		return !opened;
+		if (opened) return false;
+		if (mover instanceof Player) {
+			if (isRight(((Player) mover).keyHeld())) return false;
+		}
+		return true;
 	}
 
 	public boolean isRight(Key k) {
@@ -29,9 +32,9 @@ public class Door extends Entity {
 	}
 	
 	@Override
-	public void notifyComing(Movable e) {
-		if (e instanceof Player && opened == false) {
-			Player p = (Player) e;
+	public void notifyComing(Movable mover) {
+		if (mover instanceof Player && opened == false) {
+			Player p = (Player) mover;
 			if (isRight(p.keyHeld())) {
 				opened = true;
 				p.useKey();
