@@ -60,7 +60,7 @@ public class Enemy extends Movable {
 			if (player.isInvincible()) {
 				dies();
 			} else if (player.hasSword()) {
-				player.useSword();
+				player.useTool();
 				dies();
 			} else {
 				player.dies();

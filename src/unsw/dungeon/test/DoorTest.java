@@ -38,6 +38,7 @@ public class DoorTest {
 		Player playerRightKey = new Player(null, null);
 		playerRightKey.pickItem(rightKey);
 		
+		door.notifyComing(playerRightKey);
 		assertEquals(door.isBlocking(playerRightKey), false);
 		assertEquals(door.isOpened(), true);
 		assertEquals(door.isTransparent(), true);

@@ -9,6 +9,11 @@ public abstract class TurnBasedPotion extends Entity {
 		this.moves = 5;
 	}
 	
+	public TurnBasedPotion(Tile position, int moves) {
+		super(position);
+		this.moves = moves;
+	}
+	
 	public int getMoves() {
 		return moves;
 	}

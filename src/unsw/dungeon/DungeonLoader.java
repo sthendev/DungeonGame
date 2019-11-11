@@ -79,6 +79,11 @@ public abstract class DungeonLoader {
         	onLoad(sword);
         	entity = sword;
         	break;
+        case "hammer":
+        	Hammer hammer = new Hammer(dungeon.getTile(x, y));
+        	onLoad(hammer);
+        	entity = hammer;
+        	break;
         case "invincibility":
         	InvincibilityPotion potion = new InvincibilityPotion(dungeon.getTile(x, y));
         	onLoad(potion);
@@ -121,6 +126,11 @@ public abstract class DungeonLoader {
         	FreezePotion freezePotion = new FreezePotion(dungeon.getTile(x, y));
         	onLoad(freezePotion);
         	entity = freezePotion;
+        	break;
+        case "ghost":
+        	GhostPotion ghostPotion = new GhostPotion(dungeon.getTile(x, y));
+        	onLoad(ghostPotion);
+        	entity = ghostPotion;
         	break;
          // TODO Handle other possible entities
         }
@@ -170,6 +180,8 @@ public abstract class DungeonLoader {
     
     public abstract void onLoad(Sword sword);
     
+    public abstract void onLoad(Hammer hammer);
+    
     public abstract void onLoad(InvincibilityPotion potion);
     
     public abstract void onLoad(Boulder boulder);
@@ -185,6 +197,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Portal portal);
     
     public abstract void onLoad(FreezePotion potion);
+    
+    public abstract void onLoad(GhostPotion potion);
 
     // TODO Create additional abstract methods for the other entities
 

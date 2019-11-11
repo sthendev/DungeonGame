@@ -25,6 +25,7 @@ public class Player extends Movable {
 	public void Move(int xMove, int yMove) {
 		Tile target = getAdjacentTile(xMove, yMove);
 		if (target != null && target.canMove(this)) {
+			newTurn();
 			moveMe(target);
 			PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
 			pauseTransition.setOnFinished(event -> getDungeon().playTurn());
@@ -33,6 +34,7 @@ public class Player extends Movable {
 	}
     
     public void stay() {
+    	newTurn();
         getDungeon().playTurn();
     }
 
@@ -70,24 +72,38 @@ public class Player extends Movable {
 		if (inventory.getFreezePotion() != null) return true;
 		return false;
 	}
+	
+	public boolean isGhost() {
+		if (inventory.getGhostPotion() != null) return true;
+		return false;
+	}
 
 	public void newTurn() {
 		inventory.usePotions();
+		notifyObservers();
 	}
 	
 	public boolean hasSword() {
-		if (inventory.getSword() != null) {
+		if (toolHeld() instanceof Sword) {
 			return true;
 		}
 		return false;
 	}
 	
-	public void useSword() {
-		inventory.useSword();
+	public boolean hasHammer() {
+		if (toolHeld() instanceof Hammer) {
+			return true;
+		}
+		return false;
 	}
 	
-	public Sword getSword() {
-		return inventory.getSword();
+	public void useTool() {
+		inventory.useTool();
+		notifyObservers();
+	}
+	
+	public HitBasedTool toolHeld() {
+		return inventory.getTool();
 	}
 	
 	public Key keyHeld() {
