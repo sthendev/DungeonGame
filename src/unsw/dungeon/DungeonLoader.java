@@ -41,10 +41,13 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        onLoadInventory(dungeon.getPlayer().getInventory(), dungeon);
+        
         return dungeon;
     }
 
-    private void loadEntity(Dungeon dungeon, JSONObject json) {
+	private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
@@ -199,6 +202,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(FreezePotion potion);
     
     public abstract void onLoad(GhostPotion potion);
+    
+    protected abstract void onLoadInventory(Inventory inventory, Dungeon dungeon);
 
     // TODO Create additional abstract methods for the other entities
 
