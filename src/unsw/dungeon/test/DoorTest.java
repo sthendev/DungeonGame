@@ -14,7 +14,7 @@ public class DoorTest {
 	
 	@Test
 	public void closedDoorTest() {
-		Door door  = new Door(0, null);
+		Door door  = new Door(0, null, null);
 		
 		Key wrongKey = new Key(1, null);
 		
@@ -32,7 +32,7 @@ public class DoorTest {
 	
 	@Test
 	public void openDoorTest() {
-		Door door = new Door(0, null);
+		Door door = new Door(0, null, null);
 		
 		Key rightKey = new Key(0, null);
 		Player playerRightKey = new Player(null, null);
