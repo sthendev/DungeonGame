@@ -38,7 +38,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image frozenEnemyImage;
     private Image freezingPotionImage;
     private Image ghostPotionImage;
-    private Image emptyImage;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -63,7 +62,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         frozenEnemyImage = new Image("/gnome_frozen.png");
         freezingPotionImage = new Image("/freeze_potion.png");
         ghostPotionImage = new Image("/ghost_potion.png");
-        emptyImage = new Image("/empty.png");
     }
 
     @Override
@@ -156,14 +154,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(hammer, view);
     }
     
-    @Override
-    public void onLoadInventory(Inventory inventory, Dungeon dungeon) {
-    	for (int y = 0; y < dungeon.getHeight(); y++) {
-    		ImageView view = new ImageView(emptyImage);
-    		addEntity(new Void(new Tile(dungeon, dungeon.getWidth(), y)), view);
-    	}
-    }
-
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);
