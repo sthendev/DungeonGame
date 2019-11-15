@@ -42,8 +42,6 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
-        onLoadInventory(dungeon.getPlayer().getInventory(), dungeon);
-        
         return dungeon;
     }
 
@@ -204,8 +202,6 @@ public abstract class DungeonLoader {
     
     public abstract void onLoad(GhostPotion potion);
     
-    protected abstract void onLoadInventory(Inventory inventory, Dungeon dungeon);
-
     // TODO Create additional abstract methods for the other entities
 
 }
