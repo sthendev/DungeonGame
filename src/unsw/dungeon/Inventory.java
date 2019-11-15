@@ -13,6 +13,10 @@ public class Inventory implements Subject {
         this.observers = new ArrayList<>();
 	}
 	
+	public List<Entity> getItems() {
+		return items;
+	}
+	
 	public int getTreasureCount() {
 		int count = 0;
 		for (Entity item : items) {
