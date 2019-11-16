@@ -29,4 +29,9 @@ public class DummyGoal implements Goal {
 		
 	}
 	
+	@Override
+	public String message() {
+		return "Dummy";
+	}
+	
 }
