@@ -31,6 +31,8 @@ public class Inventory implements Subject {
 		} else {
 			items.add(item);
 		}
+    	SoundPlayer sd = new SoundPlayer();
+    	sd.playSound(sd.getSoundForItem(item));
 		notifyObservers();
 	}
 	
