@@ -44,6 +44,9 @@ public class Player extends Movable {
 			Enemy enemy = (Enemy) mover;
 			if (isInvincible()) {
 				enemy.dies();
+			} else if (hasSword()) {
+				useTool();
+				enemy.dies();
 			} else {
 				dies();
 			}
