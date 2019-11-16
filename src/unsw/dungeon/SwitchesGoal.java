@@ -41,8 +41,13 @@ public class SwitchesGoal implements Goal, Observer {
 	}
 	
 	@Override
-	public String toString() {
-		return "trigger all the floor switches";
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Trigger all of the floor switches";
+		
+		return message;
 	}
 
 }
