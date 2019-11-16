@@ -11,17 +11,11 @@ public class OrGoal extends CompositeGoal {
 	}
 	
 	@Override
-	public String toString() {
-		String message = "(";
+	public String message() {
+		String message = "";
 		
-		for (int i = 0; i < getGoals().size(); i++) {
-			message += getGoals().get(i).toString();
-			if (i < getGoals().size() - 1) {
-				message += " OR ";
-			}
-		}
-		
-		message += ")";
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Do one of the following:";
 		
 		return message;
 	}
