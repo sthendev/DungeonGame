@@ -65,6 +65,8 @@ public class Door extends Entity {
 			} else if (isRight(p.keyHeld())) {
 				opened = true;
 				p.useKey();
+		    	SoundPlayer sd = new SoundPlayer();
+		    	sd.playSound("door.wav");
 				notifyObservers();
 			} else if (p.hasHammer()) {
 				p.useTool();

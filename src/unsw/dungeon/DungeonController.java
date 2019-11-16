@@ -33,7 +33,7 @@ import javafx.scene.Node;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController implements Observer {
+public class DungeonController {
 
     @FXML
     private GridPane squares;
@@ -73,14 +73,7 @@ public class DungeonController implements Observer {
         for (int y = 0; y < dungeon.getHeight(); y++) {
         	inventory.add(new ImageView(new Image("/empty.png")), 0, y);
         }
-        dungeon.getPlayer().getInventory().addObserver(this);
         
-        for (Entity e : dungeon.getAllEntities()) {
-        	if (e instanceof Door) {
-        		Door d = (Door) e;
-        		d.addObserver(this);
-        	}
-        }
     }
 
     @FXML
@@ -105,47 +98,36 @@ public class DungeonController implements Observer {
         default:
             break;
         }
-        
+        updateInventory();
     }
     
-    @Override
-    public void update(Subject obj) {
-    	SoundPlayer sd = new SoundPlayer();
-    	if (obj instanceof Inventory) {
-    		Inventory playerInv = (Inventory) obj;
-    		if (playerInv.isJustPicked() == true) {
-    			sd.playSound("add-to-inv.wav");
-        	}
-    		inventory.getChildren().clear();
-        	
-        	int inventImageCount = 0;
-        	int treasureCount = 0;
-        	
-        	for (Entity item : playerInv.getItems()) {
-        		if (item instanceof Treasure)  {
-        			treasureCount++; 
-        			continue;
-        		}
-        		addInventoryItem(item);
-        		inventImageCount++;
-        	}
-        	
-        	if (treasureCount > 0) {
-        		addInventoryImage(new ImageView(new Image("gold_pile.png")), new Text(Integer.toString(treasureCount)));
-        		inventImageCount++;
-        	}
-        	
-        	while (inventImageCount < dungeon.getHeight()) {
-        		addInventoryImage(null, null);
-        		inventImageCount++;
-        	}
-        	
-    	} else if (obj instanceof Door) {
-    		Door d = (Door) obj;
-    		if (d.isOpened() == true) {
-        		sd.playSound("door.wav");
+    public void updateInventory() {
+
+		Inventory playerInv = dungeon.getPlayer().getInventory();
+		inventory.getChildren().clear();
+    	
+    	int inventImageCount = 0;
+    	int treasureCount = 0;
+    	
+    	for (Entity item : playerInv.getItems()) {
+    		if (item instanceof Treasure)  {
+    			treasureCount++; 
+    			continue;
     		}
+    		addInventoryItem(item);
+    		inventImageCount++;
     	}
+    	
+    	if (treasureCount > 0) {
+    		addInventoryImage(new ImageView(new Image("gold_pile.png")), new Text(Integer.toString(treasureCount)));
+    		inventImageCount++;
+    	}
+    	
+    	while (inventImageCount < dungeon.getHeight()) {
+    		addInventoryImage(null, null);
+    		inventImageCount++;
+    	}
+    	
     	
     }
     

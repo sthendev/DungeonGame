@@ -6,27 +6,17 @@ import unsw.dungeon.Observer;
 public class Inventory implements Subject {
 	
 	private List<Entity> items;
-	private boolean justPicked;
     private List<Observer> observers;
 
 	public Inventory() {
 		this.items = new ArrayList<>();
         this.observers = new ArrayList<>();
-        this.justPicked = false;
 	}
 	
 	public List<Entity> getItems() {
 		return items;
 	}
 	
-	public boolean isJustPicked() {
-		return justPicked;
-	}
-
-	public void setJustPicked(boolean justPicked) {
-		this.justPicked = justPicked;
-	}
-
 	public int getTreasureCount() {
 		int count = 0;
 		for (Entity item : items) {
@@ -41,13 +31,13 @@ public class Inventory implements Subject {
 		} else {
 			items.add(item);
 		}
-		setJustPicked(true);
+    	SoundPlayer sd = new SoundPlayer();
+    	sd.playSound("add-to-inv.wav");
 		notifyObservers();
 	}
 	
 	public void removeItem(Entity item) {
 		items.remove(item);
-		setJustPicked(false);
 		notifyObservers();
 	}
 
@@ -77,7 +67,6 @@ public class Inventory implements Subject {
 				break;
 			}
 		}
-		setJustPicked(false);
 		notifyObservers();
 	}
 	
@@ -138,7 +127,6 @@ public class Inventory implements Subject {
 				}
 			}
 		}
-		setJustPicked(false);
 		notifyObservers();
 	}
 	
