@@ -95,15 +95,19 @@ public class Player extends Movable {
 	}
 	
 	public boolean hasSword() {
-		if (toolHeld() instanceof Sword) {
-			return true;
+		for (Entity e : inventory.getItems()) {
+			if (e instanceof Sword) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public boolean hasHammer() {
-		if (toolHeld() instanceof Hammer) {
-			return true;
+		for (Entity e : inventory.getItems()) {
+			if (e instanceof Hammer) {
+				return true;
+			}
 		}
 		return false;
 	}

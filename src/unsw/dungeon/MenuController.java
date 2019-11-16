@@ -89,6 +89,11 @@ public class MenuController {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    @FXML
+    void onTutClick(MouseEvent event) {
+    	
+    }
 
 }
 

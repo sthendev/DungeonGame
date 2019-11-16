@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -106,7 +107,9 @@ public class DungeonController implements Observer{
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(ground), x, y);
+            	ImageView groundImage = new ImageView(ground);
+            	groundImage.setViewOrder(1);
+                squares.add(groundImage, x, y);
             }
         }
 
@@ -230,6 +233,8 @@ public class DungeonController implements Observer{
 	    		inventImageCount++;
 	    	}
     	}
+    	
+    	
     }
     
     public void addInventoryItem(Entity item) {
@@ -285,8 +290,15 @@ public class DungeonController implements Observer{
     public void openPauseMenu(boolean gameOver) {
     	this.isPaused = true;
     	if (gameOver) {
-    		goalInfo.setText(dungeon.getGoal().satisfied() ? "Congratulations! You win!" : "Bad luck :( Try Again?");
+    		boolean goalSatisfied = dungeon.getGoal().satisfied();
+    		goalInfo.setText( goalSatisfied ? "Congratulations! You win!" : "Bad luck :( Try Again?");
     		pauseMenu.getChildren().remove(returnButton);
+    		SoundPlayer sd = new SoundPlayer();
+        	if (goalSatisfied) {
+        		sd.playSound("success.wav");
+        	} else {
+        		sd.playSound("fail.wav");
+        	}
     	}
     	pauseMenu.setVisible(true); 	
     }

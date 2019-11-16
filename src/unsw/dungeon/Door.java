@@ -22,6 +22,8 @@ public class Door extends Entity {
 	public void destroy() {
 		getCurrentTile().removeEntity(this);
 		dungeon.removeDoor(this);
+		SoundPlayer sd = new SoundPlayer();
+		sd.playSound("break_wall.wav");
 	}
 	
 	public boolean playerHasKey() {
@@ -65,6 +67,8 @@ public class Door extends Entity {
 			} else if (isRight(p.keyHeld())) {
 				opened = true;
 				p.useKey();
+		    	SoundPlayer sd = new SoundPlayer();
+		    	sd.playSound("creak.wav");
 				notifyObservers();
 			} else if (p.hasHammer()) {
 				p.useTool();
