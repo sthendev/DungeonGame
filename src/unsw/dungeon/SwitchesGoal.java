@@ -39,5 +39,15 @@ public class SwitchesGoal implements Goal, Observer {
 			this.untriggeredSwitches++;
 		}
 	}
+	
+	@Override
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Trigger all of the floor switches";
+		
+		return message;
+	}
 
 }

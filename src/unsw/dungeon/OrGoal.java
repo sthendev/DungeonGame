@@ -9,5 +9,15 @@ public class OrGoal extends CompositeGoal {
 		}
 		return false;
 	}
+	
+	@Override
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Do one of the following:";
+		
+		return message;
+	}
 
 }

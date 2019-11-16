@@ -51,6 +51,7 @@ public class Player extends Movable {
 	}
 
 	public void dies() {
+		setCurrentTile(null);
     	getDungeon().endGame(false);
 	}
 	
