@@ -52,7 +52,6 @@ public class MenuController {
     	File [] dungeonFiles = dungeonFolder.listFiles();
     	for (File file : dungeonFiles) {
     		if (file.getName().contains(".json")) levelSelect.getItems().add(trimExtension(file.getName()));
-    		System.out.println(file.getName());
     	}
     	startButton.setDisable(true);
     	levelSelect.getSelectionModel()
