@@ -107,7 +107,9 @@ public class DungeonController {
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(ground), x, y);
+            	ImageView groundImage = new ImageView(ground);
+            	groundImage.setViewOrder(1);
+                squares.add(groundImage, x, y);
             }
         }
 

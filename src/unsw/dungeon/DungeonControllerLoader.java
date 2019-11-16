@@ -69,90 +69,105 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Entity player) {
         ImageView view = new ImageView(playerImage);
+        view.setViewOrder(0);
         addEntity(player, view);
     }
 
     @Override
     public void onLoad(Wall wall) {
         ImageView view = new ImageView(wallImage);
+        view.setViewOrder(0);
         addEntity(wall, view);
     }
     
     @Override
     public void onLoad(Enemy enemy) {
     	ImageView view = new ImageView(enemyImage);
+    	view.setViewOrder(0);
     	addEntity(enemy, view);
     }
     
     @Override
     public void onLoad(Exit exit) {
     	ImageView view = new ImageView(exitImage);
+    	view.setViewOrder(1);
     	addEntity(exit, view);
     }
     
     @Override
     public void onLoad(Sword sword) {
     	ImageView view = new ImageView(swordImage);
+    	view.setViewOrder(0.5);
     	addEntity(sword, view);
     }
     
     @Override
     public void onLoad(InvincibilityPotion potion) {
     	ImageView view = new ImageView(invincibilityPotionImage);
+    	view.setViewOrder(0.5);
     	addEntity(potion, view);
     }
     
     @Override
     public void onLoad(Boulder boulder) {
     	ImageView view = new ImageView(boulderImage);
+    	view.setViewOrder(0);
     	addEntity(boulder, view);
     }
     
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
     	ImageView view = new ImageView(floorSwitchImage);
+    	view.setViewOrder(1);
     	addEntity(floorSwitch, view);
     }
     
     @Override
     public void onLoad(Treasure treasure) {
     	ImageView view = new ImageView(treasureImage);
+    	view.setViewOrder(0.5);
     	addEntity(treasure, view);
     }
     
     @Override
     public void onLoad(Key key) {
     	ImageView view = new ImageView(keyImage);
+    	view.setViewOrder(0.5);
     	addEntity(key, view);
     }
     
     @Override
     public void onLoad(Door door) {
     	ImageView view =  new ImageView(closedDoorImage);
+    	view.setViewOrder(1);
     	addEntity(door, view);
     }
     
     @Override
     public void onLoad(Portal portal) {
     	ImageView view = new ImageView(portalImage);
+    	view.setViewOrder(1);
     	addEntity(portal, view);
     }
     
     @Override
     public void onLoad(FreezePotion potion) {
     	ImageView view = new ImageView(freezingPotionImage);
+    	view.setViewOrder(0.5);
     	addEntity(potion, view);
     }
     
     @Override
     public void onLoad(GhostPotion potion) {
     	ImageView view = new ImageView(ghostPotionImage);
+    	view.setViewOrder(0.5);
     	addEntity(potion, view);
     }
     
     @Override
     public void onLoad(Hammer hammer) {
     	ImageView view = new ImageView(hammerImage);
+    	view.setViewOrder(0.5);
     	addEntity(hammer, view);
     }
     
