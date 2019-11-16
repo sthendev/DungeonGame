@@ -157,7 +157,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
     
     @Override
-    public void onLoadInventory(Inventory inventory, Dungeon dungeon) {
+    public void onLoadInventory(Dungeon dungeon) {
     	for (int y = 0; y < dungeon.getHeight(); y++) {
     		ImageView view = new ImageView(emptyImage);
     		addEntity(new Void(new Tile(dungeon, dungeon.getWidth(), y)), view);
