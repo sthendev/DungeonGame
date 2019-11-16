@@ -9,5 +9,15 @@ public class AndGoal extends CompositeGoal {
 		}
 		return true;
 	}
+	
+	@Override
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Do all of the following:";
+		
+		return message;
+	}
 
 }

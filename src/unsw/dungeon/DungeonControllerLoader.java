@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  * A DungeonLoader that also creates the necessary ImageViews for the UI,
@@ -40,12 +41,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image freezingPotionImage;
     private Image ghostPotionImage;
     
-    private DungeonController controller;
-    
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
-        controller = null;
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         armedPlayerImage = new Image("/human_new_sword.png");
@@ -192,9 +190,9 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @return
      * @throws FileNotFoundException
      */
-    public DungeonController loadController() throws FileNotFoundException {
-    	this.controller = new DungeonController(load(), entities); 
-        return this.controller;
+    
+    public DungeonController loadController(Stage primaryStage) throws FileNotFoundException {
+        return new DungeonController(primaryStage, getJSONFile(), load(), entities);
     }
 
 

@@ -37,5 +37,15 @@ public class ExitGoal implements Goal, Observer {
 			entity.addObserver(this);
 		}
 	}
+	
+	@Override
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Get to the exit";
+		
+		return message;
+	}
 
 }

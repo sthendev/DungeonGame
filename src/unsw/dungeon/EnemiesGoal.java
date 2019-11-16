@@ -38,4 +38,14 @@ public class EnemiesGoal implements Goal, Observer {
 		}
 	}
 	
+	@Override
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Kill all the enemies";
+		
+		return message;
+	}
+	
 }

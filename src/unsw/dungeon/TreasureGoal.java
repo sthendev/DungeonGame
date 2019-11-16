@@ -38,4 +38,14 @@ public class TreasureGoal implements Goal, Observer {
 		}
 	}
 	
+	@Override
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Collect all the treasure";
+		
+		return message;
+	}
+	
 }
