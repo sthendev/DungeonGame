@@ -39,8 +39,13 @@ public class ExitGoal implements Goal, Observer {
 	}
 	
 	@Override
-	public String toString() {
-		return "reach the exit";
+	public String message() {
+		String message = "";
+		
+		message += satisfied() ? "\u2611 " : "\u2610 ";
+		message += "Get to the exit";
+		
+		return message;
 	}
 
 }
