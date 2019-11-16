@@ -2,6 +2,64 @@
   "width": 20,
   "height": 18,
   "entities": [
+
+    {
+      "x": 10,
+      "y": 1,
+      "type": "ghost"
+    },
+    {
+      "x": 12,
+      "y": 9,
+      "type": "ghost"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "type": "enemy"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "type": "enemy"
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "type": "enemy"
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "type": "enemy"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "type": "ghost"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "type": "key",
+      "id": 0
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "type": "door",
+      "id": 0
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "type": "hammer"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "type": "hammer"
+    },
     {
       "x": 0,
       "y": 0,
@@ -230,7 +288,7 @@
     {
       "x": 15,
       "y": 3,
-      "type": "wall"
+      "type": "ghost"
     },
     {
       "x": 16,
