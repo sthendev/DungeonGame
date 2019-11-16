@@ -100,8 +100,6 @@ public class DungeonController {
         this.goalsNode = parseGoalToNode(dungeon.getGoal());
         goals.getChildren().add(goalsNode);
         
-        System.out.println(goals.getChildren());
-        
         squares.setLayoutX(300);
         Image ground = new Image("/dirt_0_new.png");
 
