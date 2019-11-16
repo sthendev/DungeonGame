@@ -15,6 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -25,8 +29,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -46,6 +50,9 @@ public class DungeonController {
     
     @FXML
     private GridPane inventory;
+    
+    @FXML
+    private VBox goals;
     
     private String jsonFile;
     
@@ -67,6 +74,8 @@ public class DungeonController {
     
     private Button returnButton;
     
+    private Node goalsNode;
+    
     private boolean isPaused;
 
     public DungeonController(Stage primaryStage, String jsonFile, Dungeon dungeon, List<ImageView> initialEntities) {
@@ -80,6 +89,18 @@ public class DungeonController {
     @FXML
     public void initialize() {
     	dungeon.setController(this);
+    	
+    	goals.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+        goals.setMinHeight(32 * dungeon.getHeight());
+        goals.setPadding(new Insets(10, 10, 10, 10));
+        Text goalHeader = new Text("Goals:");
+        goalHeader.setFont(Font.font("verdana", FontWeight.BOLD, 20));
+        goals.getChildren().add(goalHeader);
+        goalHeader.toFront();
+        this.goalsNode = parseGoalToNode(dungeon.getGoal());
+        goals.getChildren().add(goalsNode);
+        
+        squares.setLayoutX(300);
         Image ground = new Image("/dirt_0_new.png");
 
         // Add the ground first so it is below all other entities
@@ -93,7 +114,7 @@ public class DungeonController {
         	squares.getChildren().add(entity);
         }
         
-        inventory.setLayoutX(32 * dungeon.getWidth());
+        inventory.setLayoutX(300 + 32 * dungeon.getWidth());
         
         for (int y = 0; y < dungeon.getHeight(); y++) {
         	inventory.add(new ImageView(new Image("/empty.png")), 0, y);
@@ -130,6 +151,25 @@ public class DungeonController {
             break;
         }
         updateInventory();
+        updateGoals();
+    }
+    
+    public Node parseGoalToNode(Goal goal) {
+    	Text goalMessage = new Text(goal.message());
+    	goalMessage.setFont(Font.font("verdana", 14));
+    	if (goal instanceof CompositeGoal) {
+    		CompositeGoal composite = (CompositeGoal) goal;
+    		VBox vbox = new VBox();
+    		vbox.getChildren().add(goalMessage);
+    		VBox subgoals = new VBox();
+    		subgoals.setPadding(new Insets(0,0,0,10));
+    		for (Goal g : composite.getGoals()) {
+    			subgoals.getChildren().add(parseGoalToNode(g));
+    		}
+    		vbox.getChildren().add(subgoals);
+    		return vbox;
+    	}
+    	return goalMessage;
     }
     
     public void initialisePauseMenu() {
@@ -138,10 +178,12 @@ public class DungeonController {
     	pauseMenu.setPadding(new Insets(20, 20, 20, 20));
     	pauseMenu.setMaxWidth(400);
     	pauseMenu.setMaxHeight(200);
-    	pauseMenu.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+    	pauseMenu.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+    	pauseMenu.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
     	
-    	this.goalInfo = new Text("Goal: " + dungeon.getGoal().toString());
-    	goalInfo.setTextAlignment(TextAlignment.CENTER);
+    	
+    	this.goalInfo = new Text("Paused");
+    	goalInfo.setFont(Font.font("verdana", FontWeight.BOLD, 16));
     	
     	this.restartButton = new Button("Restart Level");
     	restartButton.setMaxWidth(Double.MAX_VALUE);
@@ -280,6 +322,12 @@ public class DungeonController {
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
+    }
+    
+    public void updateGoals() {
+    	goals.getChildren().remove(goalsNode);
+    	this.goalsNode = parseGoalToNode(dungeon.getGoal());
+    	goals.getChildren().add(goalsNode);
     }
 }
 
