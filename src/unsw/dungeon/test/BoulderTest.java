@@ -20,7 +20,7 @@ public class BoulderTest {
 		d.addEntity(w);
 		Wall w1 = new Wall(d.getTile(12, 10));
 		d.addEntity(w1);
-		Door door = new Door(1, d.getTile(11, 11));
+		Door door = new Door(1, d.getTile(11, 11), d);
 		d.addEntity(door);
     	Boulder b = new Boulder(d, d.getTile(11, 9));
     	d.addEntity(b);

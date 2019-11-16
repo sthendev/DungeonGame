@@ -108,6 +108,11 @@
       "type": "sword"
     },
     {
+      "x": 8,
+      "y": 1,
+      "type": "hammer"
+    },
+    {
       "x": 17,
       "y": 1,
       "type": "wall"
