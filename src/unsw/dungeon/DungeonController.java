@@ -3,17 +3,8 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 import java.util.List;
-import javax.sound.sampled.AudioInputStream; 
-import javax.sound.sampled.AudioSystem; 
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.fxml.FXML;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
-import java.io.IOException;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -26,7 +17,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.Node;
 
 /**
  * A JavaFX controller for the dungeon.
