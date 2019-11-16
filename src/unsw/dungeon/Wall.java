@@ -14,11 +14,12 @@ public class Wall extends Entity {
     public boolean isBlocking(Movable mover) {
     	if (mover instanceof Player) {
     		Player player = (Player) mover;
+    		Tile oppositeTile = getCurrentTile().getOppositeTile(player.getCurrentTile());
+			if (oppositeTile == null) return true;
     		if (player.isGhost()) {
-    			Tile oppositeTile = getCurrentTile().getOppositeTile(player.getCurrentTile());
     			if (oppositeTile.hasWall() || oppositeTile.hasClosedDoor()) return true;
     			else if (player.canMove(oppositeTile)) return false;
-    		} else if (player.hasHammer()) {
+    		} else if (player.hasHammer()) {	
     			return false;
     		}
     	}

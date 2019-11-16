@@ -21,6 +21,7 @@ public class Dungeon implements Observer {
 	private Tile[][] board;
     private Player player;
     private List<Enemy> enemies;
+    private List<Door> doors;
     private Goal goal;
     private MovementStrategy offensiveStrategy;
     private MovementStrategy defensiveStrategy;
@@ -33,6 +34,7 @@ public class Dungeon implements Observer {
         this.enemies = new ArrayList<Enemy>();
         this.player = null;
         this.enemies = new ArrayList<>();
+        this.doors = new ArrayList<>();
         this.offensiveStrategy = new OffensiveEnemy();
         this.defensiveStrategy = new DefensiveEnemy();
         this.idleStrategy = new IdleEnemy();
@@ -96,6 +98,14 @@ public class Dungeon implements Observer {
     public void removeEnemy(Enemy e) {
     	getEnemies().remove(e);
 	}
+    
+    public void addDoor(Door d) {
+    	getDoors().add(d);
+    }
+    
+    public void removeDoor(Door d) {
+    	getDoors().remove(d);
+    }
 	
     public void setEnemyStrategy(MovementStrategy strategy) {
     	for (Enemy enemy : getEnemies()) {
@@ -141,6 +151,20 @@ public class Dungeon implements Observer {
     	return tile.distToTile(getPlayer().getCurrentTile());
     }
     
+    public void highlightDoor(Key key) {
+    	for (Door door : getDoors()) {
+    		if (key == null) {
+    			door.setKeyHeld(false);
+    			continue;
+    		}
+    		if (door.isRight(key)) {
+    			door.setKeyHeld(true);
+    		} else {
+    			door.setKeyHeld(false);
+    		}
+    	}
+    }
+    
     public void playTurn() {
     	if (!getGoal().satisfied()) {
 	    	List<Enemy> enemiesCopy = new ArrayList<>(getEnemies());
@@ -169,10 +193,11 @@ public class Dungeon implements Observer {
     
     //To-do
     public void endGame(boolean end) {
+		SoundPlayer sd = new SoundPlayer();
     	if (end == true) {
-    		System.out.println("complete");
+    		sd.playSound("success.wav");
     	} else {
-    		System.out.println("fail");
+    		sd.playSound("fail.wav");
     	}
     	this.gameOver = true;
     }
@@ -195,6 +220,10 @@ public class Dungeon implements Observer {
 
 	public List<Enemy> getEnemies() {
 		return enemies;
+	}
+	
+	public List<Door> getDoors() {
+		return doors;
 	}
 
 	public Player getPlayer() {

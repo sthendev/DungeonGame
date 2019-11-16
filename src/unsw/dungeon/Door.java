@@ -4,11 +4,15 @@ public class Door extends Entity {
 	
 	private int id;
 	private boolean opened;
+	private boolean keyHeld;
+	private Dungeon dungeon;
 	
-	public Door(int id, Tile position) {
+	public Door(int id, Tile position, Dungeon dungeon) {
 		super(position);
 		this.id = id;
 		this.opened = false;
+		this.keyHeld = false;
+		this.dungeon = dungeon;
 	}
 	
 	public boolean isOpened() {
@@ -17,6 +21,16 @@ public class Door extends Entity {
 	
 	public void destroy() {
 		getCurrentTile().removeEntity(this);
+		dungeon.removeDoor(this);
+	}
+	
+	public boolean playerHasKey() {
+		return keyHeld;
+	}
+	
+	public void setKeyHeld(boolean keyHeld) {
+		this.keyHeld = keyHeld;
+		notifyObservers();
 	}
 	
 	@Override
@@ -63,6 +77,5 @@ public class Door extends Entity {
 	public boolean isTransparent() {
 		return isOpened();
 	}
-
 	
 }

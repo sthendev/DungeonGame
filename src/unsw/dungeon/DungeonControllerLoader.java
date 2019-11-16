@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +39,13 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image frozenEnemyImage;
     private Image freezingPotionImage;
     private Image ghostPotionImage;
-    private Image emptyImage;
+    
+    private DungeonController controller;
     
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
+        controller = null;
         entities = new ArrayList<>();
         playerImage = new Image("/human_new.png");
         armedPlayerImage = new Image("/human_new_sword.png");
@@ -63,7 +66,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         frozenEnemyImage = new Image("/gnome_frozen.png");
         freezingPotionImage = new Image("/freeze_potion.png");
         ghostPotionImage = new Image("/ghost_potion.png");
-        emptyImage = new Image("/empty.png");
     }
 
     @Override
@@ -156,14 +158,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     	addEntity(hammer, view);
     }
     
-    @Override
-    public void onLoadInventory(Dungeon dungeon) {
-    	for (int y = 0; y < dungeon.getHeight(); y++) {
-    		ImageView view = new ImageView(emptyImage);
-    		addEntity(new Void(new Tile(dungeon, dungeon.getWidth(), y)), view);
-    	}
-    }
-
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);
@@ -199,7 +193,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+    	this.controller = new DungeonController(load(), entities); 
+        return this.controller;
     }
 
 

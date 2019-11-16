@@ -42,7 +42,11 @@ public class Player extends Movable {
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Enemy) {
 			Enemy enemy = (Enemy) mover;
-			enemy.notifyComing(this);
+			if (isInvincible() || toolHeld() != null) {
+				enemy.dies();
+			} else {
+				dies();
+			}
 		}
 	}
 
@@ -56,6 +60,9 @@ public class Player extends Movable {
 	
 	public void pickItem(Entity item) {
 		inventory.addItem(item);
+		if (item instanceof Key) {
+			getDungeon().highlightDoor((Key) item);
+		}
 	}
 	
 	public void dropItem(Entity item, Tile tile) {
@@ -84,15 +91,19 @@ public class Player extends Movable {
 	}
 	
 	public boolean hasSword() {
-		if (toolHeld() instanceof Sword) {
-			return true;
+		for (Entity e : inventory.getItems()) {
+			if (e instanceof Sword) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public boolean hasHammer() {
-		if (toolHeld() instanceof Hammer) {
-			return true;
+		for (Entity e : inventory.getItems()) {
+			if (e instanceof Hammer) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -112,5 +123,6 @@ public class Player extends Movable {
 	
 	public void useKey() {
 		inventory.removeItem(keyHeld());
+		getDungeon().highlightDoor(null);
 	}
 }

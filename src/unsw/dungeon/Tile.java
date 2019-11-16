@@ -65,13 +65,13 @@ public class Tile {
 	}
 	
 	public Direction getDirectionOfTile(Tile tile) {
-		if (getAdjacentTile(0, 1).equals(tile)) {
+		if (getAdjacentTile(0, 1) != null && getAdjacentTile(0, 1).equals(tile)) {
 			return Direction.UP;
-		} else if (getAdjacentTile(0, -1).equals(tile)) {
+		} else if (getAdjacentTile(0, -1) != null && getAdjacentTile(0, -1).equals(tile)) {
 			return Direction.DOWN;
-		} else if (getAdjacentTile(-1, 0).equals(tile)) {
+		} else if (getAdjacentTile(-1, 0) != null && getAdjacentTile(-1, 0).equals(tile)) {
 			return Direction.LEFT;
-		} else if (getAdjacentTile(1, 0).equals(tile)) {
+		} else if (getAdjacentTile(1, 0) != null && getAdjacentTile(1, 0).equals(tile)) {
 			return Direction.RIGHT;
 		} else {
 			return null;
