@@ -45,7 +45,7 @@ public class Enemy extends Movable {
     	getDungeon().removeEnemy(this);
     	ceaseExistence();
     	SoundPlayer sd = new SoundPlayer();
-    	sd.playSound("enemy-death.wav");
+    	sd.playSound("hurt.wav");
     }
     
     @Override

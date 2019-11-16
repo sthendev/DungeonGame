@@ -17,6 +17,8 @@ public class FloorSwitch extends Entity {
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Boulder) {
 			this.triggered = true;
+			SoundPlayer sd = new SoundPlayer();
+			sd.playSound("switch.wav");
 			notifyObservers();
 		}
 	}
@@ -25,6 +27,8 @@ public class FloorSwitch extends Entity {
 	public void notifyLeaving(Movable mover) {
 		if (mover instanceof Boulder) {
 			this.triggered = false;
+			SoundPlayer sd = new SoundPlayer();
+			sd.playSound("switch2.wav");
 			notifyObservers();
 		}
 	}
