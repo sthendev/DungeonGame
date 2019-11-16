@@ -37,7 +37,7 @@ import javafx.scene.Node;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController implements Observer{
 	
 	@FXML
 	private StackPane stackPane;
@@ -119,7 +119,7 @@ public class DungeonController {
         for (int y = 0; y < dungeon.getHeight(); y++) {
         	inventory.add(new ImageView(new Image("/empty.png")), 0, y);
         }
-        
+        dungeon.getPlayer().getInventory().addObserver(this);
         initialisePauseMenu();
     }
 
@@ -150,7 +150,6 @@ public class DungeonController {
         default:
             break;
         }
-        updateInventory();
         updateGoals();
     }
     
@@ -203,29 +202,33 @@ public class DungeonController {
     	pauseMenu.setVisible(false);
     }
     
-    public void updateInventory() {
-    	inventory.getChildren().clear();
-    	
-    	int inventImageCount = 0;
-    	int treasureCount = 0;
-    	
-    	for (Entity item : player.getInventory().getItems()) {
-    		if (item instanceof Treasure)  {
-    			treasureCount++; 
-    			continue;
-    		}
-    		addInventoryItem(item);
-    		inventImageCount++;
-    	}
-    	
-    	if (treasureCount > 0) {
-    		addInventoryImage(new ImageView(new Image("gold_pile.png")), new Text(Integer.toString(treasureCount)));
-    		inventImageCount++;
-    	}
-    	
-    	while (inventImageCount < dungeon.getHeight()) {
-    		addInventoryImage(null, null);
-    		inventImageCount++;
+    @Override
+    public void update(Subject obj) {
+    	if (obj instanceof Inventory) {
+    		
+	    	inventory.getChildren().clear();
+	    	
+	    	int inventImageCount = 0;
+	    	int treasureCount = 0;
+	    	
+	    	for (Entity item : player.getInventory().getItems()) {
+	    		if (item instanceof Treasure)  {
+	    			treasureCount++; 
+	    			continue;
+	    		}
+	    		addInventoryItem(item);
+	    		inventImageCount++;
+	    	}
+	    	
+	    	if (treasureCount > 0) {
+	    		addInventoryImage(new ImageView(new Image("gold_pile.png")), new Text(Integer.toString(treasureCount)));
+	    		inventImageCount++;
+	    	}
+	    	
+	    	while (inventImageCount < dungeon.getHeight()) {
+	    		addInventoryImage(null, null);
+	    		inventImageCount++;
+	    	}
     	}
     }
     
