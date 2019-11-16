@@ -42,11 +42,15 @@ public class Player extends Movable {
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Enemy) {
 			Enemy enemy = (Enemy) mover;
-			if (isInvincible() || hasSword()) {
+			if (isInvincible()) {
+				enemy.dies();
+			} else if (hasSword()) {
+				useTool();
 				enemy.dies();
 			} else {
 				dies();
 			}
+
 		}
 	}
 
