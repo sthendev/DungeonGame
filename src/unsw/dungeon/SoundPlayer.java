@@ -60,4 +60,22 @@ public class SoundPlayer {
         clip.start();
     }
 	
+	public String getSoundForItem(Entity item) {
+		if (item instanceof Sword) {
+			return "draw_sword.wav";
+		} else if (item instanceof Treasure) {
+			return "coins.wav";
+		} else if (item instanceof Key) {
+			return "keys.wav";
+		} else if (item instanceof FreezePotion) {
+			return "wind.wav";
+		} else if (item instanceof GhostPotion) {
+			return "ghost.wav";
+		} else if (item instanceof InvincibilityPotion) {
+			return "invincible.wav";
+		} else {
+			return "hammer.wav";
+		}
+	}
+	
 }

@@ -8,6 +8,8 @@ public class Wall extends Entity {
     
     public void destroy() {
     	getCurrentTile().removeEntity(this);
+    	SoundPlayer sd = new SoundPlayer();
+    	sd.playSound("break_wall.wav");
     }
     
     @Override
