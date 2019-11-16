@@ -37,5 +37,10 @@ public class ExitGoal implements Goal, Observer {
 			entity.addObserver(this);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "reach the exit";
+	}
 
 }

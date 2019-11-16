@@ -39,5 +39,10 @@ public class SwitchesGoal implements Goal, Observer {
 			this.untriggeredSwitches++;
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "trigger all the floor switches";
+	}
 
 }

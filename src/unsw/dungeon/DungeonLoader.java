@@ -19,9 +19,15 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private String jsonFile;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        this.jsonFile = filename;
+    }
+    
+    public String getJSONFile() {
+    	return jsonFile;
     }
 
     /**

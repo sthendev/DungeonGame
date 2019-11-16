@@ -38,4 +38,9 @@ public class EnemiesGoal implements Goal, Observer {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "kill all enemies";
+	}
+	
 }
