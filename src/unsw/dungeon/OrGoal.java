@@ -9,5 +9,21 @@ public class OrGoal extends CompositeGoal {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		String message = "(";
+		
+		for (int i = 0; i < getGoals().size(); i++) {
+			message += getGoals().get(i).toString();
+			if (i < getGoals().size() - 1) {
+				message += " OR ";
+			}
+		}
+		
+		message += ")";
+		
+		return message;
+	}
 
 }

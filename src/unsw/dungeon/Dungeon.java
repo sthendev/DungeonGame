@@ -27,6 +27,7 @@ public class Dungeon implements Observer {
     private MovementStrategy defensiveStrategy;
     private MovementStrategy idleStrategy;
     private boolean gameOver;
+    private DungeonController controller;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -49,6 +50,10 @@ public class Dungeon implements Observer {
     			board[row][col] = new Tile(this, col, row);
     		}
     	}
+    }
+    
+    public void setController(DungeonController controller) {
+    	this.controller = controller;
     }
     
     public Tile getTile(int x, int y) {
@@ -193,12 +198,8 @@ public class Dungeon implements Observer {
     
     //To-do
     public void endGame(boolean end) {
-    	if (end == true) {
-    		System.out.println("complete");
-    	} else {
-    		System.out.println("fail");
-    	}
     	this.gameOver = true;
+    	controller.handleKeyPress(null);
     }
 
 	public int getWidth() {

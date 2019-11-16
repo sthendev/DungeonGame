@@ -38,4 +38,9 @@ public class TreasureGoal implements Goal, Observer {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "collect all the treasure";
+	}
+	
 }
