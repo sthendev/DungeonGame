@@ -2,6 +2,64 @@
   "width": 20,
   "height": 18,
   "entities": [
+
+    {
+      "x": 10,
+      "y": 1,
+      "type": "ghost"
+    },
+    {
+      "x": 12,
+      "y": 9,
+      "type": "ghost"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "type": "enemy"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "type": "enemy"
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "type": "enemy"
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "type": "enemy"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "type": "ghost"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "type": "key",
+      "id": 0
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "type": "door",
+      "id": 0
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "type": "hammer"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "type": "hammer"
+    },
     {
       "x": 0,
       "y": 0,
@@ -108,6 +166,11 @@
       "type": "wall"
     },
     {
+      "x": 1,
+      "y": 1,
+      "type": "player"
+    },
+    {
       "x": 2,
       "y": 1,
       "type": "wall"
@@ -225,7 +288,7 @@
     {
       "x": 15,
       "y": 3,
-      "type": "wall"
+      "type": "ghost"
     },
     {
       "x": 16,
@@ -915,111 +978,6 @@
     {
       "x": 17,
       "y": 16,
-      "type": "wall"
-    },
-    {
-      "x": 19,
-      "y": 16,
-      "type": "wall"
-    },
-    {
-      "x": 0,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 1,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 2,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 3,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 4,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 5,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 6,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 7,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 8,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 9,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 10,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 11,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 12,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 13,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 14,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 15,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 16,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 17,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 18,
-      "y": 17,
-      "type": "wall"
-    },
-    {
-      "x": 19,
-      "y": 17,
       "type": "wall"
     },
     {
@@ -1028,71 +986,109 @@
       "type": "exit"
     },
     {
-      "x": 9,
+      "x": 19,
       "y": 16,
-      "type": "portal",
-      "id": 0
+      "type": "wall"
     },
     {
-      "x": 16,
-      "y": 8,
-      "type": "portal",
-      "id": 0
-    },
-    {
-      "x": 14,
-      "y": 4,
-      "type": "key",
-      "id": 0
-    },
-    
-    {
-      "x": 17,
-      "y": 4,
-      "type": "treasure",
-    },
-    {
-      "x": 18,
-      "y": 6,
-      "type": "freezing"
-    },
-    {
-      "x": 14,
-      "y": 8,
-      "type": "ghost"
-    },
-    {
-      "x": 18,
-      "y": 15,
-      "type": "enemy"
+      "x": 0,
+      "y": 17,
+      "type": "wall"
     },
     {
       "x": 1,
-      "y": 3,
-      "type": "hammer"
+      "y": 17,
+      "type": "wall"
     },
     {
-      "x": 1,
-      "y": 1,
-      "type": "player"
+      "x": 2,
+      "y": 17,
+      "type": "wall"
     },
     {
-      "x": 5,
-      "y": 3,
-      "type": "door",
-      "id": 0
+      "x": 3,
+      "y": 17,
+      "type": "wall"
     },
     {
       "x": 4,
-      "y": 5,
-      "type": "key",
-      "id": 1
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 5,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 6,
+      "y": 17,
+      "type": "wall"
     },
     {
       "x": 7,
-      "y": 5,
-      "type": "door",
-      "id": 1
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 8,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 9,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 10,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 11,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 12,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 13,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 14,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 15,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 16,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 17,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 18,
+      "y": 17,
+      "type": "wall"
+    },
+    {
+      "x": 19,
+      "y": 17,
+      "type": "wall"
     }
   ],
   "goal-condition": {

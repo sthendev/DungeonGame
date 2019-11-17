@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="unsw.dungeon.AndGoal" project="project" 
+    file="/project/src/unsw/dungeon/AndGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-42" y="174"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="unsw.dungeon.AStarSearcher" project="project" 
+    file="/project/src/unsw/dungeon/AStarSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1296" y="244"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="unsw.dungeon.Boulder" project="project" 
+    file="/project/src/unsw/dungeon/Boulder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="800" y="640"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="unsw.dungeon.CompositeGoal" project="project" 
+    file="/project/src/unsw/dungeon/CompositeGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="138" y="80"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="unsw.dungeon.DefensiveEnemy" project="project" 
+    file="/project/src/unsw/dungeon/DefensiveEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1124" y="100"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <enumeration id="6" language="java" name="unsw.dungeon.Direction" project="project" 
+    file="/project/src/unsw/dungeon/Direction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1294" y="628"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </enumeration>  
+  <class id="7" language="java" name="unsw.dungeon.Door" project="project" file="/project/src/unsw/dungeon/Door.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="26" width="57" x="652" y="340"/>    
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="unsw.dungeon.Entity" project="project" 
+    file="/project/src/unsw/dungeon/Entity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="398" y="360"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="unsw.dungeon.DoorUIUpdater" project="project" 
+    file="/project/src/unsw/dungeon/DoorUIUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4" y="740"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="unsw.dungeon.Dungeon" project="project" 
+    file="/project/src/unsw/dungeon/Dungeon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="696" y="164"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="unsw.dungeon.DungeonApplication" project="project" 
+    file="/project/src/unsw/dungeon/DungeonApplication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1316" y="692"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="unsw.dungeon.DungeonController" project="project" 
+    file="/project/src/unsw/dungeon/DungeonController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1002" y="482"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="unsw.dungeon.DungeonControllerLoader" project="project" 
+    file="/project/src/unsw/dungeon/DungeonControllerLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1358" y="402"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="unsw.dungeon.DungeonLoader" project="project" 
+    file="/project/src/unsw/dungeon/DungeonLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1366" y="330"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="unsw.dungeon.EnemiesGoal" project="project" 
+    file="/project/src/unsw/dungeon/EnemiesGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-78" y="256"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="unsw.dungeon.Enemy" project="project" file="/project/src/unsw/dungeon/Enemy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="974" y="308"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="unsw.dungeon.EnemyUIUpdater" project="project" 
+    file="/project/src/unsw/dungeon/EnemyUIUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-60" y="364"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="unsw.dungeon.Exit" project="project" file="/project/src/unsw/dungeon/Exit.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="288" y="550"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="unsw.dungeon.ExitGoal" project="project" 
+    file="/project/src/unsw/dungeon/ExitGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="442" y="194"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="unsw.dungeon.FloorSwitch" project="project" 
+    file="/project/src/unsw/dungeon/FloorSwitch.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="406" y="506"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="unsw.dungeon.FreezePotion" project="project" 
+    file="/project/src/unsw/dungeon/FreezePotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="678" y="622"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="unsw.dungeon.GhostPotion" project="project" 
+    file="/project/src/unsw/dungeon/GhostPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="694" y="530"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="unsw.dungeon.GhostSearcher" project="project" 
+    file="/project/src/unsw/dungeon/GhostSearcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1352" y="502"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="unsw.dungeon.Goal" project="project" 
+    file="/project/src/unsw/dungeon/Goal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="298" y="102"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="unsw.dungeon.Hammer" project="project" 
+    file="/project/src/unsw/dungeon/Hammer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="516" y="618"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="unsw.dungeon.HitBasedTool" project="project" 
+    file="/project/src/unsw/dungeon/HitBasedTool.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="498" y="534"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="unsw.dungeon.IdleEnemy" project="project" 
+    file="/project/src/unsw/dungeon/IdleEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1318" y="88"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="unsw.dungeon.Inventory" project="project" 
+    file="/project/src/unsw/dungeon/Inventory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="54" y="594"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="unsw.dungeon.InvincibilityPotion" project="project" 
+    file="/project/src/unsw/dungeon/InvincibilityPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="604" y="666"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="unsw.dungeon.TurnBasedPotion" project="project" 
+    file="/project/src/unsw/dungeon/TurnBasedPotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="562" y="460"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="unsw.dungeon.Key" project="project" file="/project/src/unsw/dungeon/Key.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="190" y="568"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="unsw.dungeon.MenuController" project="project" 
+    file="/project/src/unsw/dungeon/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1324" y="738"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="unsw.dungeon.Movable" project="project" 
+    file="/project/src/unsw/dungeon/Movable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="800" y="548"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="34" language="java" name="unsw.dungeon.MovementStrategy" project="project" 
+    file="/project/src/unsw/dungeon/MovementStrategy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1176" y="198"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="35" language="java" name="unsw.dungeon.Node" project="project" file="/project/src/unsw/dungeon/Node.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="527" y="103"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="unsw.dungeon.Observer" project="project" 
+    file="/project/src/unsw/dungeon/Observer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="24" width="91" x="159" y="270"/>    
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="37" language="java" name="unsw.dungeon.OffensiveEnemy" project="project" 
+    file="/project/src/unsw/dungeon/OffensiveEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1156" y="322"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="unsw.dungeon.OrGoal" project="project" 
+    file="/project/src/unsw/dungeon/OrGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-48" y="120"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="unsw.dungeon.Path" project="project" file="/project/src/unsw/dungeon/Path.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="594" y="306"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="unsw.dungeon.Player" project="project" 
+    file="/project/src/unsw/dungeon/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="24" width="121" x="975" y="796"/>    
+    <display autosize="false" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="unsw.dungeon.PlayerUIUpdater" project="project" 
+    file="/project/src/unsw/dungeon/PlayerUIUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-74" y="518"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="unsw.dungeon.Portal" project="project" 
+    file="/project/src/unsw/dungeon/Portal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="247" y="417"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="43" language="java" name="unsw.dungeon.Searcher" project="project" 
+    file="/project/src/unsw/dungeon/Searcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1170" y="468"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="44" language="java" name="unsw.dungeon.SoundPlayer" project="project" 
+    file="/project/src/unsw/dungeon/SoundPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1300" y="572"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="45" language="java" name="unsw.dungeon.Subject" project="project" 
+    file="/project/src/unsw/dungeon/Subject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="220" y="364"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="46" language="java" name="unsw.dungeon.SwitchesGoal" project="project" 
+    file="/project/src/unsw/dungeon/SwitchesGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="298" y="206"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="unsw.dungeon.Sword" project="project" file="/project/src/unsw/dungeon/Sword.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="398" y="594"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="unsw.dungeon.Tile" project="project" file="/project/src/unsw/dungeon/Tile.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="476" y="282"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="unsw.dungeon.Treasure" project="project" 
+    file="/project/src/unsw/dungeon/Treasure.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="304" y="622"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="unsw.dungeon.TreasureGoal" project="project" 
+    file="/project/src/unsw/dungeon/TreasureGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="138" y="222"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="unsw.dungeon.UIUpdater" project="project" 
+    file="/project/src/unsw/dungeon/UIUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-36" y="446"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="unsw.dungeon.Void" project="project" file="/project/src/unsw/dungeon/Void.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="178" y="686"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="unsw.dungeon.Wall" project="project" file="/project/src/unsw/dungeon/Wall.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="338" y="778"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <association id="54">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="55" name="dungeon"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="58" name="dungeon"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="51"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="62" name="prev"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="65" name="strategy"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="67">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="43"/>  
+  </realization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="70">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="71" name="dungeon"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="74" name="items"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="77" name="dungeon"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="79">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="51"/>  
+  </generalization>  
+  <association id="81">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="82" name="observers"/>      
+      <multiplicity id="83" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="85" name="doors"/>      
+      <multiplicity id="86" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="87">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <generalization id="88">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="93" name="entities"/>      
+      <multiplicity id="94" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="95">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="96">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="97" name="position"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="99">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <association id="100">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="101" name="ghostSearcher"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="104" name="tile"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="107" name="player"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="110" name="observers"/>      
+      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="112">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <association id="113">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="114" name="defensiveStrategy"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="116">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="117">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <realization id="118">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <association id="119">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="120" name="goals"/>      
+      <multiplicity id="121" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <realization id="123">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <association id="124">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="125" name="player"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="128" name="idleStrategy"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="130">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <realization id="131">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <generalization id="132">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="133">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <realization id="134">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <realization id="135">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="43"/>  
+  </realization>  
+  <association id="136">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="137" name="controller"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="139">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="140">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <realization id="141">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="142">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="143" name="path"/>      
+      <multiplicity id="144" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="146" name="inventory"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="149" name="prevPosition"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="151">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="152">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <generalization id="153">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="154">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="155" name="enemies"/>      
+      <multiplicity id="156" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="157">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <realization id="158">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="159">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="160">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="161" name="linkedPortal"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="164" name="offensiveStrategy"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="166">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <realization id="167">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <generalization id="168">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <generalization id="169">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="30"/>  
+  </generalization>  
+  <realization id="170">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="171">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="172" name="board"/>      
+      <multiplicity id="173" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="174">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="175">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="176">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="177" name="goal"/>      
+      <multiplicity id="178" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="179">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <association id="180">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="181" name="searcher"/>      
+      <multiplicity id="182" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="183">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="51"/>  
+  </generalization>  
+  <generalization id="184">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+    sort-features="false" accessors="true" visibility="false">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="true"/>
+</class-diagram>

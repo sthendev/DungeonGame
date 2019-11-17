@@ -267,6 +267,8 @@ public class DungeonController implements Observer{
     	
     	addInventoryImage(itemImage, itemInfo);
     }
+    
+    
 
     
     public void addInventoryImage(ImageView image, Text info) {

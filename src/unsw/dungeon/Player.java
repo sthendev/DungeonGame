@@ -50,6 +50,7 @@ public class Player extends Movable {
 			} else {
 				dies();
 			}
+
 		}
 	}
 
