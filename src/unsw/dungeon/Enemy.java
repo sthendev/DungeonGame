@@ -83,5 +83,9 @@ public class Enemy extends Movable {
 			}
 		}
 	}
+
+	public MovementStrategy getStrategy() {
+		return strategy;
+	}
 	
 }
