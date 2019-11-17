@@ -9,7 +9,7 @@ import unsw.dungeon.*;
 public class TreasureTest {
 	
 	@Test
-	public void treasureTest() {
+	public void pickTreasure() {
 
 		Dungeon d = new Dungeon(20, 20);
 		Player p = new Player(d, d.getTile(10, 10));
