@@ -40,6 +40,9 @@ public class TutorialController {
     	this.images = new ArrayList<>();
     }
     
+    /**
+     * initialise tutorial screens
+     */
     @FXML
     void initialize() {
     	images.add(new Image("gameplay.png"));
@@ -51,6 +54,10 @@ public class TutorialController {
     	disableButtons();
     }
     
+    /**
+     * go back a screen
+     * @param event
+     */
     @FXML
     void goBack(MouseEvent event) {
     	if (currentImageIndex != 0) {
@@ -60,6 +67,11 @@ public class TutorialController {
     	}
     }
 
+    /**
+     * go back to main menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void goMenu(MouseEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
@@ -71,6 +83,10 @@ public class TutorialController {
         primaryStage.show();
     }
 
+    /**
+     * go to next screen
+     * @param event
+     */
     @FXML
     void goNext(MouseEvent event) {
     	if (currentImageIndex != images.size() - 1) {
@@ -80,6 +96,9 @@ public class TutorialController {
     	}
     }
     
+    /**
+     * disable back or next buttons appropriately
+     */
     public void disableButtons() {
     	backButton.setDisable(false);
     	nextButton.setDisable(false);
