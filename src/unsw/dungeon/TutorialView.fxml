@@ -9,19 +9,19 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="image" fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="menuButton" layoutX="34.0" layoutY="520.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#goMenu" text="Menu">
+      <Button fx:id="menuButton" layoutX="59.0" layoutY="550.0" minHeight="40.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goMenu" text="Menu">
          <font>
-            <Font name="Verdana Bold" size="24.0" />
+            <Font name="Verdana Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="nextButton" layoutX="767.0" layoutY="520.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#goNext" text="Next">
+      <Button fx:id="nextButton" layoutX="767.0" layoutY="550.0" minHeight="40.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goNext" text="Next">
          <font>
-            <Font name="Verdana Bold" size="24.0" />
+            <Font name="Verdana Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="backButton" layoutX="635.0" layoutY="520.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back">
+      <Button fx:id="backButton" layoutX="669.0" layoutY="550.0" minHeight="40.0" minWidth="80.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Back">
          <font>
-            <Font name="Verdana Bold" size="24.0" />
+            <Font name="Verdana Bold" size="14.0" />
          </font>
       </Button>
    </children>
