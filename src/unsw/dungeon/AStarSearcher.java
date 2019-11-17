@@ -10,6 +10,7 @@ public class AStarSearcher implements Searcher {
 	@Override
 	public Path search(Movable mover, Tile target) {
 		Path path = new Path();
+		if (target == null) return path;
 		List<Node> closed = new ArrayList<>();
 		PriorityQueue<Node> open = new PriorityQueue<Node>(5, new Comparator<Node>() {
 			@Override

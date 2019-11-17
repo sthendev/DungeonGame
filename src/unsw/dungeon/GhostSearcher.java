@@ -7,6 +7,7 @@ public class GhostSearcher implements Searcher {
 	@Override
 	public Path search(Movable mover, Tile target) {
 		Path path = new Path();
+		if (target == null) return path;
 		path.add(mover.getCurrentTile());
 		while (path.getEnd() != target) {
 			Tile closest = getClosestToTarget(path.getEnd(), target);
