@@ -104,10 +104,17 @@ public class MenuController {
     /**
      * open tutorial screen
      * @param event
+     * @throws IOException 
      */
     @FXML
-    void onTutClick(MouseEvent event) {
-    	
+    void onTutClick(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("TutorialView.fxml"));
+        loader.setController(new TutorialController(primaryStage));
+        Parent root = loader.load(); 
+        Scene scene = new Scene(root);
+        root.requestFocus();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 }
