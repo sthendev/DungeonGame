@@ -122,7 +122,7 @@ public class DungeonController implements Observer{
         for (int y = 0; y < dungeon.getHeight(); y++) {
         	inventory.add(new ImageView(new Image("/empty.png")), 0, y);
         }
-        
+        dungeon.getPlayer().getInventory().addObserver(this);
         initialisePauseMenu();
     }
 
@@ -174,7 +174,6 @@ public class DungeonController implements Observer{
     	return goalMessage;
     }
     
-    
     public void initialisePauseMenu() {
     	this.pauseMenu = new VBox();
     	pauseMenu.setSpacing(20);
@@ -208,7 +207,6 @@ public class DungeonController implements Observer{
     
     @Override
     public void update(Subject obj) {
-
     	if (obj instanceof Inventory) {
     		
 	    	inventory.getChildren().clear();
@@ -235,7 +233,7 @@ public class DungeonController implements Observer{
 	    		inventImageCount++;
 	    	}
     	}
-
+    	
     	
     }
     
@@ -269,6 +267,8 @@ public class DungeonController implements Observer{
     	
     	addInventoryImage(itemImage, itemInfo);
     }
+    
+    
 
     
     public void addInventoryImage(ImageView image, Text info) {
