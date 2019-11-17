@@ -66,7 +66,7 @@ public class MenuController {
     	pictures.setSpacing(65);
     	pictures.getChildren().add(new ImageView(new Image("human_new.png")));
     	pictures.getChildren().add(new ImageView(new Image("gold_pile.png")));
-    	pictures.getChildren().add(new ImageView(new Image("freeze_potion.png")));
+    	pictures.getChildren().add(new ImageView(new Image("ghost_potion.png")));
     	pictures.getChildren().add(new ImageView(new Image("greatsword_1_new.png")));
     	pictures.getChildren().add(new ImageView(new Image("gnome.png")));
     	
