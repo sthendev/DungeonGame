@@ -15,10 +15,17 @@ public class Door extends Entity {
 		this.dungeon = dungeon;
 	}
 	
+	/**
+	 * 
+	 * @return open status of door
+	 */
 	public boolean isOpened() {
 		return opened;
 	}
 	
+	/**
+	 * handle destruction of door
+	 */
 	public void destroy() {
 		getCurrentTile().removeEntity(this);
 		dungeon.removeDoor(this);
@@ -26,10 +33,18 @@ public class Door extends Entity {
 		sd.playSound("break_wall.wav");
 	}
 	
+	/**
+	 * 
+	 * @return whether or not player has appropriate key
+	 */
 	public boolean playerHasKey() {
 		return keyHeld;
 	}
 	
+	/**
+	 * notify door that player has appropriate key
+	 * @param keyHeld
+	 */
 	public void setKeyHeld(boolean keyHeld) {
 		this.keyHeld = keyHeld;
 		notifyObservers();
@@ -49,7 +64,12 @@ public class Door extends Entity {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * 
+	 * @param k
+	 * @return whether or not specified key matches this door
+	 */
 	public boolean isRight(Key k) {
 		if (k != null && k.getId() == id) {
 			return true;
@@ -61,7 +81,7 @@ public class Door extends Entity {
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Player && opened == false) {
 			Player p = (Player) mover;
-			Tile oppositeTile = getCurrentTile().getOppositeTile(p.getPreviousTile());
+			Tile oppositeTile = getCurrentTile() == null ? null : getCurrentTile().getOppositeTile(p.getPreviousTile());
 			if (p.isGhost() && !oppositeTile.hasWall() && !oppositeTile.hasClosedDoor()) {
 				oppositeTile.movedOn(p);
 			} else if (isRight(p.keyHeld())) {

@@ -14,10 +14,18 @@ public class UIUpdater implements Observer {
 		this.originalImage = node.getImage();
 	}
 	
+	/**
+	 * 
+	 * @return associated UI node
+	 */
 	public ImageView getNode() {
 		return node;
 	}
 	
+	/**
+	 * 
+	 * @return original image of node
+	 */
 	public Image getOriginalImage() {
 		return originalImage;
 	}

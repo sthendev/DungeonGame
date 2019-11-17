@@ -29,7 +29,10 @@ public class SoundPlayer {
 	}
 
 
-
+	/**
+	 * play audie from specified filename
+	 * @param filename
+	 */
 	public void playSound(String filename) {
     	AudioInputStream audioInputStream = null;
     	String name = "sounds/" + filename;
@@ -60,6 +63,11 @@ public class SoundPlayer {
         clip.start();
     }
 	
+	/**
+	 * get appropriate sound file for specified item
+	 * @param item
+	 * @return
+	 */
 	public String getSoundForItem(Entity item) {
 		if (item instanceof Sword) {
 			return "draw_sword.wav";

@@ -17,6 +17,10 @@ public class Inventory implements Subject {
 		return items;
 	}
 	
+	/**
+	 * 
+	 * @return count of treasure in the inventory
+	 */
 	public int getTreasureCount() {
 		int count = 0;
 		for (Entity item : items) {
@@ -25,6 +29,10 @@ public class Inventory implements Subject {
 		return count;
 	}
 	
+	/**
+	 * add specified item to inventory
+	 * @param item
+	 */
 	public void addItem(Entity item) {
 		if (item instanceof TurnBasedPotion) {
 			addPotion((TurnBasedPotion) item);
@@ -36,11 +44,19 @@ public class Inventory implements Subject {
 		notifyObservers();
 	}
 	
+	/**
+	 * remove specified item to inventory
+	 * @param item
+	 */
 	public void removeItem(Entity item) {
 		items.remove(item);
 		notifyObservers();
 	}
-
+	
+	/**
+	 * 
+	 * @return current key held or null if no key
+	 */
 	public Key getKey() {
 		for (Entity item : items) {
 			if (item instanceof Key) return (Key) item;
@@ -48,6 +64,10 @@ public class Inventory implements Subject {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return current tool held or null if no tool
+	 */
 	public HitBasedTool getTool() {
 		for (Entity item : items) {
 			if (item instanceof HitBasedTool) return (HitBasedTool) item;
@@ -55,6 +75,9 @@ public class Inventory implements Subject {
 		return null;
 	}
 	
+	/**
+	 * use a hit on the currently held tool
+	 */
 	public void useTool() {
 		List<Entity> itemsCopy = new ArrayList<>(items);
 		for (Entity item : itemsCopy) {
@@ -70,6 +93,10 @@ public class Inventory implements Subject {
 		notifyObservers();
 	}
 	
+	/**
+	 * 
+	 * @return invincibility potion in inventory or null if none found
+	 */
 	public InvincibilityPotion getInvincibilityPotion() {
 		for (Entity item : items) {
 			if (item instanceof InvincibilityPotion) return (InvincibilityPotion) item;
@@ -77,6 +104,10 @@ public class Inventory implements Subject {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return freeze potion in inventory or null if none found
+	 */
 	public FreezePotion getFreezePotion() {
 		for (Entity item : items) {
 			if (item instanceof FreezePotion) return (FreezePotion) item;
@@ -84,13 +115,21 @@ public class Inventory implements Subject {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return ghost potion in enventory or null if none found
+	 */
 	public GhostPotion getGhostPotion() {
 		for (Entity item : items) {
 			if (item instanceof GhostPotion) return (GhostPotion) item;
 		}
 		return null;
 	}
-
+	
+	/**
+	 * process adding of potion to inventory
+	 * @param p
+	 */
 	public void addPotion(TurnBasedPotion p) {
 		if (p instanceof InvincibilityPotion) {
 			InvincibilityPotion existing = getInvincibilityPotion();
@@ -116,6 +155,9 @@ public class Inventory implements Subject {
 		}
 	}
 	
+	/**
+	 * process using of potions in inventory
+	 */
 	public void usePotions() {
 		List<Entity> itemsCopy = new ArrayList<>(items);
 		for (Entity item : itemsCopy) {

@@ -14,14 +14,25 @@ public abstract class TurnBasedPotion extends Entity {
 		this.moves = moves;
 	}
 	
+	/**
+	 * 
+	 * @return remaining move uses of potion
+	 */
 	public int getMoves() {
 		return moves;
 	}
 	
+	/**
+	 * consume a move use of potion
+	 */
 	public void useMove() {
 		this.moves--;
 	}
 	
+	/**
+	 * add more move uses to potion
+	 * @param moves
+	 */
 	public void extendMoves(int moves) {
 		this.moves += moves;
 	}

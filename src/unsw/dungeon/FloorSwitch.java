@@ -9,6 +9,10 @@ public class FloorSwitch extends Entity {
 		this.triggered = false;
 	}
 	
+	/**
+	 * 
+	 * @return whether or not this switch is currently triggered
+	 */
 	public boolean isTriggered() {
 		return triggered;
 	}

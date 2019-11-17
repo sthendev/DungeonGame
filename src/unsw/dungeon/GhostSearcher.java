@@ -15,6 +15,12 @@ public class GhostSearcher implements Searcher {
 		return path;
 	}
 	
+	/**
+	 * 
+	 * @param cur
+	 * @param target
+	 * @return tile around current tile that is closest to target tile
+	 */
 	private Tile getClosestToTarget(Tile cur, Tile target) {
 		List<Tile> surroundingTiles = cur.getSurroundingTiles();
 		Tile closest = cur;

@@ -192,6 +192,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         entity.addObserver(getUIUpdater(entity, node));
     }
     
+    /**
+     * 
+     * @param entity
+     * @param node
+     * @return appropriate UIUpdater for specific entity
+     */
     private UIUpdater getUIUpdater(Entity entity, ImageView node) {
     	if (entity instanceof Player) return new PlayerUIUpdater(node, armedPlayerImage, hammerPlayerImage);
     	if (entity instanceof Door) return new DoorUIUpdater(node, openDoorImage);

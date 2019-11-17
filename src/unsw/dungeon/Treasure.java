@@ -18,6 +18,10 @@ public class Treasure extends Entity {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return whether or not this treasure has been collected
+	 */
 	public boolean isCollected() {
 		return collected;
 	}

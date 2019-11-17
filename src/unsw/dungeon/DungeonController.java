@@ -86,7 +86,10 @@ public class DungeonController implements Observer{
         this.primaryStage = primaryStage;
         this.jsonFile = jsonFile;
     }
-
+    
+    /**
+     * setup UI for dungeon
+     */
     @FXML
     public void initialize() {
     	dungeon.setController(this);
@@ -125,7 +128,11 @@ public class DungeonController implements Observer{
         dungeon.getPlayer().getInventory().addObserver(this);
         initialisePauseMenu();
     }
-
+    
+    /**
+     * handle user keyboard input
+     * @param event
+     */
     @FXML
     public void handleKeyPress(KeyEvent event) {
     	if (dungeon.gameOver()) {
@@ -156,6 +163,11 @@ public class DungeonController implements Observer{
         updateGoals();
     }
     
+    /**
+     * 
+     * @param goal
+     * @return return UI Node for goal
+     */
     public Node parseGoalToNode(Goal goal) {
     	Text goalMessage = new Text(goal.message());
     	goalMessage.setFont(Font.font("verdana", 14));
@@ -174,6 +186,9 @@ public class DungeonController implements Observer{
     	return goalMessage;
     }
     
+    /**
+     * initialise pause menu UI
+     */
     public void initialisePauseMenu() {
     	this.pauseMenu = new VBox();
     	pauseMenu.setSpacing(20);
@@ -237,6 +252,10 @@ public class DungeonController implements Observer{
     	
     }
     
+    /**
+     * add item to inventory UI
+     * @param item
+     */
     public void addInventoryItem(Entity item) {
     	ImageView itemImage = null;
     	Text itemInfo = null;
@@ -268,10 +287,12 @@ public class DungeonController implements Observer{
     	addInventoryImage(itemImage, itemInfo);
     }
     
-    
-
-    
-    public void addInventoryImage(ImageView image, Text info) {
+    /**
+     * combine item image and item info and add to inventory
+     * @param image
+     * @param info
+     */
+    private void addInventoryImage(ImageView image, Text info) {
     	StackPane imageStack = new StackPane();
     	imageStack.getChildren().add(new ImageView(new Image("/empty.png")));
     	if (image != null) imageStack.getChildren().add(image);
@@ -289,6 +310,10 @@ public class DungeonController implements Observer{
     	}
     }
     
+    /**
+     * open the pause menu, format corresponds to game over status
+     * @param gameOver
+     */
     public void openPauseMenu(boolean gameOver) {
     	this.isPaused = true;
     	if (gameOver) {
@@ -305,12 +330,18 @@ public class DungeonController implements Observer{
     	pauseMenu.setVisible(true); 	
     }
     
+    /**
+     * closes pause menu
+     */
     public void closePauseMenu() {
     	this.isPaused = false;
     	pauseMenu.setVisible(false);
     	stackPane.requestFocus();
     }
     
+    /**
+     * restarts current level
+     */
     public void restartLevel() {
     	try {
     		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(jsonFile);
@@ -327,6 +358,9 @@ public class DungeonController implements Observer{
     	}
     }
     
+    /**
+     * return to the main menu
+     */
     public void backToMenu() {
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
@@ -341,6 +375,9 @@ public class DungeonController implements Observer{
     	}
     }
     
+    /**
+     * update goal UI
+     */
     public void updateGoals() {
     	goals.getChildren().remove(goalsNode);
     	this.goalsNode = parseGoalToNode(dungeon.getGoal());

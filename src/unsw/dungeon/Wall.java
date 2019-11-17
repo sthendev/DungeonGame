@@ -6,6 +6,9 @@ public class Wall extends Entity {
         super(position);
     }
     
+    /**
+     * handle destruction of wall
+     */
     public void destroy() {
     	getCurrentTile().removeEntity(this);
     	SoundPlayer sd = new SoundPlayer();
@@ -16,7 +19,7 @@ public class Wall extends Entity {
     public boolean isBlocking(Movable mover) {
     	if (mover instanceof Player) {
     		Player player = (Player) mover;
-    		Tile oppositeTile = getCurrentTile().getOppositeTile(player.getCurrentTile());
+    		Tile oppositeTile = getCurrentTile() == null ? null : getCurrentTile().getOppositeTile(player.getCurrentTile());
 			if (oppositeTile == null) return true;
     		if (player.isGhost()) {
     			if (oppositeTile.hasWall() || oppositeTile.hasClosedDoor()) return true;

@@ -22,6 +22,11 @@ public class Player extends Movable {
 		this.inventory = new Inventory();
 	}
 	
+	/**
+	 * move player in direction of x and y offset
+	 * @param xMove
+	 * @param yMove
+	 */
 	public void Move(int xMove, int yMove) {
 		Tile target = getAdjacentTile(xMove, yMove);
 		if (target != null && target.canMove(this)) {
@@ -33,6 +38,9 @@ public class Player extends Movable {
 		}
 	}
     
+	/**
+	 * remain in current position but consume a turn
+	 */
     public void stay() {
     	newTurn();
         getDungeon().playTurn();
@@ -53,48 +61,83 @@ public class Player extends Movable {
 
 		}
 	}
-
+	
+	/**
+	 * handle death of player
+	 */
 	public void dies() {
 		setCurrentTile(null);
     	getDungeon().endGame(false);
 	}
 	
+	/**
+	 * 
+	 * @return inventory of player
+	 */
 	public Inventory getInventory() {
 		return inventory;
 	}
 	
+	/**
+	 * handle adding item to player inventory from tile
+	 * @param item
+	 */
 	public void pickItem(Entity item) {
 		inventory.addItem(item);
 		if (item instanceof Key) {
-			getDungeon().highlightDoor((Key) item);
+			if (getDungeon() != null) getDungeon().highlightDoor((Key) item);
 		}
 	}
 	
+	/**
+	 * handle dropping item from inventory to tile
+	 * @param item
+	 * @param tile
+	 */
 	public void dropItem(Entity item, Tile tile) {
 		inventory.removeItem(item);
 		tile.placeEntity(item);
 	}
-
+	
+	/**
+	 * 
+	 * @return whether or not player is invincible
+	 */
 	public boolean isInvincible() {
 		if (inventory.getInvincibilityPotion() != null) return true;
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return whether or not player is using freeze ability
+	 */
 	public boolean isFreezing() {
 		if (inventory.getFreezePotion() != null) return true;
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return whether or not player is in ghost state
+	 */
 	public boolean isGhost() {
 		if (inventory.getGhostPotion() != null) return true;
 		return false;
 	}
-
+	
+	/**
+	 * process interactions of player using up a turn
+	 */
 	public void newTurn() {
 		inventory.usePotions();
 		notifyObservers();
 	}
 	
+	/**
+	 * 
+	 * @return whether or not player has sword
+	 */
 	public boolean hasSword() {
 		for (Entity e : inventory.getItems()) {
 			if (e instanceof Sword) {
@@ -104,6 +147,10 @@ public class Player extends Movable {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return whether or not player has hammer
+	 */
 	public boolean hasHammer() {
 		for (Entity e : inventory.getItems()) {
 			if (e instanceof Hammer) {
@@ -113,21 +160,35 @@ public class Player extends Movable {
 		return false;
 	}
 	
+	/**
+	 * use currently equipped tool
+	 */
 	public void useTool() {
 		inventory.useTool();
 		notifyObservers();
 	}
 	
+	/**
+	 * 
+	 * @return tool held by player
+	 */
 	public HitBasedTool toolHeld() {
 		return inventory.getTool();
 	}
 	
+	/**
+	 * 
+	 * @return key held by player
+	 */
 	public Key keyHeld() {
 		return inventory.getKey();
 	}
 	
+	/**
+	 * consume key to open door
+	 */
 	public void useKey() {
 		inventory.removeItem(keyHeld());
-		getDungeon().highlightDoor(null);
+		if (getDungeon() != null) getDungeon().highlightDoor(null);
 	}
 }

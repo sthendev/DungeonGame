@@ -46,6 +46,9 @@ public class MenuController {
     	this.primaryStage = primaryStage;
     }
     
+    /**
+     * iniialize main menu UI
+     */
     @FXML
     void initialize() {
     	File dungeonFolder = new File("dungeons");
@@ -72,10 +75,20 @@ public class MenuController {
     	
     }
     
+    /**
+     * 
+     * @param filename
+     * @return filename with extension trimmed
+     */
     public String trimExtension(String filename) {
     	return filename.substring(0, filename.lastIndexOf('.'));
     }
 
+    /**
+     * start selected dungeon level
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onStartClick(MouseEvent event) throws IOException {
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(levelSelect.getSelectionModel().selectedItemProperty().get() + ".json");
@@ -88,10 +101,20 @@ public class MenuController {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    
+    /**
+     * open tutorial screen
+     * @param event
+     * @throws IOException 
+     */
     @FXML
-    void onTutClick(MouseEvent event) {
-    	
+    void onTutClick(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("TutorialView.fxml"));
+        loader.setController(new TutorialController(primaryStage));
+        Parent root = loader.load(); 
+        Scene scene = new Scene(root);
+        root.requestFocus();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 }

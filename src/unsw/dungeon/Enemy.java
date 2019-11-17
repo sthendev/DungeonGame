@@ -19,11 +19,19 @@ public class Enemy extends Movable {
         this.ghostSearcher = new GhostSearcher();
     }
     
+    /**
+     * set strategy of enemy
+     * @param strategy
+     */
     public void setStrategy(MovementStrategy strategy) {
     	this.strategy = strategy;
     	notifyObservers();
     }
     
+    /**
+     * 
+     * @return whether or not the player is currently in the enemy's line of site
+     */
     public boolean playerInSight() {
     	Path tilesToPlayer = ghostSearcher.search(this, getDungeon().getPlayer().getCurrentTile());
     	if (tilesToPlayer.allTransparent(this)) return true;
@@ -31,6 +39,9 @@ public class Enemy extends Movable {
 
     }
     
+    /**
+     * perform move
+     */
     public void move() {
     	if (!alarmed && playerInSight()) this.alarmed = true;
     	if (!alarmed) return;
@@ -40,6 +51,9 @@ public class Enemy extends Movable {
     	if (!bestMove.equals(getCurrentTile())) moveMe(bestMove);
     }
     
+    /**
+     * handle death of enemy
+     */
     public void dies() {
     	if (getCurrentTile() != null) getCurrentTile().movedOff(this);
     	getDungeon().removeEnemy(this);

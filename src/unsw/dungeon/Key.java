@@ -22,7 +22,6 @@ public class Key extends Entity {
 		}
 	}
 
-
 	public int getId() {
 		return id;
 	}
