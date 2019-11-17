@@ -11,14 +11,26 @@ public abstract class CompositeGoal implements Goal {
 		goals = new ArrayList<>();
 	}
 	
+	/**
+	 * 
+	 * @return subgoals
+	 */
 	public List<Goal> getGoals() {
 		return goals;
 	}
-
+	
+	/**
+	 * remove specified goal
+	 * @param g
+	 */
 	public void remove(Goal g) {
 		goals.remove(g);
 	}
-
+	
+	/**
+	 * add specified goal
+	 * @param goal
+	 */
 	public void addGoal(Goal goal) {
 		goals.add(goal);
 	}

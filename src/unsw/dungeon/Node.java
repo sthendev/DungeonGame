@@ -15,10 +15,18 @@ public class Node {
 		return tile;
 	}
 	
+	/**
+	 * 
+	 * @return not that this node was reached from
+	 */
 	public Node getPrev() {
 		return prev;
 	}
 	
+	/**
+	 * 
+	 * @return total cost of path used to reach this node
+	 */
 	public int getPathCost() {
 		if (prev == null) {
 			return 0;
@@ -27,10 +35,18 @@ public class Node {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return estimated cost to target tile
+	 */
 	public double estimateDistToTarget() {
 		return distToTarget;
 	}
 	
+	/**
+	 * 
+	 * @return sum of path cost and estimated cost
+	 */
 	public double totalCost() {
 		return estimateDistToTarget() + getPathCost();
 	}

@@ -43,6 +43,11 @@ public class Dungeon implements Observer {
         initializeBoard(width, height);
     }
     
+    /**
+     * initialize dungeon with specified width and height
+     * @param width
+     * @param height
+     */
     private void initializeBoard(int width, int height) {
     	this.board = new Tile[height][width];
     	for (int row = 0; row < height; row ++) {
@@ -52,10 +57,20 @@ public class Dungeon implements Observer {
     	}
     }
     
+    /**
+     * inform dungeon of associated UI controller
+     * @param controller
+     */
     public void setController(DungeonController controller) {
     	this.controller = controller;
     }
     
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return Tile object at specified x and y
+     */
     public Tile getTile(int x, int y) {
     	if (x < 0 || x >= getWidth()
     		|| y < 0 || y >= getHeight()) 
@@ -63,6 +78,10 @@ public class Dungeon implements Observer {
     	return board[y][x];
     }
     
+    /**
+     * 
+     * @return all entities in dungeon
+     */
     public List<Entity> getAllEntities() {
     	List<Entity> entities = new ArrayList<>();
     	
@@ -74,18 +93,31 @@ public class Dungeon implements Observer {
     	
     	return entities;
     }
-
+    
+    /**
+     * inform dungeon of player
+     * @param player
+     */
     public void setPlayer(Player player) {
     	if (this.player != null) player.getInventory().removeObserver(this);
         this.player = player;
         player.getInventory().addObserver(this);
     }
     
+    /**
+     * move specified Movable entity onto specified Tile object
+     * @param entity
+     * @param tile
+     */
     public void moveEntity(Movable entity, Tile tile) {
     	if (entity.getCurrentTile() != null) entity.getCurrentTile().movedOff(entity);
     	tile.movedOn(entity);
     }
-
+    
+    /**
+     * add specified entity to dungeon
+     * @param entity
+     */
 	public void addEntity(Entity entity) {
     	if (entity instanceof Portal) {
     		if (getPortalCountById((Portal) entity) == 2) return;
@@ -95,29 +127,53 @@ public class Dungeon implements Observer {
     	linkToGoal(entity);
     }
 
-
+	/**
+	 * inform dungeon of specified enemy
+	 * @param e
+	 */
 	public void addEnemy(Enemy e) {
     	getEnemies().add(e);
     }
     
+	/**
+	 * remove specified enemy from dungeon's known enemies
+	 * @param e
+	 */
     public void removeEnemy(Enemy e) {
     	getEnemies().remove(e);
 	}
     
+    /**
+     * inform dungeon of specified door
+     * @param d
+     */
     public void addDoor(Door d) {
     	getDoors().add(d);
     }
     
+    /**
+     * remove specified enemy from dungeon's known doors
+     * @param d
+     */
     public void removeDoor(Door d) {
     	getDoors().remove(d);
     }
 	
+    /**
+     * apply specify enemy movement strategy to enemies
+     * @param strategy
+     */
     public void setEnemyStrategy(MovementStrategy strategy) {
     	for (Enemy enemy : getEnemies()) {
     		enemy.setStrategy(strategy);
     	}
     }
     
+    /**
+     * 
+     * @param portal
+     * @return count of portals with matching id as specified portal
+     */
     public int getPortalCountById(Portal portal) {
     	int count = 0;
     	for (Entity e : getAllEntities()) {
@@ -131,10 +187,18 @@ public class Dungeon implements Observer {
     	return count;
     }
     
+    /**
+     * link entity to appropriate goal
+     * @param entity
+     */
     public void linkToGoal(Entity entity) {
     	getGoal().linkEntity(entity);
     }
     
+    /**
+     * link to portal to matching portal in dungeon
+     * @param portal
+     */
     public void linkPortals(Portal portal) {
 		for (Entity e : getAllEntities()) {
 			if (e instanceof Portal) {
@@ -148,14 +212,28 @@ public class Dungeon implements Observer {
 		}
     }
     
+    /**
+     * place specified entity on specified tile
+     * @param entity
+     * @param tile
+     */
     public void placeEntityTile(Entity entity, Tile tile) {
     	tile.placeEntity(entity);
     }
     
+    /**
+     * 
+     * @param tile
+     * @return return distance from specified tile to player position
+     */
     public double distToPlayer(Tile tile) {
     	return tile.distToTile(getPlayer().getCurrentTile());
     }
     
+    /**
+     * highlight matching door of specified key
+     * @param key
+     */
     public void highlightDoor(Key key) {
     	for (Door door : getDoors()) {
     		if (key == null) {
@@ -170,6 +248,9 @@ public class Dungeon implements Observer {
     	}
     }
     
+    /**
+     * process enemy moves
+     */
     public void playTurn() {
     	if (!getGoal().satisfied()) {
 	    	List<Enemy> enemiesCopy = new ArrayList<>(getEnemies());
@@ -196,12 +277,15 @@ public class Dungeon implements Observer {
 		}
     }
     
-    //To-do
+    /**
+     * finish game
+     * @param end
+     */
     public void endGame(boolean end) {
     	this.gameOver = true;
     	controller.handleKeyPress(null);
     }
-
+    
 	public int getWidth() {
         return width;
     }
@@ -230,6 +314,10 @@ public class Dungeon implements Observer {
         return player;
     }
 	
+	/**
+	 * 
+	 * @return game over status
+	 */
 	public boolean gameOver() {
 		return gameOver;
 	}

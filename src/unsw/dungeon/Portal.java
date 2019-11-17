@@ -15,6 +15,10 @@ public class Portal extends Entity {
 		return id;
 	}
 	
+	/**
+	 * associate portal with portal of matching id
+	 * @param linkedPortal
+	 */
 	public void setLinkedPortal(Portal linkedPortal) {
 		this.linkedPortal = linkedPortal;
 	}

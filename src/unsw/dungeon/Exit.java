@@ -9,6 +9,10 @@ public class Exit extends Entity {
         this.playerHere = false;
     }
 	
+	/**
+	 * 
+	 * @return whether or not player is currently on the exit
+	 */
 	public boolean playerIsHere() {
 		return playerHere;
 	}

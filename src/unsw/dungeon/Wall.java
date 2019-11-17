@@ -6,6 +6,9 @@ public class Wall extends Entity {
         super(position);
     }
     
+    /**
+     * handle destruction of wall
+     */
     public void destroy() {
     	getCurrentTile().removeEntity(this);
     	SoundPlayer sd = new SoundPlayer();
