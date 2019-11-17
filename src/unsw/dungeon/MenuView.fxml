@@ -4,25 +4,22 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ChoiceBox fx:id="levelSelect" layoutX="237.0" layoutY="150.0" prefWidth="150.0" />
-      <Button fx:id="startButton" layoutX="409.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#onStartClick" text="Start" />
-      <Text layoutX="146.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dungeon Game">
-         <font>
-            <Font name="Verdana Bold" size="36.0" />
-         </font>
-      </Text>
-      <Label layoutX="146.0" layoutY="156.0" text="Select Map">
+   	  <ImageView fx:id="image" fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true" />
+      <ChoiceBox fx:id="levelSelect" layoutX="375.0" layoutY="250.0" prefWidth="150.0" />
+      <Button fx:id="startButton" layoutX="545.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#onStartClick" text="Start" />
+   
+      <Label fx:id="label" layoutX="270.0" layoutY="254.0" text="Select Map">
          <font>
             <Font name="Verdana Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="tutButton" layoutX="271.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onTutClick" text="Tutorial" />
-      <HBox fx:id="pictures" layoutX="94.0" layoutY="280.0" prefHeight="33.0" prefWidth="413.0" />
+      <Button fx:id="tutButton" layoutX="420.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#onTutClick" text="Tutorial" />
    </children>
 </Pane>

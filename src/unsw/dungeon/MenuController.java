@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -11,11 +12,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,6 +34,9 @@ public class MenuController {
 	private Pane pane;
 
     @FXML
+    private ImageView image;
+    
+    @FXML
     private ChoiceBox<String> levelSelect;
 
     @FXML
@@ -37,7 +46,7 @@ public class MenuController {
     private Button tutButton;
     
     @FXML
-    private HBox pictures;
+    private Label label;
     
     private Stage primaryStage;
     
@@ -56,6 +65,9 @@ public class MenuController {
     	for (File file : dungeonFiles) {
     		if (file.getName().contains(".json")) levelSelect.getItems().add(trimExtension(file.getName()));
     	}
+    	SoundPlayer sd = new SoundPlayer();
+    	sd.playSound("music.wav");
+    	label.setTextFill(Color.WHITESMOKE);
     	startButton.setDisable(true);
     	levelSelect.getSelectionModel()
         	.selectedItemProperty()
@@ -64,15 +76,12 @@ public class MenuController {
         			startButton.setDisable(false);
         		}
         	});
-    	pane.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
     	
-    	pictures.setSpacing(65);
-    	pictures.getChildren().add(new ImageView(new Image("human_new.png")));
-    	pictures.getChildren().add(new ImageView(new Image("gold_pile.png")));
-    	pictures.getChildren().add(new ImageView(new Image("ghost_potion.png")));
-    	pictures.getChildren().add(new ImageView(new Image("greatsword_1_new.png")));
-    	pictures.getChildren().add(new ImageView(new Image("gnome.png")));
-    	
+    	try {
+			image.setImage(new Image(this.getClass().getResource("bg.png").toURI().toString()));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
     }
     
     /**
