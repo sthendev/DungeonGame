@@ -81,7 +81,7 @@ public class Door extends Entity {
 	public void notifyComing(Movable mover) {
 		if (mover instanceof Player && opened == false) {
 			Player p = (Player) mover;
-			Tile oppositeTile = getCurrentTile().getOppositeTile(p.getPreviousTile());
+			Tile oppositeTile = getCurrentTile() == null ? null : getCurrentTile().getOppositeTile(p.getPreviousTile());
 			if (p.isGhost() && !oppositeTile.hasWall() && !oppositeTile.hasClosedDoor()) {
 				oppositeTile.movedOn(p);
 			} else if (isRight(p.keyHeld())) {

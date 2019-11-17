@@ -85,7 +85,7 @@ public class Player extends Movable {
 	public void pickItem(Entity item) {
 		inventory.addItem(item);
 		if (item instanceof Key) {
-			getDungeon().highlightDoor((Key) item);
+			if (getDungeon() != null) getDungeon().highlightDoor((Key) item);
 		}
 	}
 	
@@ -189,6 +189,6 @@ public class Player extends Movable {
 	 */
 	public void useKey() {
 		inventory.removeItem(keyHeld());
-		getDungeon().highlightDoor(null);
+		if (getDungeon() != null) getDungeon().highlightDoor(null);
 	}
 }
